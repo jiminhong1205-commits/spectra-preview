@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eNomix — Spectra</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+
+  :root {
+    --spectra:        #1A6BFF;
+    --enomix:         #1E4DB7;
+    --enomix-light:   rgba(30,77,183,0.08);
+    --enomix-border:  rgba(30,77,183,0.2);
+    --enomix-accent:  #F59E0B;
+    --enomix-acc-lt:  rgba(245,158,11,0.10);
+
+    --text-primary:   #0F172A;
+    --text-secondary: #475569;
+    --text-muted:     #94A3B8;
+    --bg-white:   #FFFFFF;
+    --bg-soft:    #F5F7FA;
+    --bg-softer:  #F8FAFC;
+    --border:     rgba(0,0,0,0.07);
+    --border-md:  rgba(0,0,0,0.12);
+    --bg-dark:    #060A14;
+    --bg-dark2:   #0C1220;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Pretendard',-apple-system,sans-serif; background:var(--bg-white); color:var(--text-primary); overflow-x:hidden; }
+  .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+
+  .tag { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:4px 12px; border-radius:100px; }
+  .tag-enomix  { background:var(--enomix-light); color:var(--enomix); border:1px solid var(--enomix-border); }
+  .tag-spectra { background:rgba(26,107,255,0.08); color:var(--spectra); border:1px solid rgba(26,107,255,0.2); }
+  .tag-orange  { background:var(--enomix-acc-lt); color:#92400E; border:1px solid rgba(245,158,11,0.25); }
+
+  .btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:100px; font-size:15px; font-weight:700; cursor:pointer; text-decoration:none; transition:all 0.2s; border:none; }
+  .btn-enomix { background:var(--enomix); color:white; box-shadow:0 4px 20px rgba(30,77,183,0.3); }
+  .btn-enomix:hover { background:#1A3FA3; transform:translateY(-1px); }
+  .btn-outline { background:transparent; color:var(--text-primary); border:1.5px solid var(--border-md); }
+  .btn-outline:hover { background:var(--bg-soft); }
+  .btn-outline-dark { background:transparent; color:white; border:1.5px solid rgba(255,255,255,0.25); padding:14px 28px; border-radius:100px; font-size:15px; font-weight:700; cursor:pointer; text-decoration:none; transition:all 0.2s; display:inline-flex; align-items:center; gap:8px; }
+  .btn-outline-dark:hover { background:rgba(255,255,255,0.08); }
+
+  /* GNB */
+  .gnb { position:sticky; top:0; z-index:99; background:rgba(255,255,255,0.97); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:0 24px; }
+  .gnb-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:64px; }
+  .gnb-logo { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text-primary); letter-spacing:-0.02em; margin-right:48px; text-decoration:none; flex-shrink:0; display:flex; align-items:center; gap:8px; }
+  .gnb-breadcrumb { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-muted); }
+  .gnb-breadcrumb a { color:var(--text-muted); text-decoration:none; }
+  .gnb-breadcrumb a:hover { color:var(--text-primary); }
+  .gnb-breadcrumb .sep { opacity:0.4; }
+  .gnb-breadcrumb .current { color:var(--text-primary); font-weight:600; }
+  .gnb-cta { padding:9px 20px; border-radius:100px; background:var(--spectra); color:white; font-size:13px; font-weight:700; text-decoration:none; transition:all 0.2s; white-space:nowrap; margin-left:auto; }
+  .gnb-cta:hover { background:#1258DD; }
+
+  /* HERO — 다크, 브랜드 포지션 중심 */
+  .hero { background:var(--bg-dark); padding:120px 0 100px; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 60% at 15% 50%, rgba(30,77,183,0.18) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 85% 30%, rgba(245,158,11,0.06) 0%, transparent 60%); }
+  .hero::after { content:''; position:absolute; inset:0; opacity:0.025; background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px); background-size:60px 60px; }
+  .hero-inner { position:relative; z-index:2; display:grid; grid-template-columns:1fr 420px; gap:80px; align-items:center; }
+  .hero-eyebrow { display:flex; align-items:center; gap:10px; margin-bottom:28px; }
+  .hero-eyebrow-text { font-size:12px; color:rgba(255,255,255,0.35); }
+  .hero-h1 { font-family:'Syne',sans-serif; font-size:clamp(40px,5vw,64px); font-weight:800; line-height:1.1; letter-spacing:-0.03em; margin-bottom:20px; color:white; }
+  .hero-h1 em { color:var(--enomix-accent); font-style:normal; }
+  .hero-tagline { font-size:20px; font-weight:600; color:rgba(255,255,255,0.5); margin-bottom:24px; line-height:1.5; }
+  .hero-desc { font-size:17px; line-height:1.8; color:rgba(255,255,255,0.55); margin-bottom:48px; max-width:480px; }
+  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
+
+  /* Hero 우측 — 브랜드 연혁 타임라인 */
+  .hero-timeline { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:36px; backdrop-filter:blur(16px); }
+  .ht-title { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:28px; }
+  .ht-item { display:flex; gap:16px; margin-bottom:20px; position:relative; }
+  .ht-item:last-child { margin-bottom:0; }
+  .ht-item::before { content:''; position:absolute; left:19px; top:32px; bottom:-20px; width:1px; background:rgba(255,255,255,0.08); }
+  .ht-item:last-child::before { display:none; }
+  .ht-year { width:40px; height:40px; border-radius:50%; background:rgba(30,77,183,0.3); border:1px solid rgba(30,77,183,0.5); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:var(--enomix-accent); flex-shrink:0; }
+  .ht-content { padding-top:8px; }
+  .ht-label { font-size:14px; font-weight:600; color:white; margin-bottom:3px; }
+  .ht-desc { font-size:12px; color:rgba(255,255,255,0.4); line-height:1.5; }
+
+  /* SECTIONS */
+  .section { padding:100px 0; }
+  .section-h2 { font-family:'Syne',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-0.03em; line-height:1.15; margin-bottom:16px; color:var(--text-primary); }
+  .section-sub { font-size:17px; line-height:1.7; color:var(--text-secondary); max-width:560px; margin:0 auto; }
+  .section-header { text-align:center; margin-bottom:64px; }
+  .section-eyebrow { margin-bottom:14px; }
+
+  /* BRAND STORY — 왜 eNomix가 만들어졌는가 */
+  .story-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:56px; }
+  .story-card { padding:32px; border-radius:16px; background:var(--bg-softer); border:1px solid var(--border); transition:all 0.2s; }
+  .story-card:hover { border-color:var(--border-md); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
+  .story-icon { font-size:28px; margin-bottom:16px; }
+  .story-year { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--enomix); margin-bottom:8px; }
+  .story-title { font-size:16px; font-weight:700; color:var(--text-primary); margin-bottom:8px; }
+  .story-desc { font-size:14px; color:var(--text-secondary); line-height:1.7; }
+
+  /* 브랜드 포지션 박스 */
+  .position-box { background:linear-gradient(135deg,#EEF2FF,#EFF6FF); border:1px solid var(--enomix-border); border-radius:20px; padding:56px 48px; text-align:center; position:relative; overflow:hidden; }
+  .position-box::before { content:''; position:absolute; top:-80px; right:-80px; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle,rgba(30,77,183,0.08),transparent 70%); }
+  .position-box-quote { font-family:'Syne',sans-serif; font-size:clamp(22px,2.5vw,32px); font-weight:800; line-height:1.3; color:var(--text-primary); margin-bottom:16px; position:relative; z-index:1; }
+  .position-box-quote em { color:var(--enomix); font-style:normal; }
+  .position-box-sub { font-size:16px; color:var(--text-secondary); line-height:1.7; max-width:560px; margin:0 auto; position:relative; z-index:1; }
+
+  /* 브랜드 개성 3가지 */
+  .trait-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:32px; }
+  .trait-card { padding:28px; border-radius:16px; background:var(--bg-softer); border:1px solid var(--border); text-align:center; }
+  .trait-icon { font-size:28px; margin-bottom:12px; }
+  .trait-title { font-size:16px; font-weight:700; color:var(--text-primary); margin-bottom:8px; }
+  .trait-desc { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+
+  /* 수치 섹션 */
+  .section-stats { background:var(--enomix); padding:80px 0; }
+  .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+  .stat-cell { text-align:center; padding:40px 24px; border-right:1px solid rgba(255,255,255,0.15); }
+  .stat-cell:last-child { border-right:none; }
+  .stat-num { font-family:'Syne',sans-serif; font-size:clamp(36px,4vw,56px); font-weight:800; color:white; letter-spacing:-0.03em; margin-bottom:8px; }
+  .stat-num span { color:var(--enomix-accent); }
+  .stat-label { font-size:14px; color:rgba(255,255,255,0.65); line-height:1.5; }
+
+  /* 제품 소개 — 간략히 */
+  .product-brief { background:var(--bg-soft); }
+  .module-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .module-card { background:white; border-radius:16px; padding:28px; border:1px solid var(--border); display:flex; gap:16px; align-items:flex-start; transition:all 0.2s; }
+  .module-card:hover { border-color:var(--enomix-border); box-shadow:0 8px 24px rgba(30,77,183,0.06); }
+  .module-card.featured { border-left:3px solid var(--enomix); }
+  .module-icon { width:44px; height:44px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .mi-talk { background:var(--enomix-light); }
+  .mi-mail { background:#FEF3C7; }
+  .mi-bot  { background:#F0FDF4; }
+  .mi-ai   { background:#F5F3FF; }
+  .module-body { flex:1; }
+  .module-name { font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+  .module-en   { font-size:11px; color:var(--text-muted); margin-bottom:8px; }
+  .module-desc { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+  .module-more { font-size:12px; color:var(--enomix); font-weight:600; margin-top:8px; text-decoration:none; }
+  .module-more:hover { text-decoration:underline; }
+
+  /* 고객사 */
+  .section-clients { padding:80px 0; background:var(--bg-white); }
+  .clients-label { text-align:center; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:36px; }
+  .clients-by-industry { display:flex; flex-direction:column; gap:14px; }
+  .industry-row { display:flex; align-items:center; gap:16px; }
+  .industry-label { font-size:11px; font-weight:700; color:var(--text-muted); letter-spacing:0.06em; text-transform:uppercase; min-width:100px; text-align:right; flex-shrink:0; }
+  .industry-divider { width:1px; height:28px; background:var(--border-md); flex-shrink:0; }
+  .industry-chips { display:flex; gap:8px; flex-wrap:wrap; }
+  .client-chip { padding:7px 16px; border-radius:100px; background:var(--bg-softer); border:1px solid var(--border); font-size:13px; font-weight:600; color:var(--text-secondary); transition:all 0.15s; }
+  .client-chip:hover { border-color:var(--enomix-border); color:var(--enomix); }
+  .market-badge { margin-top:40px; text-align:center; padding:24px; background:linear-gradient(135deg,#EEF2FF,#EFF6FF); border-radius:16px; border:1px solid var(--enomix-border); }
+  .market-badge-num { font-family:'Syne',sans-serif; font-size:40px; font-weight:800; color:var(--enomix); }
+  .market-badge-label { font-size:15px; color:var(--text-secondary); margin-top:6px; line-height:1.6; }
+
+  /* 기존 고객 안내 */
+  .section-notice { padding:60px 0; background:linear-gradient(135deg,#FFFBEB,#FEF3C7); border-top:3px solid var(--enomix-accent); }
+  .notice-inner { display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center; }
+  .notice-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; padding:4px 12px; border-radius:100px; background:var(--enomix-acc-lt); color:#92400E; border:1px solid rgba(245,158,11,0.3); margin-bottom:14px; letter-spacing:0.07em; text-transform:uppercase; }
+  .notice-title { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:var(--text-primary); margin-bottom:10px; }
+  .notice-desc { font-size:15px; color:var(--text-secondary); line-height:1.7; max-width:560px; }
+
+  /* CTA */
+  .section-cta { padding:100px 0; background:linear-gradient(135deg,var(--bg-dark),var(--bg-dark2)); position:relative; overflow:hidden; }
+  .section-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(30,77,183,0.1),transparent 70%); }
+  .cta-inner { text-align:center; position:relative; }
+  .cta-h2 { font-family:'Syne',sans-serif; font-size:clamp(28px,4vw,48px); font-weight:800; letter-spacing:-0.03em; line-height:1.15; margin-bottom:16px; color:white; }
+  .cta-h2 em { color:var(--enomix-accent); font-style:normal; }
+  .cta-sub { font-size:17px; color:rgba(255,255,255,0.5); margin-bottom:40px; }
+  .cta-actions { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+  .cta-note { margin-top:20px; font-size:13px; color:rgba(255,255,255,0.25); }
+
+  @media (max-width:960px) {
+    .hero-inner, .notice-inner { grid-template-columns:1fr; }
+    .hero-timeline { display:none; }
+    .story-grid, .trait-grid, .module-grid { grid-template-columns:1fr; }
+    .stats-grid { grid-template-columns:1fr 1fr; }
+    .stat-cell { border-right:none; border-bottom:1px solid rgba(255,255,255,0.15); }
+  }
+</style>
+</head>
+<body>
+
+<!-- GNB -->
+<header class="gnb">
+  <div class="gnb-inner">
+    <a class="gnb-logo" href="spectra_homepage_v2.html">
+      <svg viewBox="0 0 54 36" fill="none" width="28" height="18">
+        <g transform="translate(9,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#00C6FF"/></g>
+        <g transform="translate(27,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#1A6BFF"/></g>
+        <g transform="translate(45,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#5B21B6"/></g>
+      </svg>SPECTRA
+    </a>
+    <div class="gnb-breadcrumb">
+      <a href="spectra_homepage_v2.html">홈</a><span class="sep">›</span>
+      <a href="#">브랜드</a><span class="sep">›</span>
+      <span class="current">eNomix</span>
+    </div>
+    <a class="gnb-cta" href="#contact">도입 상담</a>
+  </div>
+</header>
+
+<!-- ① HERO — 브랜드 포지션 -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="tag tag-enomix">Spectra eNomix</span>
+          <span class="hero-eyebrow-text">Digital Engagement Platform</span>
+        </div>
+        <h1 class="hero-h1">
+          고객과 만나는<br>가장 <em>자연스러운</em><br>방법
+        </h1>
+        <p class="hero-tagline">채널이 달라도, 시간이 달라도.<br>고객 경험은 끊겨서는 안 됩니다.</p>
+        <p class="hero-desc">
+          1999년 비대면 채널의 시작부터,<br>
+          스펙트라는 고객과 기업이 만나는<br>
+          그 접점을 설계해왔습니다.<br>
+          eNomix는 그 26년의 집약입니다.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-enomix" href="#product">제품 살펴보기</a>
+          <a class="btn-outline-dark" href="#contact">고객 지원</a>
+        </div>
+      </div>
+
+      <!-- 우측 — 브랜드 연혁 타임라인 -->
+      <div class="hero-timeline">
+        <div class="ht-title">eNomix의 여정</div>
+        <div class="ht-item">
+          <div class="ht-year">1999</div>
+          <div class="ht-content">
+            <div class="ht-label">비대면 채널의 시작</div>
+            <div class="ht-desc">(주)스펙트라 설립. 기업용 디지털 커뮤니케이션 첫 걸음</div>
+          </div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">2005</div>
+          <div class="ht-content">
+            <div class="ht-label">금융권 표준이 되다</div>
+            <div class="ht-desc">국내 대형 금융권 솔루션 공급 개시. 채팅상담 인프라의 기준을 만들다</div>
+          </div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">2016</div>
+          <div class="ht-content">
+            <div class="ht-label">시장점유율 1위 달성</div>
+            <div class="ht-desc">채팅상담 시장 86% 점유. 대한민국 상담 접점의 표준으로 자리잡다</div>
+          </div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">2018+</div>
+          <div class="ht-content">
+            <div class="ht-label">eNomix Engager 런칭</div>
+            <div class="ht-desc">AI 시대를 대비한 통합 디지털 상담 플랫폼으로 진화</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② 브랜드 스토리 — 왜 eNomix가 필요한가 -->
+<section class="section" style="background:var(--bg-white);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow"><span class="tag tag-enomix">Why eNomix</span></div>
+      <h2 class="section-h2">고객 접점은<br>기술만으로 완성되지 않습니다</h2>
+      <p class="section-sub">AI가 발전해도 사라지지 않는 한 가지 — 사람이 직접 응대해야 하는 순간.</p>
+    </div>
+
+    <div class="story-grid">
+      <div class="story-card">
+        <div class="story-icon">💬</div>
+        <div class="story-year">채널의 분산</div>
+        <div class="story-title">고객은 원하는 채널로 옵니다</div>
+        <div class="story-desc">카카오톡, 웹, 앱, 이메일. 고객은 자신에게 편한 채널을 선택합니다. 기업이 채널마다 다른 경험을 제공하면, 고객은 그 틈새에서 이탈합니다.</div>
+      </div>
+      <div class="story-card">
+        <div class="story-icon">🤖</div>
+        <div class="story-year">AI의 한계</div>
+        <div class="story-title">복합 문의는 여전히 사람이 해결합니다</div>
+        <div class="story-desc">AI 기술 도입률 72%에도 복합 문의 재상담률은 25% 증가했습니다. 효율성은 높아졌지만, 고객 만족은 정체입니다. AI가 끝낸 곳에서 eNomix가 시작합니다.</div>
+      </div>
+      <div class="story-card">
+        <div class="story-icon">🔗</div>
+        <div class="story-year">연결의 부재</div>
+        <div class="story-title">채널 사이에서 고객 맥락이 사라집니다</div>
+        <div class="story-desc">채널마다 따로 운영되면 상담사는 같은 고객에게 같은 질문을 반복합니다. 고객의 맥락을 이어가는 것, 그것이 eNomix가 26년간 해온 일입니다.</div>
+      </div>
+      <div class="story-card">
+        <div class="story-icon">🏗</div>
+        <div class="story-year">인프라의 필요</div>
+        <div class="story-title">상담은 인프라 위에서 작동합니다</div>
+        <div class="story-desc">좋은 상담사도 안정적인 플랫폼 없이는 역량을 발휘하기 어렵습니다. 대용량 트래픽, 보안, 시스템 연동 — eNomix는 상담의 인프라입니다.</div>
+      </div>
+    </div>
+
+    <div class="position-box">
+      <div class="position-box-quote">
+        "<em>eNomix</em>는 고객과 기업이 만나는<br>
+        모든 디지털 접점을 연결합니다."
+      </div>
+      <p class="position-box-sub">
+        채널이 달라도 하나의 경험으로. 기술이 바뀌어도 끊기지 않는 연결.<br>
+        26년간 대한민국 상담 인프라의 표준을 만들어온 이유입니다.
+      </p>
+    </div>
+
+    <!-- 브랜드 개성 3가지 -->
+    <div class="trait-grid">
+      <div class="trait-card">
+        <div class="trait-icon">🔇</div>
+        <div class="trait-title">조용한 대화</div>
+        <div class="trait-desc">사무실 소음을 줄이고 사생활을 보호합니다. 채팅은 전화보다 조용하지만, 더 깊이 연결됩니다.</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-icon">👁</div>
+        <div class="trait-title">보이는 콘텐츠</div>
+        <div class="trait-desc">이미지, 문서, 링크를 실시간으로 공유합니다. 말로 전달하기 어려운 것을 보여줍니다.</div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-icon">🕐</div>
+        <div class="trait-title">시공간의 자유</div>
+        <div class="trait-desc">비동기 소통으로 상대방의 업무를 방해하지 않습니다. 기록은 언제든 다시 확인할 수 있습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 수치로 증명 -->
+<section class="section-stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-num">86<span>%</span></div>
+        <div class="stat-label">국내 채팅상담<br>시장점유율</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">250<span>+</span></div>
+        <div class="stat-label">금융·유통·공공<br>구축 사이트</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">26<span>년</span></div>
+        <div class="stat-label">디지털 커뮤니케이션<br>기술 축적</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">108<span>명</span></div>
+        <div class="stat-label">전문 인력<br>(기술인력 85%)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 제품 소개 — 간략히, 상세는 솔루션 페이지 -->
+<section class="section product-brief" id="product">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow"><span class="tag tag-enomix">eNomix Engager (EER)</span></div>
+      <h2 class="section-h2">네 가지 방식으로<br>고객과 연결합니다</h2>
+      <p class="section-sub">채팅, 메일, 자동화, AI — 고객이 원하는 방식에 맞춰 대응합니다.<br>상세 기능은 솔루션 페이지에서 확인하세요.</p>
+    </div>
+    <div class="module-grid">
+      <div class="module-card featured">
+        <div class="module-icon mi-talk">💬</div>
+        <div class="module-body">
+          <div class="module-name">채팅 상담</div>
+          <div class="module-en">CS Talk</div>
+          <div class="module-desc">실시간 1:1 상담. 상담사 1인이 최대 5건 동시 처리. 고객이 가장 선호하는 비대면 채널로 즉시성을 제공합니다.</div>
+          <a class="module-more" href="#">상세 보기 →</a>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon mi-mail">✉️</div>
+        <div class="module-body">
+          <div class="module-name">메일 상담</div>
+          <div class="module-en">E-mail Service</div>
+          <div class="module-desc">비실시간 채널로 복잡한 문의를 심도 있게 처리합니다. 1회 완결률이 높고 개인화 응대에 최적화되어 있습니다.</div>
+          <a class="module-more" href="#">상세 보기 →</a>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon mi-bot">🤖</div>
+        <div class="module-body">
+          <div class="module-name">시나리오 봇</div>
+          <div class="module-en">Scenario Service</div>
+          <div class="module-desc">단순 반복 문의를 고객 스스로 해결하게 합니다. 노코드로 봇을 설계하고, 상담사 부담을 줄입니다.</div>
+          <a class="module-more" href="#">상세 보기 →</a>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon mi-ai">✨</div>
+        <div class="module-body">
+          <div class="module-name">AI 어시스턴트</div>
+          <div class="module-en">AI Assistant</div>
+          <div class="module-desc">생성형 AI와 연계한 추천 답변·요약·지식 캡처. 상담사가 고객에게 더 집중할 수 있도록 돕습니다.</div>
+          <a class="module-more" href="#">상세 보기 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 대표 고객사 -->
+<section class="section-clients">
+  <div class="container">
+    <div class="clients-label">eNomix를 선택한 대한민국 대표 기업들</div>
+    <div class="clients-by-industry">
+      <div class="industry-row">
+        <div class="industry-label">금융 · 은행</div>
+        <div class="industry-divider"></div>
+        <div class="industry-chips">
+          <div class="client-chip">신한은행</div><div class="client-chip">우리은행</div>
+          <div class="client-chip">IBK기업은행</div><div class="client-chip">카카오뱅크</div><div class="client-chip">케이뱅크</div>
+        </div>
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">카드 · 보험</div>
+        <div class="industry-divider"></div>
+        <div class="industry-chips">
+          <div class="client-chip">삼성카드</div><div class="client-chip">신한카드</div>
+          <div class="client-chip">KB국민카드</div><div class="client-chip">현대해상</div>
+          <div class="client-chip">삼성화재</div><div class="client-chip">라이나생명</div>
+        </div>
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">공공 · 공기업</div>
+        <div class="industry-divider"></div>
+        <div class="industry-chips">
+          <div class="client-chip">LH공사</div><div class="client-chip">한국수력원자력</div>
+          <div class="client-chip">행정안전부</div><div class="client-chip">건강보험심사평가원</div><div class="client-chip">우체국</div>
+        </div>
+      </div>
+      <div class="industry-row">
+        <div class="industry-label">유통 · 서비스</div>
+        <div class="industry-divider"></div>
+        <div class="industry-chips">
+          <div class="client-chip">GS홈쇼핑</div><div class="client-chip">CJ온스타일</div>
+          <div class="client-chip">SK텔레콤</div><div class="client-chip">LG전자</div>
+          <div class="client-chip">코웨이</div><div class="client-chip">유한킴벌리</div>
+        </div>
+      </div>
+    </div>
+    <div class="market-badge">
+      <div class="market-badge-num">86%</div>
+      <div class="market-badge-label">
+        "검증된 솔루션이 곧 신뢰입니다."<br>
+        국내 eCRM 시장점유율 1위 · 대한민국의 모든 상담 접점 뒤에는 스펙트라가 있습니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 기존 고객 안내 -->
+<section class="section-notice">
+  <div class="container">
+    <div class="notice-inner">
+      <div>
+        <div class="notice-badge">기존 고객 안내</div>
+        <h2 class="notice-title">eNomix EER 기존 고객사를<br>위한 전용 지원</h2>
+        <p class="notice-desc">
+          현재 eNomix EER을 운영 중이신 고객사는 기존 시스템을 유지하면서 지원을 받으실 수 있습니다.
+          더 확장된 솔루션을 검토 중이시라면 Spectra DWorks Cowork+로의 전환도 안내드립니다.
+        </p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a class="btn btn-enomix" href="#contact">고객 지원</a>
+        <a class="btn btn-outline" href="dworks_brand.html">DWorks 알아보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ CTA -->
+<section class="section-cta" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-h2">
+        <em>26년</em>의 신뢰,<br>지금도 함께합니다.
+      </h2>
+      <p class="cta-sub">구축형 · 클라우드 구독형 모두 가능합니다. 기존 시스템 연동 및 운영 지원도 함께합니다.</p>
+      <div class="cta-actions">
+        <a class="btn btn-enomix" href="#">고객 지원 →</a>
+        <a class="btn-outline-dark" href="dworks_brand.html">DWorks 알아보기</a>
+      </div>
+      <p class="cta-note">영업일 기준 24시간 내 담당자가 연락드립니다</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

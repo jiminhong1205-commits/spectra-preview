@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스펙트라 소개 — Spectra</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+  :root {
+    --spectra:#1A6BFF; --dworks:#00C6FF; --noa:#5B21B6;
+    --text-primary:#0F172A; --text-secondary:#475569; --text-muted:#94A3B8;
+    --bg-white:#FFFFFF; --bg-soft:#F5F7FA; --bg-softer:#F8FAFC;
+    --border:rgba(0,0,0,0.07); --border-md:rgba(0,0,0,0.12);
+    --bg-dark:#060A14; --bg-dark2:#0C1220;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+  body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg-white);color:var(--text-primary);overflow-x:hidden}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:100px}
+  .tag-spectra{background:rgba(26,107,255,0.08);color:var(--spectra);border:1px solid rgba(26,107,255,0.2)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.2s;border:none}
+  .btn-spectra{background:var(--spectra);color:white;box-shadow:0 4px 20px rgba(26,107,255,0.25)}
+  .btn-spectra:hover{background:#1258DD;transform:translateY(-1px)}
+  .btn-outline-dark{background:transparent;color:white;border:1.5px solid rgba(255,255,255,0.25);padding:14px 28px;border-radius:100px;font-size:15px;font-weight:700;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-outline-dark:hover{background:rgba(255,255,255,0.08)}
+
+  /* GNB */
+  .gnb{position:sticky;top:0;z-index:99;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+  .gnb-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:64px}
+  .gnb-logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;margin-right:48px;text-decoration:none;flex-shrink:0;display:flex;align-items:center;gap:8px}
+  .gnb-breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted)}
+  .gnb-breadcrumb a{color:var(--text-muted);text-decoration:none}
+  .gnb-breadcrumb a:hover{color:var(--text-primary)}
+  .gnb-breadcrumb .sep{opacity:0.4}
+  .gnb-breadcrumb .current{color:var(--text-primary);font-weight:600}
+  .gnb-cta{padding:9px 20px;border-radius:100px;background:var(--spectra);color:white;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.2s;white-space:nowrap;margin-left:auto}
+  .gnb-cta:hover{background:#1258DD}
+
+  /* HERO */
+  .hero{background:var(--bg-dark);padding:100px 0 80px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 50% 60% at 0% 50%,rgba(26,107,255,0.15) 0%,transparent 70%),
+               radial-gradient(ellipse 40% 40% at 100% 20%,rgba(91,33,182,0.1) 0%,transparent 60%)}
+  .hero::after{content:'';position:absolute;inset:0;opacity:0.025;
+    background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);
+    background-size:60px 60px}
+  .hero-inner{position:relative;z-index:2;max-width:760px}
+  .hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+  .hero-h1{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:24px;color:white}
+  .hero-h1 em{
+    background:linear-gradient(90deg,var(--dworks),var(--spectra));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    font-style:normal}
+  .hero-sub{font-size:18px;line-height:1.75;color:rgba(255,255,255,0.55);max-width:600px}
+
+  /* KPI 배너 */
+  .kpi-banner{background:var(--bg-softer);border-bottom:1px solid var(--border);padding:0}
+  .kpi-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+  .kpi-cell{padding:36px 32px;border-right:1px solid var(--border);text-align:center}
+  .kpi-cell:last-child{border-right:none}
+  .kpi-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--spectra);letter-spacing:-0.03em;line-height:1}
+  .kpi-unit{font-size:20px;font-weight:800;color:var(--spectra)}
+  .kpi-label{font-size:13px;color:var(--text-secondary);margin-top:8px;line-height:1.4}
+
+  /* SECTIONS */
+  .section{padding:96px 0}
+  .section-h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,40px);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:16px;color:var(--text-primary)}
+  .section-sub{font-size:16px;line-height:1.75;color:var(--text-secondary)}
+  .section-eyebrow{margin-bottom:14px}
+
+  /* 정체성 섹션 */
+  .identity-section{background:var(--bg-white)}
+  .identity-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .identity-text p{font-size:17px;line-height:1.85;color:var(--text-secondary);margin-bottom:20px}
+  .identity-text p:last-child{margin-bottom:0}
+  .identity-text strong{color:var(--text-primary);font-weight:700}
+  .identity-visual{display:flex;flex-direction:column;gap:16px}
+  .iv-card{padding:24px 28px;border-radius:16px;background:var(--bg-softer);border:1px solid var(--border);border-left:3px solid var(--spectra)}
+  .iv-card:nth-child(2){border-left-color:var(--dworks)}
+  .iv-card:nth-child(3){border-left-color:var(--noa)}
+  .iv-title{font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:6px}
+  .iv-desc{font-size:13px;color:var(--text-secondary);line-height:1.6}
+
+  /* 연혁 */
+  .history-section{background:var(--bg-soft)}
+  .history-layout{display:grid;grid-template-columns:280px 1fr;gap:80px;align-items:start}
+  .history-sticky{position:sticky;top:88px}
+  .history-timeline{display:flex;flex-direction:column;gap:0}
+  .ht-group{margin-bottom:0}
+  .ht-year{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--spectra);padding:24px 0 12px;border-top:2px solid var(--border);letter-spacing:-0.02em}
+  .ht-year:first-child{border-top:none;padding-top:0}
+  .ht-items{display:flex;flex-direction:column;gap:10px;padding-bottom:24px}
+  .ht-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-secondary);line-height:1.5}
+  .ht-dot{width:6px;height:6px;border-radius:50%;background:var(--spectra);flex-shrink:0;margin-top:6px}
+  .ht-item.highlight{color:var(--text-primary);font-weight:600}
+  .ht-item.highlight .ht-dot{background:var(--spectra);width:8px;height:8px;margin-top:5px}
+
+  /* 인증·수상 */
+  .cert-section{background:var(--bg-white)}
+  .cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .cert-card{padding:24px;border-radius:14px;background:var(--bg-softer);border:1px solid var(--border);text-align:center;transition:all 0.2s}
+  .cert-card:hover{border-color:rgba(26,107,255,0.2);box-shadow:0 8px 20px rgba(26,107,255,0.06)}
+  .cert-icon{font-size:32px;margin-bottom:12px}
+  .cert-title{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:6px}
+  .cert-year{font-size:12px;color:var(--text-muted)}
+
+  /* 고객사 섹션 */
+  .clients-section{background:var(--bg-soft)}
+  .clients-category{margin-bottom:40px}
+  .clients-category:last-child{margin-bottom:0}
+  .cc-label{font-size:12px;font-weight:700;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:16px}
+  .cc-logos{display:flex;flex-wrap:wrap;gap:8px}
+  .cc-chip{padding:8px 16px;border-radius:8px;background:white;border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--text-secondary)}
+
+  /* 오시는 길 */
+  .contact-section{background:var(--bg-white)}
+  .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .contact-info{display:flex;flex-direction:column;gap:20px}
+  .ci-row{display:flex;gap:16px}
+  .ci-label{font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;min-width:60px;padding-top:2px}
+  .ci-val{font-size:15px;color:var(--text-primary);line-height:1.6}
+  .map-placeholder{background:var(--bg-softer);border-radius:16px;border:1px solid var(--border);height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--text-muted);font-size:14px}
+
+  /* CTA */
+  .section-cta{padding:88px 0;background:linear-gradient(135deg,var(--bg-dark),var(--bg-dark2));position:relative;overflow:hidden}
+  .section-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(26,107,255,0.1),transparent 70%)}
+  .cta-inner{text-align:center;position:relative}
+  .cta-h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3.5vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:16px;color:white}
+  .cta-h2 em{color:#60A5FA;font-style:normal}
+  .cta-sub{font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:36px;line-height:1.7}
+  .cta-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
+  @media(max-width:960px){
+    .kpi-inner{grid-template-columns:repeat(2,1fr)}
+    .identity-layout,.history-layout,.contact-layout{grid-template-columns:1fr}
+    .history-sticky{position:static}
+    .cert-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:640px){
+    .kpi-inner{grid-template-columns:1fr 1fr}
+    .cert-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- GNB -->
+<header class="gnb">
+  <div class="gnb-inner">
+    <a class="gnb-logo" href="spectra_homepage_v2.html">
+      <svg viewBox="0 0 54 36" fill="none" width="28" height="18">
+        <g transform="translate(9,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#00C6FF"/></g>
+        <g transform="translate(27,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#1A6BFF"/></g>
+        <g transform="translate(45,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#5B21B6"/></g>
+      </svg>SPECTRA
+    </a>
+    <div class="gnb-breadcrumb">
+      <a href="spectra_homepage_v2.html">홈</a><span class="sep">›</span>
+      <span class="current">스펙트라 소개</span>
+    </div>
+    <a class="gnb-cta" href="#contact">도입 상담</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <span class="tag tag-spectra">About Spectra</span>
+      </div>
+      <h1 class="hero-h1">
+        시장을 이해하는<br><em>엔지니어링</em><br>조직
+      </h1>
+      <p class="hero-sub">
+        1999년부터 대한민국 기업 커뮤니케이션 인프라를 구축해왔습니다. 금융, 공공, 유통 현장에서 26년간 축적된 도메인 이해를 기반으로, 기술이 실제 업무 현장에서 작동하도록 만듭니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- KPI 배너 -->
+<div class="kpi-banner">
+  <div class="kpi-inner">
+    <div class="kpi-cell">
+      <div><span class="kpi-num">26</span><span class="kpi-unit">년</span></div>
+      <div class="kpi-label">1999년 설립<br>기업 커뮤니케이션 인프라 구축</div>
+    </div>
+    <div class="kpi-cell">
+      <div><span class="kpi-num">250</span><span class="kpi-unit">+</span></div>
+      <div class="kpi-label">누적 고객사<br>금융·공공·유통·통신</div>
+    </div>
+    <div class="kpi-cell">
+      <div><span class="kpi-num">86</span><span class="kpi-unit">%</span></div>
+      <div class="kpi-label">국내 채팅상담<br>시장점유율</div>
+    </div>
+    <div class="kpi-cell">
+      <div><span class="kpi-num">108</span><span class="kpi-unit">명</span></div>
+      <div class="kpi-label">임직원 중 85%<br>개발·기술 인력</div>
+    </div>
+  </div>
+</div>
+
+<!-- 정체성 -->
+<section class="section identity-section">
+  <div class="container">
+    <div class="identity-layout">
+      <div class="identity-text">
+        <div class="section-eyebrow"><span class="tag tag-spectra">Who We Are</span></div>
+        <h2 class="section-h2" style="margin-bottom:28px;">기술을 파는 것이 아니라<br>문제를 해결합니다</h2>
+        <p>스펙트라는 <strong>엔지니어링 조직</strong>입니다. 임직원 108명 중 85%가 개발·기술 인력입니다. 그러나 우리가 다른 기술 회사와 구별되는 것은 26년간 금융, 공공, 유통 현장에서 쌓아온 <strong>도메인 이해</strong> 때문입니다.</p>
+        <p>보험 설계매니저의 하루, 공공기관 민원 담당자의 업무 구조, 제조사 영업지원팀의 소통 방식 — 이 현장을 이해하는 엔지니어들이 솔루션을 만듭니다. 기술이 현장에서 실제로 작동하는 이유입니다.</p>
+        <p>DWorks와 eNomix라는 두 브랜드 아래, 기업 커뮤니케이션의 공식화·자동화·인사이트화라는 일관된 방향으로 나아가고 있습니다.</p>
+      </div>
+      <div class="identity-visual">
+        <div class="iv-card">
+          <div class="iv-title">🔵 eNomix — 검증된 인프라</div>
+          <div class="iv-desc">26년간 대한민국 기업 채팅상담의 표준을 만들어온 브랜드. 채팅상담 86%, 이메일상담 87% 시장점유율. 250+ 고객사의 신뢰.</div>
+        </div>
+        <div class="iv-card">
+          <div class="iv-title">🟦 DWorks — 다음 업무의 시작</div>
+          <div class="iv-desc">비공식 대화를 공식 업무로 전환하는 플랫폼. Cowork+로 현장 소통을 자산화하고, NOA AI로 인텔리전스를 더합니다.</div>
+        </div>
+        <div class="iv-card">
+          <div class="iv-title">🟣 NOA — AI 인텔리전스</div>
+          <div class="iv-desc">쌓인 대화 데이터를 분석하고, 도메인 특화 AI가 응대를 자동화합니다. DX를 넘어 AX 전환을 이끕니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 연혁 -->
+<section class="section history-section">
+  <div class="container">
+    <div class="history-layout">
+      <div class="history-sticky">
+        <div class="section-eyebrow"><span class="tag tag-spectra">History</span></div>
+        <h2 class="section-h2">26년의<br>기록</h2>
+        <p class="section-sub" style="margin-top:16px;">1999년 설립 이후 대한민국 기업 커뮤니케이션 인프라의 역사와 함께해왔습니다.</p>
+      </div>
+      <div class="history-timeline">
+
+        <div class="ht-year">1999 — 2005</div>
+        <div class="ht-items">
+          <div class="ht-item highlight"><div class="ht-dot"></div>1999년 3월 (주)스펙트라 설립</div>
+          <div class="ht-item"><div class="ht-dot"></div>eNomix Mail, LiveChat 등 초기 상담 솔루션 출시</div>
+          <div class="ht-item highlight"><div class="ht-dot"></div>2001년 정보통신부 신소프트웨어 상품대상 수상</div>
+          <div class="ht-item"><div class="ht-dot"></div>2002년 한국정보통신기술협회 GS인증 획득</div>
+          <div class="ht-item"><div class="ht-dot"></div>조달청 행정 업무용 S/W 등록</div>
+          <div class="ht-item highlight"><div class="ht-dot"></div>2005년 한국콘텍센터 대상 기술부문 수상</div>
+        </div>
+
+        <div class="ht-year">2006 — 2013</div>
+        <div class="ht-items">
+          <div class="ht-item highlight"><div class="ht-dot"></div>2006년 CRM Award 수상 (Frost & Sullivan)</div>
+          <div class="ht-item"><div class="ht-dot"></div>eNomix Enterprise V1.0 출시 (Mail·FAQ·Chat·VOC 통합)</div>
+          <div class="ht-item"><div class="ht-dot"></div>2012년 PC & Mobile 통합관리 솔루션 EE V2.0 출시</div>
+          <div class="ht-item"><div class="ht-dot"></div>2013년 SW공학센터 품질 우수 과제 선정</div>
+        </div>
+
+        <div class="ht-year">2014 — 2018</div>
+        <div class="ht-items">
+          <div class="ht-item highlight"><div class="ht-dot"></div>2014년 카카오톡 상담 서비스 K-Talk 출시</div>
+          <div class="ht-item"><div class="ht-dot"></div>일본 시장 On-Demand 서비스 M-Talk 출시</div>
+          <div class="ht-item highlight"><div class="ht-dot"></div>2016년 인터넷 전문은행 상담 솔루션 100% 시장점유율 확보</div>
+          <div class="ht-item highlight"><div class="ht-dot"></div>2018년 카카오 상담톡 공식 딜러사 선정</div>
+        </div>
+
+        <div class="ht-year">2019 — 현재</div>
+        <div class="ht-items">
+          <div class="ht-item"><div class="ht-dot"></div>2019년 Rule-Base 챗봇 솔루션 Scenario-Bot V1.0 출시</div>
+          <div class="ht-item"><div class="ht-dot"></div>2020년 eNomix Engager V4.5 출시</div>
+          <div class="ht-item"><div class="ht-dot"></div>2021년 차세대 채팅 솔루션 Victory V1.0 출시</div>
+          <div class="ht-item highlight"><div class="ht-dot"></div>DWorks 브랜드 론칭 — Cowork+ / NOA AI Agent 출시</div>
+          <div class="ht-item highlight"><div class="ht-dot"></div>현재 250+ 고객사와 함께 AX 전환을 이끌고 있습니다</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 인증·수상 -->
+<section class="section cert-section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="section-eyebrow"><span class="tag tag-spectra">Certification & Awards</span></div>
+      <h2 class="section-h2">검증된 기술력과<br>신뢰의 기록</h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🏆</div>
+        <div class="cert-title">정보통신부<br>신소프트웨어 상품대상</div>
+        <div class="cert-year">2001</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📋</div>
+        <div class="cert-title">한국정보통신기술협회<br>GS 인증</div>
+        <div class="cert-year">2002</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🥇</div>
+        <div class="cert-title">한국콘텍센터 대상<br>기술부문</div>
+        <div class="cert-year">2005</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🌏</div>
+        <div class="cert-title">CRM Award<br>Frost & Sullivan</div>
+        <div class="cert-year">2006</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🔒</div>
+        <div class="cert-title">ISO 27001<br>정보보안 인증</div>
+        <div class="cert-year">취득 완료</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">💬</div>
+        <div class="cert-title">카카오 상담톡<br>공식 딜러사</div>
+        <div class="cert-year">2018 선정</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🏦</div>
+        <div class="cert-title">인터넷 전문은행<br>상담 솔루션 100%</div>
+        <div class="cert-year">2016 달성</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🇯🇵</div>
+        <div class="cert-title">일본 누적 고객사</div>
+        <div class="cert-year">79개사</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 주요 고객사 -->
+<section class="section clients-section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="section-eyebrow"><span class="tag tag-spectra">Customers</span></div>
+      <h2 class="section-h2">250+개 기업이<br>스펙트라와 함께합니다</h2>
+    </div>
+
+    <div class="clients-category">
+      <div class="cc-label">🏦 금융</div>
+      <div class="cc-logos">
+        <span class="cc-chip">카카오뱅크</span><span class="cc-chip">케이뱅크</span>
+        <span class="cc-chip">우리은행</span><span class="cc-chip">KB국민은행</span>
+        <span class="cc-chip">IBK기업은행</span><span class="cc-chip">하나은행</span>
+        <span class="cc-chip">NH농협은행</span><span class="cc-chip">신한카드</span>
+        <span class="cc-chip">삼성카드</span><span class="cc-chip">현대카드</span>
+        <span class="cc-chip">롯데카드</span><span class="cc-chip">우리카드</span>
+        <span class="cc-chip">삼성화재</span><span class="cc-chip">현대해상</span>
+        <span class="cc-chip">한화생명</span><span class="cc-chip">라이나생명</span>
+        <span class="cc-chip">신한투자증권</span><span class="cc-chip">KB캐피탈</span>
+      </div>
+    </div>
+
+    <div class="clients-category">
+      <div class="cc-label">🏢 공공</div>
+      <div class="cc-logos">
+        <span class="cc-chip">LH공사</span><span class="cc-chip">국민연금공단</span>
+        <span class="cc-chip">한국도로공사</span><span class="cc-chip">코레일</span>
+        <span class="cc-chip">한국전력공사</span><span class="cc-chip">서울특별시</span>
+        <span class="cc-chip">경기도</span><span class="cc-chip">국민건강보험공단</span>
+        <span class="cc-chip">한국거래소</span>
+      </div>
+    </div>
+
+    <div class="clients-category">
+      <div class="cc-label">🛒 유통·통신·서비스</div>
+      <div class="cc-logos">
+        <span class="cc-chip">GS홈쇼핑</span><span class="cc-chip">CJ온스타일</span>
+        <span class="cc-chip">롯데면세점</span><span class="cc-chip">신라면세점</span>
+        <span class="cc-chip">SSF Shop</span><span class="cc-chip">NS홈쇼핑</span>
+        <span class="cc-chip">SK텔레콤</span><span class="cc-chip">LG유플러스</span>
+        <span class="cc-chip">KT</span><span class="cc-chip">카카오M</span>
+        <span class="cc-chip">삼성전자서비스</span><span class="cc-chip">한진택배</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 오시는 길 -->
+<section class="section contact-section" id="contact-info">
+  <div class="container">
+    <div class="contact-layout">
+      <div>
+        <div class="section-eyebrow"><span class="tag tag-spectra">Contact</span></div>
+        <h2 class="section-h2" style="margin-bottom:36px;">찾아오시는 길</h2>
+        <div class="contact-info">
+          <div class="ci-row">
+            <div class="ci-label">주소</div>
+            <div class="ci-val">서울특별시 서초구 반포대로 27길 16<br>파크빌딩 3층</div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-label">전화</div>
+            <div class="ci-val">02-508-7799</div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-label">이메일</div>
+            <div class="ci-val">info@spectra.co.kr</div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-label">설립</div>
+            <div class="ci-val">1999년 3월</div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-label">대표</div>
+            <div class="ci-val">박태준</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="map-placeholder">
+          <div style="font-size:32px;">📍</div>
+          <div style="font-weight:600;color:var(--text-primary);">서초구 반포대로 27길 16</div>
+          <div>파크빌딩 3층</div>
+          <!-- 개발자에게 카카오맵 또는 네이버맵 embed 요청 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-cta" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-h2">26년의 현장 경험을<br><em>지금 활용하세요</em></h2>
+      <p class="cta-sub">어떤 산업이든, 어떤 규모든 — 같은 문제를 먼저 해결한 사례를 보여드립니다.</p>
+      <div class="cta-actions">
+        <a class="btn btn-spectra" href="#">도입 상담 신청 →</a>
+        <a class="btn-outline-dark" href="spectra_homepage_v2.html">홈으로 돌아가기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPECTRA — 기업 커뮤니케이션 인프라의 새로운 기준</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+
+  /* ════════════════════════════════════════
+     DESIGN TOKENS — 전체 색상 시스템
+     브랜드 컬러를 바꾸려면 이 블록만 수정
+  ════════════════════════════════════════ */
+  :root {
+    /* ── 브랜드 컬러 (확정) ── */
+    --spectra:        #1A6BFF;
+    --spectra-light:  rgba(26,107,255,0.10);
+    --spectra-border: rgba(26,107,255,0.25);
+    --dworks:         #00C6FF;           /* Cyan 앵커 */
+    --dworks-light:   rgba(0,198,255,0.10);
+    --dworks-border:  rgba(0,198,255,0.25);
+    --noa:            #5B21B6;           /* Deep Purple 앵커 */
+    --noa-mid:        #3730A3;
+    --noa-light:      rgba(91,33,182,0.10);
+    --noa-border:     rgba(91,33,182,0.25);
+    --enomix:         #64748B;
+    --enomix-light:   rgba(100,116,139,0.10);
+
+    /* ── 기본 타이포 / 텍스트 ── */
+    --text-primary:   #0F172A;
+    --text-secondary: #475569;
+    --text-muted:     #94A3B8;
+    --text-white:     #FFFFFF;
+
+    /* ── 배경 (라이트) ── */
+    --bg-white:       #FFFFFF;
+    --bg-soft:        #F5F7FA;
+    --bg-softer:      #F8FAFC;
+    --border-light:   rgba(0,0,0,0.07);
+    --border-medium:  rgba(0,0,0,0.12);
+
+    /* ── 배경 (다크 — Hero, CTA, Footer) ── */
+    --bg-dark:        #060A14;
+    --bg-dark2:       #0C1220;
+    --border-dark:    rgba(255,255,255,0.08);
+
+    /* ── 섹션별 토큰 (여기서 섹션 배경 한번에 제어) ── */
+    --s-notice-from:  var(--spectra);
+    --s-notice-to:    var(--noa);
+    --s-gnb:          rgba(255,255,255,0.97);
+    --s-hero-bg:      var(--bg-dark);          /* 비디오 섹션 — 다크 유지 */
+    --s-logos:        var(--bg-softer);
+    --s-brand:        var(--bg-white);
+    --s-brand-text:   var(--text-primary);
+    --s-cowork:       var(--bg-soft);
+    --s-cowork-text:  var(--text-primary);
+    --s-noa:          var(--bg-white);
+    --s-noa-text:     var(--text-primary);
+    --s-synergy:      #EEF2FF;                /* 인디고 틴트 */
+    --s-synergy-text: var(--text-primary);
+    --s-cases:        var(--bg-white);
+    --s-cases-text:   var(--text-primary);
+    --s-industry:     var(--bg-soft);
+    --s-insight:      var(--bg-white);
+    --s-cta-from:     #060A14;
+    --s-cta-to:       #0C1220;
+    --s-footer:       #040710;
+
+    --radius:    16px;
+    --radius-sm: 10px;
+  }
+
+  /* ════════════════════════════════════════
+     RESET & BASE
+  ════════════════════════════════════════ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--bg-white);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  /* ════════════════════════════════════════
+     UTILITIES
+  ════════════════════════════════════════ */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .tag-spectra { background: var(--spectra-light); color: var(--spectra); border: 1px solid var(--spectra-border); }
+  .tag-dworks  { background: var(--dworks-light);  color: #0077AA;        border: 1px solid var(--dworks-border); }
+  .tag-noa     { background: var(--noa-light);     color: var(--noa);     border: 1px solid var(--noa-border); }
+  .tag-enomix  { background: var(--enomix-light);  color: var(--enomix);  border: 1px solid rgba(100,116,139,0.2); }
+  .tag-dark    { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); }
+  .tag-industry { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    text-decoration: none; transition: all 0.2s; border: none;
+  }
+  .btn-primary {
+    background: var(--spectra); color: white;
+    box-shadow: 0 4px 20px rgba(26,107,255,0.35);
+  }
+  .btn-primary:hover { background: #1258DD; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(26,107,255,0.45); }
+  .btn-outline-dark {
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.25);
+  }
+  .btn-outline-dark:hover { background: rgba(255,255,255,0.08); }
+  .btn-outline-light {
+    background: transparent; color: var(--text-primary);
+    border: 1.5px solid var(--border-medium);
+  }
+  .btn-outline-light:hover { background: var(--bg-soft); }
+  .btn-dworks {
+    background: var(--dworks); color: #0A1A2E;
+    box-shadow: 0 4px 20px rgba(0,198,255,0.3);
+  }
+  .btn-dworks:hover { background: #00B8EF; transform: translateY(-1px); }
+  .btn-noa {
+    background: var(--noa); color: white;
+    box-shadow: 0 4px 20px rgba(91,33,182,0.3);
+  }
+  .btn-noa:hover { background: #4B1A9B; transform: translateY(-1px); }
+
+  /* ════════════════════════════════════════
+     ① NOTICE BAR
+  ════════════════════════════════════════ */
+  .notice-bar {
+    background: linear-gradient(90deg, var(--s-notice-from), var(--s-notice-to));
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 13px; font-weight: 600; color: white;
+    position: relative; z-index: 100;
+  }
+  .notice-bar a { color: white; text-decoration: none; opacity: 0.9; }
+  .notice-bar a:hover { opacity: 1; text-decoration: underline; }
+  .notice-bar .sep { opacity: 0.5; margin: 0 10px; }
+
+  /* ════════════════════════════════════════
+     ② GNB
+  ════════════════════════════════════════ */
+  .gnb {
+    position: sticky; top: 0; z-index: 99;
+    background: var(--s-gnb);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 0 24px;
+  }
+  .gnb-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; height: 64px;
+  }
+  .gnb-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800;
+    color: var(--text-primary); letter-spacing: -0.02em;
+    margin-right: 48px; text-decoration: none; flex-shrink: 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  /* 로고 심볼: 3 다이아몬드 인라인 SVG */
+  .gnb-logo svg { width: 28px; height: 20px; }
+  .gnb-nav {
+    display: flex; align-items: center; gap: 2px; flex: 1;
+  }
+  .gnb-item {
+    position: relative;
+    padding: 8px 14px;
+    font-size: 14px; font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer; border-radius: 8px;
+    transition: all 0.15s; white-space: nowrap;
+    text-decoration: none;
+  }
+  .gnb-item:hover { color: var(--text-primary); background: var(--bg-soft); }
+  .gnb-item.has-dropdown::after {
+    content: ''; display: inline-block;
+    width: 5px; height: 5px; margin-left: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+  }
+  .gnb-dropdown {
+    display: none;
+    position: absolute; top: calc(100% + 8px); left: 0;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 8px;
+    min-width: 220px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    z-index: 200;
+  }
+  .gnb-item:hover .gnb-dropdown,
+  .gnb-item.open .gnb-dropdown { display: block; }
+  .gnb-dropdown-section {
+    font-size: 10px; font-weight: 700; color: var(--text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 6px 10px 3px;
+  }
+  .gnb-dropdown-divider { height: 1px; background: var(--border-light); margin: 6px 8px; }
+  .gnb-dropdown-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 8px;
+    font-size: 13px; font-weight: 500; color: var(--text-secondary);
+    cursor: pointer; transition: background 0.15s;
+    text-decoration: none;
+  }
+  .gnb-dropdown-item:hover { background: var(--bg-soft); color: var(--text-primary); }
+  .gnb-dropdown-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .gnb-dropdown-sub { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+  .gnb-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+  .gnb-login {
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 14px; font-weight: 500; color: var(--text-secondary);
+    cursor: pointer; transition: all 0.15s; text-decoration: none;
+  }
+  .gnb-login:hover { color: var(--text-primary); background: var(--bg-soft); }
+  .gnb-cta {
+    padding: 9px 20px; border-radius: 100px;
+    background: var(--spectra); color: white;
+    font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none; white-space: nowrap;
+  }
+  .gnb-cta:hover { background: #1258DD; box-shadow: 0 4px 16px rgba(26,107,255,0.35); }
+
+  /* ════════════════════════════════════════
+     ③ HERO — 비디오 배경 (다크 유지)
+  ════════════════════════════════════════ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 0 80px;
+    overflow: hidden;
+    background: var(--s-hero-bg);
+  }
+  /* 비디오 배경 */
+  .hero-video-wrap {
+    position: absolute; inset: 0;
+    overflow: hidden;
+  }
+  .hero-video-wrap video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.45;          /* 영상 위에 텍스트 가독성 확보 */
+  }
+  /* 영상 위 오버레이 그라데이션 */
+  .hero-video-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to right, rgba(6,10,20,0.85) 40%, rgba(6,10,20,0.2) 100%),
+      linear-gradient(to top, rgba(6,10,20,0.6) 0%, transparent 50%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
+  }
+  .hero-h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(40px, 5.5vw, 68px);
+    font-weight: 800; line-height: 1.1;
+    letter-spacing: -0.03em; margin-bottom: 24px;
+    color: white;
+  }
+  .hero-h1 .accent-cyan   { color: var(--dworks); }
+  .hero-h1 .accent-purple { color: #A78BFA; }
+  .hero-sub {
+    font-size: 18px; line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px; margin-bottom: 40px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 34px; font-weight: 800;
+    color: white; letter-spacing: -0.03em;
+  }
+  .hero-stat-num span { color: var(--dworks); }
+  .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+  /* Hero 우측 — 브랜드 카드 */
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .brand-preview-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 20px 24px;
+    backdrop-filter: blur(16px);
+    transition: all 0.2s; cursor: pointer;
+    text-decoration: none; display: block;
+  }
+  .brand-preview-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+    transform: translateX(6px);
+  }
+  .brand-preview-card.hl-dworks { border-left: 3px solid var(--dworks); }
+  .brand-preview-card.hl-noa    { border-left: 3px solid #A78BFA; }
+  .brand-preview-card.hl-enomix { border-left: 3px solid var(--enomix); opacity: 0.55; }
+  .bpc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .bpc-brand { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .bpc-product { font-size: 18px; font-weight: 800; color: white; margin-bottom: 5px; }
+  .bpc-desc { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .bpc-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+  .bpc-badge-main { background: var(--spectra-light); color: var(--spectra); }
+  .bpc-badge-maint { background: rgba(100,116,139,0.2); color: var(--enomix); }
+
+  /* ════════════════════════════════════════
+     ④ 고객사 로고 스트립
+  ════════════════════════════════════════ */
+  .logo-strip {
+    background: var(--s-logos);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    padding: 32px 0; overflow: hidden;
+  }
+  .logo-strip-label {
+    text-align: center;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 22px;
+  }
+  .logo-scroll {
+    display: flex; align-items: center; gap: 56px;
+    animation: scroll-logos 32s linear infinite;
+    width: max-content;
+  }
+  .logo-item {
+    font-size: 14px; font-weight: 700;
+    color: var(--text-muted); white-space: nowrap; letter-spacing: 0.03em;
+  }
+  @keyframes scroll-logos {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ════════════════════════════════════════
+     공통 섹션 헤더
+  ════════════════════════════════════════ */
+  .section { padding: 100px 0; }
+  .section-header { text-align: center; margin-bottom: 64px; }
+  .section-eyebrow { margin-bottom: 14px; }
+  .section-h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1.15; margin-bottom: 16px;
+    color: var(--text-primary);
+  }
+  .section-h2-white { color: white; }
+  .section-sub {
+    font-size: 17px; line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 560px; margin: 0 auto;
+  }
+  .section-sub-white { color: rgba(255,255,255,0.6); }
+
+  /* ════════════════════════════════════════
+     ⑤ 브랜드 선택 — DWorks & eNomix
+  ════════════════════════════════════════ */
+  .section-brand { background: var(--s-brand); }
+
+  .brand-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;
+  }
+  .brand-card {
+    border-radius: 20px; padding: 40px;
+    position: relative; overflow: hidden;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; display: block;
+  }
+  .brand-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+  .brand-card-dworks {
+    background: linear-gradient(135deg, #EBF8FF 0%, #F0FAFF 100%);
+    border: 1px solid rgba(0,198,255,0.2);
+  }
+  .brand-card-dworks::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(0,198,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .brand-card-enomix {
+    grid-column: span 2;
+    background: var(--bg-softer);
+    border: 1px solid var(--border-light);
+    display: flex; align-items: center; gap: 40px;
+    padding: 28px 40px; opacity: 0.75;
+  }
+  .bc-brand  { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .bc-product { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; color: var(--text-primary); }
+  .bc-desc { font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 28px; }
+  .bc-modules { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bc-module {
+    font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 100px;
+    background: rgba(0,0,0,0.05); color: var(--text-secondary);
+    border: 1px solid var(--border-light);
+  }
+  .bc-arrow {
+    position: absolute; bottom: 32px; right: 32px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(0,0,0,0.06);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; transition: background 0.2s; color: var(--text-primary);
+  }
+  .brand-card:hover .bc-arrow { background: rgba(0,0,0,0.1); }
+
+  /* ════════════════════════════════════════
+     ⑥ COWORK+ 상세
+  ════════════════════════════════════════ */
+  .section-cowork { background: var(--s-cowork); }
+  .section-noa    { background: var(--s-noa); }
+
+  .product-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .product-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .product-h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1.15; margin-bottom: 16px;
+    color: var(--text-primary);
+  }
+  .product-sub {
+    font-size: 16px; line-height: 1.8;
+    color: var(--text-secondary); margin-bottom: 36px;
+  }
+  .feature-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 20px; border-radius: 12px;
+    background: white; border: 1px solid var(--border-light);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .feature-item:hover { border-color: var(--border-medium); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .feature-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .fi-dworks { background: var(--dworks-light); }
+  .fi-noa    { background: var(--noa-light); }
+  .feature-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+  .feature-desc  { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* 제품 목업 비주얼 */
+  .product-visual { position: relative; }
+  .mock-window {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border-medium);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+  }
+  .mock-bar {
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .mock-bar-dworks { background: #EBF8FF; border-bottom: 1px solid var(--dworks-border); }
+  .mock-bar-noa    { background: #EDE9FE; border-bottom: 1px solid var(--noa-border); }
+  .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .mock-content { padding: 24px; }
+  .mock-content-dworks { background: #F0FAFF; }
+  .mock-content-noa    { background: #F5F3FF; }
+
+  .chat-mock { display: flex; flex-direction: column; gap: 12px; }
+  .chat-msg { display: flex; gap: 10px; align-items: flex-start; }
+  .chat-msg.right { flex-direction: row-reverse; }
+  .chat-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .chat-bubble {
+    max-width: 240px; padding: 10px 14px; border-radius: 14px;
+    font-size: 13px; line-height: 1.5;
+  }
+  .bubble-in  { background: white; color: var(--text-primary); border: 1px solid var(--border-light); }
+  .bubble-out { background: var(--dworks); color: #0A1A2E; }
+  .chat-ts { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
+  .chat-ai-notice {
+    padding: 10px 14px; border-radius: 10px;
+    background: var(--dworks-light); border: 1px solid var(--dworks-border);
+    font-size: 12px; color: #0077AA;
+  }
+  .mock-stats {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px solid var(--border-light);
+    display: flex; gap: 10px;
+  }
+  .mock-stat {
+    flex: 1; padding: 10px; border-radius: 8px;
+    background: white; border: 1px solid var(--border-light);
+    text-align: center;
+  }
+  .mock-stat-num   { font-size: 18px; font-weight: 800; color: var(--text-primary); }
+  .mock-stat-label { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* NOA AI 목업 */
+  .ai-mock { display: flex; flex-direction: column; gap: 12px; }
+  .ai-insight-card {
+    padding: 14px 16px; border-radius: 12px;
+    background: white; border: 1px solid var(--noa-border);
+  }
+  .aic-label { font-size: 10px; font-weight: 700; color: var(--noa); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .aic-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .aic-bar { height: 5px; border-radius: 3px; background: var(--bg-soft); margin-top: 10px; overflow: hidden; }
+  .aic-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--noa-mid), var(--noa)); }
+  .ai-row { display: flex; gap: 10px; }
+  .ai-mini-card {
+    flex: 1; padding: 12px 14px; border-radius: 10px;
+    background: white; border: 1px solid var(--border-light);
+  }
+  .amc-num   { font-size: 22px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; }
+  .amc-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ════════════════════════════════════════
+     ⑧ 시너지
+  ════════════════════════════════════════ */
+  .section-synergy {
+    background: var(--s-synergy);
+    padding: 100px 0; position: relative; overflow: hidden;
+  }
+  .synergy-grid {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center;
+  }
+  .synergy-card {
+    border-radius: 20px; padding: 36px; text-align: center;
+    background: white; border: 1px solid var(--border-light);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .syn-dworks { border-top: 3px solid var(--dworks); }
+  .syn-noa    { border-top: 3px solid var(--noa); }
+  .synergy-plus {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .syn-plus-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--spectra-light); border: 1px solid var(--spectra-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: var(--spectra); font-weight: 700;
+  }
+  .syn-plus-label { font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .syn-brand-name { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .syn-product-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 10px; color: var(--text-primary);
+  }
+  .syn-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+  .synergy-result {
+    margin-top: 48px;
+    background: white; border: 1px solid var(--spectra-border);
+    border-radius: 16px; padding: 32px 40px; text-align: center;
+    box-shadow: 0 4px 20px rgba(26,107,255,0.08);
+  }
+  .syn-result-label { font-size: 12px; font-weight: 700; color: var(--spectra); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .syn-result-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);
+  }
+
+  /* ════════════════════════════════════════
+     ⑨ 고객 사례
+  ════════════════════════════════════════ */
+  .section-cases { background: var(--s-cases); }
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .case-card {
+    background: var(--bg-softer); border: 1px solid var(--border-light);
+    border-radius: 16px; padding: 28px;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .case-card:hover {
+    border-color: var(--border-medium);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+  }
+  .case-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .case-company { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+  .case-industry {
+    font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 100px;
+    background: var(--bg-soft); color: var(--text-muted); letter-spacing: 0.04em;
+    border: 1px solid var(--border-light);
+  }
+  .case-quote { font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 16px; }
+  .case-kpi {
+    display: flex; gap: 16px;
+    padding-top: 16px; border-top: 1px solid var(--border-light);
+  }
+  .case-kpi-num { font-size: 20px; font-weight: 800; color: var(--text-primary); }
+  .case-kpi-num.cyan   { color: #0077AA; }
+  .case-kpi-num.purple { color: var(--noa); }
+  .case-kpi-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .case-brand-tag {
+    display: inline-block; margin-top: 12px;
+    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px;
+  }
+
+  /* ════════════════════════════════════════
+     ⑩ 산업별
+  ════════════════════════════════════════ */
+  .section-industry { background: var(--s-industry); }
+  .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .industry-card {
+    background: white; border-radius: 16px; padding: 28px 24px;
+    border: 1px solid var(--border-light);
+    transition: all 0.2s; cursor: pointer;
+  }
+  .industry-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.09); }
+  .industry-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 16px;
+  }
+  .ii-finance { background: #EFF6FF; }
+  .ii-mfg     { background: #ECFDF5; }
+  .ii-retail  { background: #FDF4FF; }
+  .ii-telco   { background: #FFF7ED; }
+  .industry-name { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+  .industry-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
+  .industry-clients { font-size: 12px; color: var(--text-muted); }
+  .industry-clients strong { color: var(--text-secondary); font-weight: 600; }
+
+  /* ════════════════════════════════════════
+     ⑪ 인사이트
+  ════════════════════════════════════════ */
+  .section-insight { background: var(--s-insight); }
+  .insight-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; }
+  .insight-card {
+    border-radius: 16px; overflow: hidden;
+    background: var(--bg-softer); border: 1px solid var(--border-light);
+    transition: all 0.2s; cursor: pointer;
+  }
+  .insight-card:hover { border-color: var(--border-medium); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .insight-thumb {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+  }
+  .it-finance { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+  .it-ai      { background: linear-gradient(135deg, #F5F3FF, #EDE9FE); }
+  .it-kakao   { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); }
+  .insight-body { padding: 20px; }
+  .insight-cat { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .insight-title { font-size: 15px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; color: var(--text-primary); }
+  .insight-date  { font-size: 12px; color: var(--text-muted); }
+  .insight-more  { text-align: center; margin-top: 40px; }
+
+  /* ════════════════════════════════════════
+     ⑫ CTA — 다크 유지 (시각적 마무리)
+  ════════════════════════════════════════ */
+  .section-cta {
+    background: linear-gradient(135deg, var(--s-cta-from), var(--s-cta-to));
+    padding: 100px 0; position: relative; overflow: hidden;
+  }
+  .section-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(26,107,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner { text-align: center; position: relative; }
+  .cta-h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1.15; margin-bottom: 16px; color: white;
+  }
+  .cta-sub   { font-size: 17px; color: rgba(255,255,255,0.55); margin-bottom: 40px; }
+  .cta-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .cta-note  { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.3); }
+
+  /* ════════════════════════════════════════
+     ⑬ FOOTER
+  ════════════════════════════════════════ */
+  footer {
+    background: var(--s-footer);
+    padding: 60px 0 32px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 240px 1fr; gap: 80px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 28px;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800; color: white; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.7; }
+  .footer-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .footer-col-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-link { display: block; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 10px; text-decoration: none; transition: color 0.15s; }
+  .footer-link:hover { color: white; }
+  .footer-link.legacy { color: rgba(255,255,255,0.3); font-size: 12px; }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: rgba(255,255,255,0.2);
+  }
+  .footer-legal { display: flex; gap: 20px; }
+  .footer-legal a { color: rgba(255,255,255,0.2); text-decoration: none; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+  /* ════════════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════════════ */
+  @media (max-width: 960px) {
+    .hero > .container > div,
+    .product-layout,
+    .synergy-grid,
+    .brand-grid,
+    .cases-grid,
+    .industry-grid,
+    .insight-grid,
+    .footer-top,
+    .footer-nav-grid { grid-template-columns: 1fr !important; }
+    .brand-card-enomix { grid-column: span 1; flex-direction: column; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .hero-visual { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ① 상단 CTA 바 -->
+<div class="notice-bar">
+  스펙트라 솔루션이 궁금하신가요? 전문가 상담을 받아보세요
+  <span class="sep">|</span>
+  <a href="#contact" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:100px;border:1.5px solid rgba(255,255,255,0.5);font-weight:700;opacity:1;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">제품 문의 →</a>
+</div>
+
+<!-- ② GNB -->
+<header class="gnb">
+  <div class="gnb-inner">
+    <a class="gnb-logo" href="spectra_homepage_v2.html">
+      <!-- 로고 심볼: 3 다이아몬드 인라인 -->
+      <svg viewBox="0 0 54 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(9,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#00C6FF"/></g>
+        <g transform="translate(27,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#1A6BFF"/></g>
+        <g transform="translate(45,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#5B21B6"/></g>
+      </svg>
+      SPECTRA
+    </a>
+    <nav class="gnb-nav">
+
+      <!-- 브랜드 -->
+      <div class="gnb-item has-dropdown">브랜드
+        <div class="gnb-dropdown">
+          <a class="gnb-dropdown-item" href="dworks_brand.html">
+            <div class="gnb-dropdown-dot" style="background:var(--dworks);"></div>
+            DWorks <span class="gnb-dropdown-sub">상담 · 협업 · AI</span>
+          </a>
+          <a class="gnb-dropdown-item" href="eNomix_brand.html">
+            <div class="gnb-dropdown-dot" style="background:var(--enomix);"></div>
+            eNomix <span class="gnb-dropdown-sub">기업 채팅상담</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 솔루션 -->
+      <div class="gnb-item has-dropdown">솔루션
+        <div class="gnb-dropdown">
+          <div class="gnb-dropdown-section">DWorks · Cowork+</div>
+          <a class="gnb-dropdown-item" href="cowork_plus.html">
+            <div class="gnb-dropdown-dot" style="background:var(--dworks);"></div>
+            Cowork+ <span class="gnb-dropdown-sub">비공식 대화의 공식화</span>
+          </a>
+          <div class="gnb-dropdown-divider"></div>
+          <div class="gnb-dropdown-section">DWorks · NOA</div>
+          <a class="gnb-dropdown-item" href="noa.html">
+            <div class="gnb-dropdown-dot" style="background:var(--noa);"></div>
+            NOA <span class="gnb-dropdown-sub">AI Agent · Insight · QA · OCR</span>
+          </a>
+          <div class="gnb-dropdown-divider"></div>
+          <div class="gnb-dropdown-section">eNomix</div>
+          <a class="gnb-dropdown-item" style="opacity:0.6;" href="eNomix_brand.html">
+            <div class="gnb-dropdown-dot" style="background:var(--enomix);"></div>
+            EER <span class="gnb-dropdown-sub">기존 고객 지원</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 적용 산업 -->
+      <div class="gnb-item has-dropdown">적용 산업
+        <div class="gnb-dropdown">
+          <a class="gnb-dropdown-item" href="industry_finance.html">🏦 금융</a>
+          <a class="gnb-dropdown-item" href="industry_manufacturing.html">🏭 제조</a>
+          <a class="gnb-dropdown-item" href="industry_retail.html">🛒 유통 & 서비스</a>
+          <a class="gnb-dropdown-item" href="industry_telecom.html">📡 통신 & 공공</a>
+          <a class="gnb-dropdown-item" href="industry_construction.html">🏗 건설 & 플랜트</a>
+        </div>
+      </div>
+
+      <!-- 인사이트 -->
+      <a class="gnb-item" href="https://www.spectra.co.kr/blog/" target="_blank">인사이트</a>
+
+      <!-- 회사 소개 -->
+      <div class="gnb-item has-dropdown">회사 소개
+        <div class="gnb-dropdown">
+          <a class="gnb-dropdown-item" href="about_spectra.html">Spectra 소개</a>
+          <a class="gnb-dropdown-item" href="https://www.spectra.co.kr/blog/" target="_blank">채용</a>
+        </div>
+      </div>
+    </nav>
+    <div class="gnb-actions">
+
+      <a class="gnb-cta" href="#contact">도입 상담</a>
+    </div>
+  </div>
+</header>
+
+<!-- ③ HERO — 비디오 배경 -->
+<section class="hero">
+  <!-- 비디오 배경 -->
+  <div class="hero-video-wrap">
+    <!--
+      개발자 안내: 오프닝_타이틀_f1.mp4 파일을 이 HTML과 같은 경로에 두세요.
+      autoplay muted loop playsinline 은 브라우저 자동재생 정책에 필수입니다.
+    -->
+    <video autoplay muted loop playsinline>
+      <source src="오프닝_타이틀_f1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 400px; gap:80px; align-items:center;">
+
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="tag tag-dark">SPECTRA · 설립 1999</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.35);">설립 26년 · 고객사 250+</span>
+        </div>
+        <h1 class="hero-h1">
+          고객과의 <span class="accent-cyan">대화</span>를<br>
+          비즈니스 <span class="accent-purple">자산</span>으로.
+        </h1>
+        <p class="hero-sub">
+          DWorks Cowork+로 상담·협업 인프라를 구축하고,<br>
+          NOA로 모든 대화를 AI 인사이트로 전환하세요.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">도입 상담 신청</a>
+          <a class="btn btn-outline-dark" href="cowork_plus.html">제품 살펴보기</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">250<span>+</span></div>
+            <div class="hero-stat-label">도입 기업</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">86<span>%</span></div>
+            <div class="hero-stat-label">채팅상담 시장점유율</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">26<span>년</span></div>
+            <div class="hero-stat-label">커뮤니케이션 기술 축적</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 우측 브랜드 카드 -->
+      <div class="hero-visual">
+        <a class="brand-preview-card hl-dworks" href="dworks_brand.html">
+          <div class="bpc-top">
+            <span class="bpc-brand" style="color:var(--dworks);">DWorks</span>
+            <span class="bpc-badge bpc-badge-main">주력 브랜드</span>
+          </div>
+          <div class="bpc-product">Cowork+</div>
+          <div class="bpc-desc">카카오 기반 상담 & 외부 협업 인프라</div>
+        </a>
+        <a class="brand-preview-card hl-dworks" href="noa.html">
+          <div class="bpc-top">
+            <span class="bpc-brand" style="color:#A78BFA;">DWorks · NOA</span>
+            <span class="bpc-badge bpc-badge-main">주력 브랜드</span>
+          </div>
+          <div class="bpc-product">AI All-in-One</div>
+          <div class="bpc-desc">대화 데이터를 AI 인사이트로 전환</div>
+        </a>
+        <a class="brand-preview-card hl-enomix" href="eer.html">
+          <div class="bpc-top">
+            <span class="bpc-brand" style="color:var(--enomix);">eNomix · EER</span>
+            <span class="bpc-badge bpc-badge-maint">기존 고객</span>
+          </div>
+          <div class="bpc-desc">채팅상담 플랫폼 기존 고객 지원</div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ④ 고객사 로고 스트립 -->
+<div class="logo-strip">
+  <div class="logo-strip-label">250개 이상의 기업이 Spectra와 함께합니다</div>
+  <div style="overflow:hidden;">
+    <div class="logo-scroll">
+      <span class="logo-item">하나은행</span>
+      <span class="logo-item">카카오뱅크</span>
+      <span class="logo-item">케이뱅크</span>
+      <span class="logo-item">W캐피탈</span>
+      <span class="logo-item">S카드</span>
+      <span class="logo-item">신한생명</span>
+      <span class="logo-item">GS홈쇼핑</span>
+      <span class="logo-item">SK텔레콤</span>
+      <span class="logo-item">G전선</span>
+      <span class="logo-item">롯데카드</span>
+      <span class="logo-item">현대카드</span>
+      <span class="logo-item">KB증권</span>
+      <span class="logo-item">미래에셋</span>
+      <span class="logo-item">풀무원</span>
+      <!-- loop duplicate -->
+      <span class="logo-item">하나은행</span>
+      <span class="logo-item">카카오뱅크</span>
+      <span class="logo-item">케이뱅크</span>
+      <span class="logo-item">W캐피탈</span>
+      <span class="logo-item">S카드</span>
+      <span class="logo-item">신한생명</span>
+      <span class="logo-item">GS홈쇼핑</span>
+      <span class="logo-item">SK텔레콤</span>
+      <span class="logo-item">G전선</span>
+      <span class="logo-item">롯데카드</span>
+      <span class="logo-item">현대카드</span>
+      <span class="logo-item">KB증권</span>
+      <span class="logo-item">미래에셋</span>
+      <span class="logo-item">풀무원</span>
+    </div>
+  </div>
+</div>
+
+<!-- ⑤ 브랜드 선택 -->
+<section class="section section-brand">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow"><span class="tag tag-spectra">Our Brands</span></div>
+      <h2 class="section-h2">Spectra의 두 가지 브랜드</h2>
+      <p class="section-sub">각기 다른 역할로, 기업 커뮤니케이션의 모든 과제를 해결합니다</p>
+    </div>
+    <div class="brand-grid">
+
+      <!-- DWorks 카드 -->
+      <a class="brand-card brand-card-dworks" href="#dworks">
+        <div class="bc-brand" style="color:#0077AA;">Spectra DWorks</div>
+        <div class="bc-product">Cowork+</div>
+        <div class="bc-desc">카카오톡 기반 상담 & 외부 협업 인프라.<br>고객 상담부터 거래처 협업, 영업까지 하나의 플랫폼으로.</div>
+        <div class="bc-modules">
+          <span class="bc-module">CStalk</span>
+          <span class="bc-module">SalesBridge</span>
+          <span class="bc-module">구축형</span>
+          <span class="bc-module">클라우드 구독형</span>
+        </div>
+        <div class="bc-arrow">→</div>
+      </a>
+
+      <!-- NOA 카드 — DWorks 브랜드 산하 -->
+      <a class="brand-card" href="#noa" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1px solid var(--noa-border);">
+        <div style="position:absolute;top:0;right:0;width:280px;height:280px;background:radial-gradient(circle,rgba(91,33,182,0.1) 0%,transparent 70%);pointer-events:none;"></div>
+        <div class="bc-brand" style="color:var(--noa);">Spectra DWorks · NOA</div>
+        <div class="bc-product">AI All-in-One</div>
+        <div class="bc-desc">대화 데이터를 분석·자산화하는 AI 솔루션.<br>DX를 넘어 AX(AI Transformation)로의 전환을 지원합니다.</div>
+        <div class="bc-modules">
+          <span class="bc-module">AI Agent</span>
+          <span class="bc-module">AI Insight</span>
+          <span class="bc-module">AI QA</span>
+          <span class="bc-module">AI OCR/NER</span>
+        </div>
+        <div class="bc-arrow" style="color:var(--noa);">→</div>
+      </a>
+
+      <!-- eNomix 카드 -->
+      <div class="brand-card brand-card-enomix">
+        <div style="flex:1;">
+          <div class="bc-brand" style="color:var(--enomix);font-size:10px;">Spectra eNomix · EER</div>
+          <div style="font-size:18px;font-weight:700;margin-bottom:6px;color:var(--text-primary);">기업 채팅상담 플랫폼</div>
+          <div style="font-size:13px;color:var(--text-muted);">eNomix EER을 이용 중이신 기존 고객을 위한 지원 페이지입니다.</div>
+        </div>
+        <a href="eer.html" style="font-size:13px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border-medium);padding:9px 18px;border-radius:100px;white-space:nowrap;transition:all 0.15s;">
+          기존 고객 지원 →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 고객 사례 — 브랜드 다음으로 이동 -->
+<section class="section section-cases">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow"><span class="tag tag-spectra">Customer Stories</span></div>
+      <h2 class="section-h2">고객이 말하는 변화</h2>
+      <p class="section-sub">금융, 제조, 유통 등 다양한 산업에서 실제로 경험한 성과입니다</p>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-top">
+          <span class="case-company">하나은행</span>
+          <span class="case-industry">금융</span>
+        </div>
+        <p class="case-quote">"카카오 상담톡 도입 후 고객 응대 시간이 절반으로 줄었습니다. NOA AI QA 덕분에 컴플라이언스 이슈도 사전에 잡을 수 있게 됐습니다."</p>
+        <div class="case-kpi">
+          <div class="case-kpi-item">
+            <div class="case-kpi-num cyan">-48%</div>
+            <div class="case-kpi-label">평균 응대 시간</div>
+          </div>
+          <div class="case-kpi-item">
+            <div class="case-kpi-num purple">+31%</div>
+            <div class="case-kpi-label">고객 만족도</div>
+          </div>
+        </div>
+        <span class="case-brand-tag" style="background:var(--dworks-light);color:#0077AA;">DWorks · Cowork+</span>
+      </div>
+      <div class="case-card">
+        <div class="case-top">
+          <span class="case-company">G전선</span>
+          <span class="case-industry">제조</span>
+        </div>
+        <p class="case-quote">"거래처 협업이 카카오 개인 채팅에서 공식 채널로 전환됐습니다. 기록이 남고 담당자가 바뀌어도 업무 연속성이 유지됩니다."</p>
+        <div class="case-kpi">
+          <div class="case-kpi-item">
+            <div class="case-kpi-num cyan">100%</div>
+            <div class="case-kpi-label">공식 채널 전환</div>
+          </div>
+          <div class="case-kpi-item">
+            <div class="case-kpi-num">개인폰</div>
+            <div class="case-kpi-label">업무 사용 차단</div>
+          </div>
+        </div>
+        <span class="case-brand-tag" style="background:var(--dworks-light);color:#0077AA;">DWorks · Cowork+</span>
+      </div>
+      <div class="case-card">
+        <div class="case-top">
+          <span class="case-company">S카드</span>
+          <span class="case-industry">금융</span>
+        </div>
+        <p class="case-quote">"NOA AI QA로 불완전 판매 리스크를 사전에 차단합니다. 연간 감사 대응 업무가 자동화되어 팀 생산성이 크게 올라갔습니다."</p>
+        <div class="case-kpi">
+          <div class="case-kpi-item">
+            <div class="case-kpi-num purple">-89%</div>
+            <div class="case-kpi-label">컴플라이언스 이슈</div>
+          </div>
+          <div class="case-kpi-item">
+            <div class="case-kpi-num">자동화</div>
+            <div class="case-kpi-label">감사 대응 업무</div>
+          </div>
+        </div>
+        <span class="case-brand-tag" style="background:var(--noa-light);color:var(--noa);">DWorks · NOA</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a class="btn btn-outline-light" href="https://www.spectra.co.kr/blog/" target="_blank">전체 고객 사례 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ISO 인증 배지 -->
+<div style="background:var(--bg-softer);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);padding:28px 0;">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:52px;height:52px;border-radius:12px;background:white;border:1.5px solid #1A6BFF;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(26,107,255,0.12);">
+          <span style="font-size:22px;">🛡️</span>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary);">ISO 27001 인증</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">정보보안 경영 시스템 국제표준 인증</div>
+        </div>
+      </div>
+      <div style="width:1px;height:40px;background:var(--border-light);"></div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:52px;height:52px;border-radius:12px;background:white;border:1.5px solid var(--border-medium);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:22px;">🏢</span>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary);">설립 26년 · 1999</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">기업 커뮤니케이션 인프라 전문</div>
+        </div>
+      </div>
+      <div style="width:1px;height:40px;background:var(--border-light);"></div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:52px;height:52px;border-radius:12px;background:white;border:1.5px solid var(--border-medium);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:22px;">🏦</span>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary);">금융감독원 보안 심의</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">금융권 보안 기준 적합 검증 완료</div>
+        </div>
+      </div>
+      <div style="width:1px;height:40px;background:var(--border-light);"></div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:52px;height:52px;border-radius:12px;background:white;border:1.5px solid var(--border-medium);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:22px;">✅</span>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary);">250+ 고객사</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">금융 · 제조 · 유통 · 통신 전 산업</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑦ Cowork+ 상세 -->
+<section class="section section-cowork" id="dworks">
+  <div class="container">
+    <div class="product-layout">
+      <div>
+        <div class="product-label">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--dworks);display:inline-block;"></span>
+          <span style="color:#0077AA;">Spectra DWorks · Cowork+</span>
+        </div>
+        <h2 class="product-h2">카카오 대화가<br>업무로 전환됩니다</h2>
+        <p class="product-sub">
+          설계매니저가 카카오톡으로 보낸 고객 정보를<br>
+          AI가 3초 안에 자동 추출해 등록 폼에 채웁니다.<br>
+          수동 입력 없이, 실수 없이.
+        </p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon fi-dworks">💬</div>
+            <div>
+              <div class="feature-title">상담 — GA · 설계매니저 채널</div>
+              <div class="feature-desc">카카오 기반 인바운드 접수. GA·설계매니저 요청을 하나의 플랫폼에서 통합 관리</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon fi-dworks">🤖</div>
+            <div>
+              <div class="feature-title">AI OCR/NER — 정보 자동 추출</div>
+              <div class="feature-desc">카톡 메시지·운전면허증·서류 이미지에서 고객 정보를 자동 파싱. 수동 입력 제로</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon fi-dworks">🤝</div>
+            <div>
+              <div class="feature-title">협업 — 딜러사 · 캐피털사 채널</div>
+              <div class="feature-desc">자동차 딜러사 ↔ 캐피털사 소통을 공식 채널로 전환. 700인 규모 그룹 채널 운영</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon fi-dworks">🔗</div>
+            <div>
+              <div class="feature-title">시스템 연동</div>
+              <div class="feature-desc">보험·CRM·ERP 시스템과 API 연동. 대화 데이터가 기존 업무 시스템에 자동 반영</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <a class="btn btn-dworks" href="#contact">Cowork+ 상담 신청</a>
+          <a class="btn btn-outline-light" href="cowork_plus.html">제품 상세 보기</a>
+        </div>
+      </div>
+
+      <div class="product-visual">
+        <div class="mock-window">
+          <div class="mock-bar mock-bar-dworks">
+            <div class="mock-dot" style="background:#FF5F57;"></div>
+            <div class="mock-dot" style="background:#FEBC2E;"></div>
+            <div class="mock-dot" style="background:#28C840;"></div>
+            <span style="margin-left:12px;font-size:11px;color:var(--text-muted);">Cowork+ · 인카 송파 채널</span>
+          </div>
+          <div class="mock-content mock-content-dworks">
+            <div style="font-size:11px;color:#0077AA;font-weight:700;margin-bottom:12px;letter-spacing:0.06em;">● 설계매니저 요청 접수</div>
+
+            <!-- 설계매니저가 고객 정보 카톡으로 전송 -->
+            <div class="chat-mock">
+              <div class="chat-msg">
+                <div class="chat-avatar" style="background:#FEF9C3;color:#92400E;font-size:11px;">GA</div>
+                <div>
+                  <div class="chat-bubble bubble-in" style="font-size:12px;">매니저님 설계 요청드려요~</div>
+                  <div class="chat-ts">11:22</div>
+                </div>
+              </div>
+              <div class="chat-msg">
+                <div class="chat-avatar" style="background:#FEF9C3;color:#92400E;font-size:11px;">GA</div>
+                <div>
+                  <!-- 고객 정보 텍스트 블록 -->
+                  <div class="chat-bubble bubble-in" style="font-size:12px;line-height:1.7;">
+                    40대 · 남자<br>
+                    문○환 · 770824-1<span style="color:var(--text-muted);">●●●●●●</span><br>
+                    010-1111-2222<br>
+                    트럭운전 · 은평구 서오릉로
+                  </div>
+                  <div class="chat-ts">11:23</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI OCR/NER 자동 파싱 표시 -->
+            <div style="margin:10px 0;padding:10px 12px;border-radius:10px;background:var(--dworks-light);border:1px solid var(--dworks-border);font-size:11px;color:#0077AA;">
+              🤖 <strong>AI OCR/NER</strong> — 고객 정보 자동 추출 · 등록 폼 자동 완성
+            </div>
+
+            <!-- 자동 완성된 고객 등록 폼 -->
+            <div style="border:1px solid var(--border-light);border-radius:10px;overflow:hidden;font-size:11px;">
+              <div style="background:#1A6BFF;color:white;padding:7px 12px;font-weight:700;font-size:11px;display:flex;align-items:center;gap:6px;">
+                <span style="width:7px;height:7px;border-radius:50%;background:white;opacity:0.9;"></span> 고객등록
+              </div>
+              <div style="padding:10px 12px;display:grid;grid-template-columns:56px 1fr;gap:6px 10px;align-items:center;background:white;">
+                <span style="color:var(--text-muted);">이름</span>
+                <span style="background:#F0FAFF;border:1px solid var(--dworks-border);border-radius:5px;padding:3px 8px;color:var(--text-primary);font-weight:600;">문○환</span>
+                <span style="color:var(--text-muted);">연락처</span>
+                <span style="background:#F0FAFF;border:1px solid var(--dworks-border);border-radius:5px;padding:3px 8px;color:var(--text-primary);">010-1111-2222</span>
+                <span style="color:var(--text-muted);">직업</span>
+                <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                  <span style="padding:2px 8px;border-radius:4px;background:#1A6BFF;color:white;font-size:10px;font-weight:700;">운수업 ✓</span>
+                  <span style="padding:2px 8px;border-radius:4px;background:var(--bg-soft);color:var(--text-muted);font-size:10px;">건설기계</span>
+                  <span style="padding:2px 8px;border-radius:4px;background:var(--bg-soft);color:var(--text-muted);font-size:10px;">자영업</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mock-stats" style="margin-top:10px;">
+              <div class="mock-stat">
+                <div class="mock-stat-num" style="color:#0077AA;">3초</div>
+                <div class="mock-stat-label">정보 자동 추출</div>
+              </div>
+              <div class="mock-stat">
+                <div class="mock-stat-num">0건</div>
+                <div class="mock-stat-label">수동 입력</div>
+              </div>
+              <div class="mock-stat">
+                <div class="mock-stat-num">100%</div>
+                <div class="mock-stat-label">이력 기록</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ NOA 상세 -->
+<section class="section section-noa" id="noa">
+  <div class="container">
+    <div class="product-layout" style="direction:rtl;">
+      <div style="direction:ltr;">
+        <div class="product-label">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--noa);display:inline-block;"></span>
+          <span style="color:var(--noa);">Spectra DWorks · NOA</span>
+        </div>
+        <h2 class="product-h2">DX를 넘어<br><span style="color:var(--noa);">AX</span>로의 전환</h2>
+        <p class="product-sub">
+          대화 데이터를 자산화하고, AI로 분석·자동화.<br>
+          모든 대화가 비즈니스 인텔리전스가 됩니다.
+        </p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon fi-noa">🤖</div>
+            <div>
+              <div class="feature-title">AI Agent — 자동화</div>
+              <div class="feature-desc">반복 상담 자동 처리, 시나리오 봇 설계, 복잡한 업무 흐름 자동화</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon fi-noa">📊</div>
+            <div>
+              <div class="feature-title">AI Insight — 분석</div>
+              <div class="feature-desc">상담 데이터 실시간 분석, 고객 감성 트래킹, 경영진 대시보드 자동 생성</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon fi-noa">✅</div>
+            <div>
+              <div class="feature-title">AI QA — 품질 관리</div>
+              <div class="feature-desc">100% 상담 품질 자동 평가. 금융권 불완전 판매 사전 감지 및 컴플라이언스 대응</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon fi-noa">📄</div>
+            <div>
+              <div class="feature-title">AI OCR/NER — 문서 처리</div>
+              <div class="feature-desc">비정형 문서 자동 인식·분류, 계약서·신청서 데이터 추출 자동화</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <a class="btn btn-noa" href="#contact">NOA 상담 신청</a>
+          <a class="btn btn-outline-light" href="noa.html">제품 상세 보기</a>
+        </div>
+      </div>
+
+      <div class="product-visual" style="direction:ltr;">
+        <div class="mock-window">
+          <div class="mock-bar mock-bar-noa">
+            <div class="mock-dot" style="background:#FF5F57;"></div>
+            <div class="mock-dot" style="background:#FEBC2E;"></div>
+            <div class="mock-dot" style="background:#28C840;"></div>
+            <span style="margin-left:12px;font-size:11px;color:var(--text-muted);">NOA · AI Insight</span>
+          </div>
+          <div class="mock-content mock-content-noa">
+            <div style="font-size:11px;color:var(--noa);font-weight:700;margin-bottom:16px;letter-spacing:0.06em;">● 실시간 인사이트</div>
+            <div class="ai-mock">
+              <div class="ai-insight-card">
+                <div class="aic-label">감성 분석</div>
+                <div class="aic-text">이번 주 고객 긍정 반응 비율이 전주 대비 12% 상승했습니다.</div>
+                <div class="aic-bar"><div class="aic-bar-fill" style="width:78%;"></div></div>
+              </div>
+              <div class="ai-insight-card">
+                <div class="aic-label">QA 알림</div>
+                <div class="aic-text">오늘 상담 중 스크립트 이탈 3건이 감지되었습니다. 확인이 필요합니다.</div>
+                <div class="aic-bar"><div class="aic-bar-fill" style="width:95%;background:#EF4444;"></div></div>
+              </div>
+              <div class="ai-row">
+                <div class="ai-mini-card">
+                  <div class="amc-num">1,247</div>
+                  <div class="amc-label">오늘 처리 상담</div>
+                </div>
+                <div class="ai-mini-card">
+                  <div class="amc-num" style="color:var(--noa);">89%</div>
+                  <div class="amc-label">자동화 처리율</div>
+                </div>
+                <div class="ai-mini-card">
+                  <div class="amc-num">4.8</div>
+                  <div class="amc-label">평균 만족 점수</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ 시너지 -->
+<section class="section-synergy">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow"><span class="tag tag-spectra">Why Together</span></div>
+      <h2 class="section-h2">Cowork+와 NOA가 만나면</h2>
+      <p class="section-sub">대화 인프라와 AI 인텔리전스의 결합으로 기업 커뮤니케이션의 완전한 혁신을 이룹니다</p>
+    </div>
+    <div class="synergy-grid">
+      <div class="synergy-card syn-dworks">
+        <div class="syn-brand-name" style="color:#0077AA;">DWorks · Cowork+</div>
+        <div class="syn-product-name">대화 인프라</div>
+        <div class="syn-desc">카카오 기반으로 모든 외부 커뮤니케이션을 하나의 플랫폼에 통합합니다.</div>
+      </div>
+      <div class="synergy-plus">
+        <div class="syn-plus-icon">+</div>
+        <div class="syn-plus-label">결합</div>
+      </div>
+      <div class="synergy-card syn-noa">
+        <div class="syn-brand-name" style="color:var(--noa);">DWorks · NOA</div>
+        <div class="syn-product-name">AI 인텔리전스</div>
+        <div class="syn-desc">축적된 대화 데이터를 AI로 분석하여 비즈니스 인사이트를 자동 생성합니다.</div>
+      </div>
+    </div>
+    <div class="synergy-result">
+      <div class="syn-result-label">결과</div>
+      <div class="syn-result-text">고객과의 모든 대화가 비즈니스 자산이 됩니다</div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑩ 산업별 -->
+<section class="section section-industry">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow"><span class="tag tag-industry">Industry</span></div>
+      <h2 class="section-h2">산업별 최적화 솔루션</h2>
+      <p class="section-sub">각 산업의 규제와 특성에 맞게 설계된 Spectra 솔루션</p>
+    </div>
+    <div class="industry-grid" style="grid-template-columns:repeat(5,1fr);">
+      <div class="industry-card">
+        <div class="industry-icon ii-finance">🏦</div>
+        <div class="industry-name">금융</div>
+        <div class="industry-desc">금융감독원 보안 심의 대응, 불완전 판매 감지, 개인정보 보호 특화</div>
+        <div class="industry-clients"><strong>하나은행 · 카카오뱅크 · 케이뱅크</strong> 외 80여 개 금융사</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon ii-mfg">🏭</div>
+        <div class="industry-name">제조</div>
+        <div class="industry-desc">거래처·글로벌 파트너와의 협업 채널 공식화, 설비 점검·정비 요청 관리</div>
+        <div class="industry-clients"><strong>G전선</strong> 외 제조업 다수</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon ii-retail">🛒</div>
+        <div class="industry-name">유통 · 서비스</div>
+        <div class="industry-desc">고객 CS 챗봇 자동화, 반품·배송 시나리오 셀프 처리, 상담사 생산성 향상</div>
+        <div class="industry-clients"><strong>GS홈쇼핑 · 풀무원</strong> 외 다수</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon ii-telco">📡</div>
+        <div class="industry-name">통신 · 공공</div>
+        <div class="industry-desc">대용량 상담 트래픽 처리, 멀티채널 통합, 공공기관 보안 규격 준수</div>
+        <div class="industry-clients"><strong>SK텔레콤</strong> 외 통신·공공 다수</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon" style="background:#FFF8F0;">🏗</div>
+        <div class="industry-name">건설 · 플랜트</div>
+        <div class="industry-desc">산업안전보건법 현장 이력 디지털화, 다국어 현장 멀티채널(카카오·WhatsApp) 통합 관리</div>
+        <div class="industry-clients" style="color:#D97706;font-weight:600;font-size:12px;">적용 가능 산업</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑪ 인사이트 -->
+<section class="section section-insight">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;">
+      <div>
+        <span class="tag tag-spectra" style="margin-bottom:12px;display:inline-block;">Insight</span>
+        <h2 class="section-h2" style="margin-bottom:0;">스펙트라 인사이트</h2>
+      </div>
+      <a href="https://www.spectra.co.kr/blog/" target="_blank" style="font-size:14px;color:var(--text-muted);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">전체 보기 →</a>
+    </div>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-thumb it-finance">🏦</div>
+        <div class="insight-body">
+          <div class="insight-cat" style="color:var(--spectra);">★ SEO 허브</div>
+          <div class="insight-title">금융권이 카카오톡 상담을 선택하는 5가지 이유</div>
+          <div class="insight-date">2025. 05. 14</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-thumb it-ai">🤖</div>
+        <div class="insight-body">
+          <div class="insight-cat" style="color:var(--noa);">NOA</div>
+          <div class="insight-title">챗봇 자동화 설계 원칙 — 시나리오봇 구조</div>
+          <div class="insight-date">2025. 04. 25</div>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-thumb it-kakao">💬</div>
+        <div class="insight-body">
+          <div class="insight-cat" style="color:#0077AA;">Cowork+</div>
+          <div class="insight-title">업무 단체방을 공식 채널로 전환하는 법</div>
+          <div class="insight-date">2025. 03. 27</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑫ CTA — 다크 마무리 -->
+<section class="section-cta">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-h2">
+        지금 바로 시작하세요.<br>
+        <span style="color:var(--dworks);">26년의 기술</span>이 함께합니다.
+      </h2>
+      <p class="cta-sub">도입 방식(구축형 / 클라우드 구독형)과 산업에 맞는 맞춤 상담을 제공합니다.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="#contact">도입 상담 신청 →</a>
+        <a class="btn btn-outline-dark" href="#">자료 다운로드</a>
+      </div>
+      <p class="cta-note">영업일 기준 24시간 내 담당자가 연락드립니다</p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑬ FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg viewBox="0 0 54 36" fill="none" width="28" height="18">
+            <g transform="translate(9,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#00C6FF"/></g>
+            <g transform="translate(27,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#1A6BFF"/></g>
+            <g transform="translate(45,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#5B21B6"/></g>
+          </svg>
+          SPECTRA
+        </div>
+        <div class="footer-tagline">
+          기업 커뮤니케이션 인프라의 새로운 기준.<br>
+          Spectra DWorks · Spectra eNomix
+        </div>
+        <div style="margin-top:20px;display:flex;gap:8px;">
+          <a href="#" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;">📘</a>
+          <a href="#" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;">▶</a>
+        </div>
+      </div>
+      <div class="footer-nav-grid">
+        <div>
+          <div class="footer-col-title">제품</div>
+          <a class="footer-link" href="cowork_plus.html">DWorks · Cowork+</a>
+          <a class="footer-link" href="noa.html">DWorks · NOA</a>
+          <a class="footer-link legacy" href="eer.html">eNomix EER (기존 고객)</a>
+        </div>
+        <div>
+          <div class="footer-col-title">도입</div>
+          <a class="footer-link" href="cowork_plus.html">구축형 (On-Premise)</a>
+          <a class="footer-link" href="cowork_plus.html">클라우드 구독형</a>
+          <a class="footer-link" href="#contact">도입 상담 신청</a>
+        </div>
+        <div>
+          <div class="footer-col-title">리소스</div>
+          <a class="footer-link" href="https://www.spectra.co.kr/blog/" target="_blank">고객 사례</a>
+          <a class="footer-link" href="https://www.spectra.co.kr/blog/" target="_blank">인사이트 블로그</a>
+          <a class="footer-link" href="#">ISO 27001 인증</a>
+        </div>
+        <div>
+          <div class="footer-col-title">회사</div>
+          <a class="footer-link" href="about_spectra.html">Spectra 소개</a>
+          <a class="footer-link" href="https://www.spectra.co.kr/blog/" target="_blank">채용</a>
+          <a class="footer-link" href="eer.html">고객 지원</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>(주)스펙트라 · 서울특별시 서초구 반포대로 27길 16 · 02-508-7799</div>
+      <div class="footer-legal">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">© 2026 Spectra Inc.</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // GNB 드롭다운 — hover + click 모두 지원
+  document.querySelectorAll('.gnb-item.has-dropdown').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      var isOpen = item.classList.contains('open');
+      // 다른 열린 드롭다운 닫기
+      document.querySelectorAll('.gnb-item.has-dropdown.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+      e.stopPropagation();
+    });
+  });
+  // 외부 클릭 시 닫기
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.gnb-item.has-dropdown.open').forEach(function(el) {
+      el.classList.remove('open');
+    });
+  });
+  // 드롭다운 아이템 클릭 시 닫기
+  document.querySelectorAll('.gnb-dropdown-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.querySelectorAll('.gnb-item.has-dropdown.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+    });
+  });
+</script>
+</body>
+</html>
