@@ -113,12 +113,16 @@
     transform: rotate(45deg) translateY(-2px);
   }
   .gnb-dd {
-    display: none; position: absolute; top: calc(100% + 6px); left: 0;
-    background: #fff; border: 1px solid var(--bdr);
-    border-radius: 14px; padding: 8px; min-width: 220px;
-    box-shadow: 0 16px 48px rgba(0,0,0,.1); z-index: 200;
+    display: none; position: absolute; top: 100%; left: 0;
+    padding-top: 8px; /* gap을 padding으로 처리해 마우스 이탈 방지 */
+    min-width: 220px; z-index: 200;
   }
-  .gnb-item:hover .gnb-dd, .gnb-item.open .gnb-dd { display: block; }
+  .gnb-dd-inner {
+    background: #fff; border: 1px solid var(--bdr);
+    border-radius: 14px; padding: 8px;
+    box-shadow: 0 16px 48px rgba(0,0,0,.1);
+  }
+  .gnb-item.open .gnb-dd { display: block; }
   .gnb-dd-sec { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing:.08em; text-transform:uppercase; padding: 6px 10px 3px; }
   .gnb-dd-div { height: 1px; background: var(--bdr); margin: 6px 8px; }
   .gnb-dd-item {
@@ -562,6 +566,7 @@
       <!-- 브랜드 -->
       <div class="gnb-item has-dd">브랜드
         <div class="gnb-dd">
+        <div class="gnb-dd-inner">
           <div class="gnb-dd-sec">Spectra DWorks</div>
           <a class="gnb-dd-item" href="cowork_plus.html">
             <span class="gnb-dd-dot" style="background:#00C6FF;"></span>
@@ -579,18 +584,16 @@
           </a>
         </div>
       </div>
+      </div>
 
       <!-- 솔루션 -->
       <div class="gnb-item has-dd">솔루션
         <div class="gnb-dd" style="min-width:260px;">
+        <div class="gnb-dd-inner">
           <div class="gnb-dd-sec">DWorks Cowork+</div>
-          <a class="gnb-dd-item" href="cowork_plus.html#cs">
+          <a class="gnb-dd-item" href="cowork_plus.html">
             <span class="gnb-dd-dot" style="background:#00C6FF;"></span>
-            고객 상담 채널
-          </a>
-          <a class="gnb-dd-item" href="cowork_plus.html#collab">
-            <span class="gnb-dd-dot" style="background:#00C6FF;"></span>
-            외부 협업 채널
+            Cowork+
           </a>
           <div class="gnb-dd-div"></div>
           <div class="gnb-dd-sec">DWorks NOA</div>
@@ -618,16 +621,19 @@
           </a>
         </div>
       </div>
+      </div>
 
       <!-- 적용 산업 -->
       <div class="gnb-item has-dd">적용 산업
         <div class="gnb-dd">
+        <div class="gnb-dd-inner">
           <a class="gnb-dd-item" href="industry_finance.html">🏦 금융</a>
           <a class="gnb-dd-item" href="industry_manufacturing.html">🏭 제조</a>
           <a class="gnb-dd-item" href="industry_retail.html">🛒 유통 · 서비스</a>
           <a class="gnb-dd-item" href="industry_telecom.html">📡 통신 · 공공</a>
           <a class="gnb-dd-item" href="industry_construction.html">🏗 건설 · 플랜트</a>
         </div>
+      </div>
       </div>
 
       <!-- 인사이트 -->
@@ -636,10 +642,12 @@
       <!-- 회사 소개 -->
       <div class="gnb-item has-dd">회사 소개
         <div class="gnb-dd">
+        <div class="gnb-dd-inner">
           <a class="gnb-dd-item" href="about_spectra.html">🏢 회사 소개</a>
           <a class="gnb-dd-item" href="#">📋 채용 정보</a>
           <a class="gnb-dd-item" href="#">🔒 ISO 27001 인증</a>
         </div>
+      </div>
       </div>
     </div>
 
@@ -1249,17 +1257,32 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // GNB 드롭다운
+  
+  // GNB 드롭다운 — click 전용 (hover 이탈 문제 해결)
   document.querySelectorAll('.gnb-item.has-dd').forEach(function(item) {
     item.addEventListener('click', function(e) {
       var isOpen = item.classList.contains('open');
-      document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) { el.classList.remove('open'); });
+      document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
       if (!isOpen) item.classList.add('open');
       e.stopPropagation();
     });
   });
+  // 드롭다운 내 링크 클릭 시 닫기
+  document.querySelectorAll('.gnb-dd-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+    });
+  });
+  // 외부 클릭 시 닫기
   document.addEventListener('click', function() {
-    document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) { el.classList.remove('open'); });
+    document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
+      el.classList.remove('open');
+    });
   });
 
   // Sticky bar on scroll
