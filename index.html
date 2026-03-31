@@ -837,14 +837,6 @@
   </div>
 </nav>
 
-
-<!-- ① 상단 CTA 바 -->
-<div class="notice-bar">
-  스펙트라 솔루션이 궁금하신가요? 전문가 상담을 받아보세요
-  <span class="sep">|</span>
-  <a href="#contact" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:100px;border:1.5px solid rgba(255,255,255,0.5);font-weight:700;opacity:1;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">제품 문의 →</a>
-</div>
-
 <!-- ② GNB -->
 
 
@@ -1541,33 +1533,44 @@
 </footer>
 
 <script>
-  // GNB 드롭다운 — hover + click 모두 지원
-  document.querySelectorAll('.gnb-item.has-dropdown').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      var isOpen = item.classList.contains('open');
-      // 다른 열린 드롭다운 닫기
-      document.querySelectorAll('.gnb-item.has-dropdown.open').forEach(function(el) {
-        el.classList.remove('open');
+// GNB 드롭다운 — mouseenter/leave + 200ms 딜레이로 빠른 사라짐 방지
+(function() {
+  var timer = {};
+  document.querySelectorAll('.gnb-item.has-dd').forEach(function(item, idx) {
+    var dd = item.querySelector('.gnb-dd');
+
+    function open() {
+      if (timer[idx]) { clearTimeout(timer[idx]); delete timer[idx]; }
+      document.querySelectorAll('.gnb-item.has-dd').forEach(function(el, i) {
+        if (i !== idx) el.classList.remove('open');
       });
-      if (!isOpen) item.classList.add('open');
+      item.classList.add('open');
+    }
+    function close() {
+      timer[idx] = setTimeout(function() {
+        item.classList.remove('open');
+      }, 220);
+    }
+
+    item.addEventListener('mouseenter', open);
+    item.addEventListener('mouseleave', close);
+    if (dd) {
+      dd.addEventListener('mouseenter', function() {
+        if (timer[idx]) { clearTimeout(timer[idx]); delete timer[idx]; }
+      });
+      dd.addEventListener('mouseleave', close);
+    }
+    item.addEventListener('click', function(e) {
+      item.classList.contains('open') ? item.classList.remove('open') : open();
       e.stopPropagation();
     });
   });
-  // 외부 클릭 시 닫기
   document.addEventListener('click', function() {
-    document.querySelectorAll('.gnb-item.has-dropdown.open').forEach(function(el) {
+    document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
       el.classList.remove('open');
     });
   });
-  // 드롭다운 아이템 클릭 시 닫기
-  document.querySelectorAll('.gnb-dropdown-item').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      e.stopPropagation();
-      document.querySelectorAll('.gnb-item.has-dropdown.open').forEach(function(el) {
-        el.classList.remove('open');
-      });
-    });
-  });
+})();
 </script>
 
 <div id="inquiryModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
