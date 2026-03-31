@@ -521,865 +521,111 @@
 </head>
 <body>
 
-<!-- ① NOTICE BAR -->
-<div class="notice-bar" style="background:#1A6BFF;padding:9px 24px;text-align:center;font-size:13.5px;font-weight:600;color:#fff;"><a href="#" onclick="openModal();return false;" style="color:#fff;text-decoration:none;letter-spacing:0.01em;">도입 상담 →</a></div>
-
-<!-- ② GNB -->
-<nav class="gnb">
-  <div class="gnb-inner">
-    <div class="gnb-logo-wrap">
-      <a href="#" class="gnb-logo">
-        <img src="data:image/jpeg;base64,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HmXusY9frX6WeG/gf4C8I3C3Gj+FdOsJl5Dxxcj867dEWNQqqFUdAowKJ4ttWihql3MXwV4M0n4f+GbDQdEtUs9Os4xHHGg/U+pNblFFcG5uFfFf/BTTwfqeteCfC+tWlu81lpdxMtyyLnZ5gQKfzU19qVW1DT7bVrKa0vII7m2mUpJFIuVYHqCKunPkkpEyXMrH4T+H9Av/ABLrVnpem273N9dSrDFEgyWZjgCv3E8B6VLoXgnQNOnUrPa2EEMinsyxqGH5g1i+E/gn4E8C6o+o6D4X0/TL587p4Y/m5+prt62rVva2siIQ5QqvqEBurC5hHJkiZPzBFWKK5TU/DH4jeC9T8A+M9W0TVrd7e7s7ho2DDAPoR68Yr6e/4Jv+AdR1T4oXniTyHj07Tbcr5zLhXdgV2g9zzmvv7xx8G/BPxImim8TeGrHWZYhhHuE5H4git3w34X0nwfpcWm6Lp8Om2MX3ILddqiu+eJ5octtTBU7O5q0UUVwG4V8T/wDBS3wHqmteF/D/AIhs7d7iz052huPLBJTdyGPtxX2xUF5ZQajay211Ck9vKpV45BlWB7EVpTn7OSkTJcysfhDo+j3utalb2NjbSXV3M4SOGNcszHoK/bX4QeG7nwh8MvDmj3mPtVpaKkmOx5OP1qPw38GPA/g/Vn1PRvDOn6fftkm4hj+bn6mu0ratW9rZJEQhyhXzz+3R4G1Pxt8CdSXSrd7u6spEuDbxjLMgYbiPoATX0NSModSrAMpGCCODXPGXLJSRo1dWPwSW1maURCNjJnG0Dn8q/XT9iHwXqngX9nvRLHV4Gtrq4llvRG3BCSEMufwr0Ffgf4Cj8Qf24vhXTRq2/wAz7V5XzbvX0ruFAUAAYA6AV1Vq/tFypGUKfK7i0UUVxmwUUUUAIQGBBGRWAfBGmNqX2zbJnOfKyNmevTH9a6CivNxmW4PMOT63SU+V3V1ezNqdapSvyStcRVCqABgDgCloor0jEKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k=" alt="SPECTRA">
-      </a>
-      <a href="https://www.spectra.co.kr/blog/" target="_blank" class="gnb-blog">BLOG</a>
-    </div>
-
-    <div class="gnb-nav">
-      <!-- 브랜드 -->
-      <div class="gnb-item has-dd">브랜드
-        <div class="gnb-dd">
-        <div class="gnb-dd-inner">
-          <div class="gnb-dd-sec">Spectra DWorks</div>
-          <a class="gnb-dd-item" href="cowork_plus.html">
-            <span class="gnb-dd-dot" style="background:#00C6FF;"></span>
-            Cowork+ <span style="font-size:11px;color:var(--text3);margin-left:auto;">채널 통합</span>
-          </a>
-          <a class="gnb-dd-item" href="noa.html">
-            <span class="gnb-dd-dot" style="background:#5B21B6;"></span>
-            NOA <span style="font-size:11px;color:var(--text3);margin-left:auto;">AI 분석</span>
-          </a>
-          <div class="gnb-dd-div"></div>
-          <div class="gnb-dd-sec">Spectra eNomix</div>
-          <a class="gnb-dd-item" href="eer.html">
-            <span class="gnb-dd-dot" style="background:#94A3B8;"></span>
-            EER <span style="font-size:11px;color:var(--text3);margin-left:auto;">기존 고객</span>
-          </a>
-        </div>
-      </div>
-      </div>
-
-      <!-- 솔루션 -->
-      <div class="gnb-item has-dd">솔루션
-        <div class="gnb-dd" style="min-width:260px;">
-        <div class="gnb-dd-inner">
-          <div class="gnb-dd-sec">DWorks Cowork+</div>
-          <a class="gnb-dd-item" href="cowork_plus.html">
-            <span class="gnb-dd-dot" style="background:#00C6FF;"></span>
-            Cowork+
-          </a>
-          <div class="gnb-dd-div"></div>
-          <div class="gnb-dd-sec">DWorks NOA</div>
-          <a class="gnb-dd-item" href="noa.html">
-            <span class="gnb-dd-dot" style="background:#7C3AED;"></span>
-            NOA
-          </a>
-          <div class="gnb-dd-div"></div>
-          <div class="gnb-dd-sec">eNomix</div>
-          <a class="gnb-dd-item" href="eer.html">
-            <span class="gnb-dd-dot" style="background:#94A3B8;"></span>
-            EER (기존 고객)
-          </a>
-        </div>
-      </div>
-      </div>
-
-      <!-- 적용 산업 -->
-      <div class="gnb-item has-dd">적용 산업
-        <div class="gnb-dd">
-        <div class="gnb-dd-inner">
-          <a class="gnb-dd-item" href="industry_finance.html">🏦 금융</a>
-          <a class="gnb-dd-item" href="industry_manufacturing.html">🏭 제조</a>
-          <a class="gnb-dd-item" href="industry_retail.html">🛒 유통 · 서비스</a>
-          <a class="gnb-dd-item" href="industry_telecom.html">📡 통신 · 공공</a>
-          <a class="gnb-dd-item" href="industry_construction.html">🏗 건설 · 플랜트</a>
-        </div>
-      </div>
-      </div>
-
-      <!-- 인사이트 -->
-      <a class="gnb-item" href="https://www.spectra.co.kr/blog/" target="_blank">인사이트</a>
-
-      <!-- 회사 소개 -->
-      <div class="gnb-item has-dd">회사 소개
-        <div class="gnb-dd">
-        <div class="gnb-dd-inner">
-          <a class="gnb-dd-item" href="about_spectra.html">🏢 회사 소개</a>
-          <a class="gnb-dd-item" href="#">📋 채용 정보</a>
-          <a class="gnb-dd-item" href="#">🔒 ISO 27001 인증</a>
-        </div>
-      </div>
-      </div>
-    </div>
-
-
-  </div>
-</nav>
-
-<!-- ③ HERO — Video Stage -->
-<section class="hero">
-  <div style="max-width:1100px;margin:0 auto;padding:0 28px;">
-    <!-- VIDEO FRAME — full stage -->
-    <div class="hero-video-frame" id="heroVideoFrame">
-      <video autoplay loop muted playsinline id="heroVideo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;">
-        <source src="video.mp4" type="video/mp4">
-      </video>
-      <!-- Placeholder -->
-      <div class="hero-video-placeholder" id="videoPlaceholder">
-        <div class="hero-play-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <div style="font-weight:700;color:var(--text2);font-size:16px;margin-top:4px;">SPECTRA DWorks 소개 영상</div>
-        <div style="font-size:13px;color:var(--text3);margin-top:4px;">기업 커뮤니케이션 인프라의 새로운 기준</div>
-      </div>
-    </div>
-    <!-- Stats row -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:56px;margin-top:48px;flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <div style="font-size:30px;font-weight:800;color:var(--text1);letter-spacing:-0.02em;line-height:1;">250<span style="color:var(--spectra);">+</span></div>
-        <div style="font-size:13px;color:var(--text3);margin-top:5px;">도입 기업 수</div>
-      </div>
-      <div style="width:1px;height:40px;background:var(--bdr);"></div>
-      <div style="text-align:center;">
-        <div style="font-size:30px;font-weight:800;color:var(--text1);letter-spacing:-0.02em;line-height:1;">27<span style="color:var(--spectra);">년</span></div>
-        <div style="font-size:13px;color:var(--text3);margin-top:5px;">기업 커뮤니케이션 전문</div>
-      </div>
-      <div style="width:1px;height:40px;background:var(--bdr);"></div>
-      <div style="text-align:center;">
-        <div style="font-size:30px;font-weight:800;color:var(--text1);letter-spacing:-0.02em;line-height:1;">ISO <span style="color:var(--spectra);">27001</span></div>
-        <div style="font-size:13px;color:var(--text3);margin-top:5px;">정보보안 국제표준 인증</div>
-      </div>
-      <div style="width:1px;height:40px;background:var(--bdr);"></div>
-      <div style="text-align:center;">
-        <div style="font-size:30px;font-weight:800;color:var(--text1);letter-spacing:-0.02em;line-height:1;">250<span style="color:var(--spectra);">+</span></div>
-        <div style="font-size:13px;color:var(--text3);margin-top:5px;">고객사</div>
-      </div>
-    </div>
-    <!-- CTA row -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:36px;">
-      <a class="btn btn-primary" href="#" onclick="openModal();return false;">도입 상담 신청 →</a>
-      <a class="btn btn-outline-light" href="cowork_plus.html">제품 살펴보기</a>
-    </div>
-  </div>
-</section>
-
-<!-- ④ 로고 스트립 -->
-<div class="logo-strip">
-  <div class="logo-strip-label">250개 이상의 기업이 SPECTRA와 함께합니다</div>
-  <div style="overflow:hidden;">
-    <div class="logo-scroll">
-      <span class="logo-item">카카오뱅크</span><span class="logo-item">하나카드</span><span class="logo-item">케이뱅크</span><span class="logo-item">KB국민은행</span><span class="logo-item">우리은행</span><span class="logo-item">IBK기업은행</span><span class="logo-item">키움증권</span><span class="logo-item">삼성카드</span><span class="logo-item">신한카드</span><span class="logo-item">LG유플러스</span><span class="logo-item">호텔신라</span><span class="logo-item">삼성물산</span><span class="logo-item">롯데쇼핑</span><span class="logo-item">국민연금공단</span>
-      <!-- loop -->
-      <span class="logo-item">카카오뱅크</span><span class="logo-item">하나카드</span><span class="logo-item">케이뱅크</span><span class="logo-item">KB국민은행</span><span class="logo-item">우리은행</span><span class="logo-item">IBK기업은행</span><span class="logo-item">키움증권</span><span class="logo-item">삼성카드</span><span class="logo-item">신한카드</span><span class="logo-item">LG유플러스</span><span class="logo-item">호텔신라</span><span class="logo-item">삼성물산</span><span class="logo-item">롯데쇼핑</span><span class="logo-item">국민연금공단</span>
-    </div>
-  </div>
-</div>
-
-<!-- ⑤ BRAND 선택 -->
-<section class="section section-brand">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow"><span class="pill pill-spectra">Our Brands</span></div>
-      <h2 class="section-h2">SPECTRA의 브랜드 포트폴리오</h2>
-      <p class="section-sub">각기 다른 역할로, 기업 커뮤니케이션의 모든 과제를 해결합니다</p>
-    </div>
-    <div class="brand-grid">
-      <!-- Cowork+ -->
-      <a class="brand-card brand-card-dworks" href="cowork_plus.html">
-        <div class="bc-brand" style="color:#0077AA;">Spectra DWorks</div>
-        <div class="bc-product">Cowork+</div>
-        <div class="bc-desc">카카오톡 기반 상담 & 외부 협업 인프라.<br>고객 상담부터 거래처 협업, 영업까지 하나의 플랫폼으로.</div>
-        <div class="bc-tags">
-          <span class="bc-tag">고객 상담 채널</span>
-          <span class="bc-tag">외부 협업</span>
-          <span class="bc-tag">구축형</span>
-          <span class="bc-tag">클라우드 구독형</span>
-        </div>
-        <div class="bc-arrow" style="color:#0077AA;">→</div>
-      </a>
-      <!-- NOA -->
-      <a class="brand-card brand-card-noa" href="noa.html">
-        <div class="bc-brand" style="color:var(--noa);">Spectra DWorks · NOA</div>
-        <div class="bc-product">AI All-in-One</div>
-        <div class="bc-desc">대화 데이터를 분석·자산화하는 AI 솔루션.<br>AI 챗봇부터 QA, Insight까지 기업 대화의 완전한 자동화.</div>
-        <div class="bc-tags">
-          <span class="bc-tag">AI 챗봇</span>
-          <span class="bc-tag">AI Insight</span>
-          <span class="bc-tag">AI QA</span>
-          <span class="bc-tag">AI OCR/NER</span>
-        </div>
-        <div class="bc-arrow" style="color:var(--noa);">→</div>
-      </a>
-      <!-- eNomix -->
-      <a href="eer.html" class="brand-card brand-card-enomix" style="text-decoration:none;">
-        <div style="flex:1;">
-          <div class="bc-brand" style="color:#64748B;font-size:10px;">Spectra eNomix · EER</div>
-          <div style="font-size:18px;font-weight:700;margin-bottom:6px;color:var(--text1);">기업 채팅상담 플랫폼</div>
-          <div style="font-size:13px;color:var(--text3);">eNomix EER을 이용 중이신 기존 고객을 위한 지원 페이지입니다.</div>
-        </div>
-        <span style="font-size:13px;color:var(--text2);border:1px solid var(--bdrmd);padding:9px 18px;border-radius:100px;white-space:nowrap;transition:all .15s;flex-shrink:0;">
-          고객 지원 →
-        </span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ⑥ 고객 사례 -->
-<section class="section section-cases">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow"><span class="pill pill-spectra">Customer Stories</span></div>
-      <h2 class="section-h2">고객이 말하는 변화</h2>
-      <p class="section-sub">금융, 제조, 유통 등 다양한 산업에서 실제로 경험한 성과입니다</p>
-    </div>
-    <div class="cases-grid">
-      <div class="case-card">
-        <div class="case-top">
-          <span class="case-company">하나카드</span>
-          <span class="case-industry">카드 · 금융</span>
-        </div>
-        <p class="case-quote">"일 1,500건의 문의를 단 25명의 상담사가 처리합니다. 시나리오봇 도입으로 셀프 심사 자동화가 실현됐습니다."</p>
-        <div class="case-kpi">
-          <div>
-            <div class="case-kpi-num cy">-40%</div>
-            <div class="case-kpi-label">상담 처리 시간</div>
-          </div>
-          <div>
-            <div class="case-kpi-num pu">8개국</div>
-            <div class="case-kpi-label">실시간 다국어 번역</div>
-          </div>
-        </div>
-        <span class="case-brand-tag" style="background:rgba(0,198,255,.08);color:#0077AA;">DWorks · Cowork+</span>
-      </div>
-      <div class="case-card">
-        <div class="case-top">
-          <span class="case-company">LG유플러스</span>
-          <span class="case-industry">통신</span>
-        </div>
-        <p class="case-quote">"200여명의 채팅 전문 상담사들이 일평균 3,000여 건을 처리합니다. 전화에서 채팅으로의 전환이 상담사 만족도를 높였습니다."</p>
-        <div class="case-kpi">
-          <div>
-            <div class="case-kpi-num cy">3,000+</div>
-            <div class="case-kpi-label">일평균 채팅 상담 건수</div>
-          </div>
-          <div>
-            <div class="case-kpi-num">10+</div>
-            <div class="case-kpi-label">멀티센터 도메인</div>
-          </div>
-        </div>
-        <span class="case-brand-tag" style="background:rgba(0,198,255,.08);color:#0077AA;">DWorks · Cowork+</span>
-      </div>
-      <div class="case-card">
-        <div class="case-top">
-          <span class="case-company">카카오뱅크</span>
-          <span class="case-industry">인터넷 전문은행</span>
-        </div>
-        <p class="case-quote">"100% 비대면 채널 은행의 핵심은 온라인 상담입니다. 100여명 상담사가 전화·채팅·이메일을 하나의 시스템에서 처리합니다."</p>
-        <div class="case-kpi">
-          <div>
-            <div class="case-kpi-num cy">1,000+</div>
-            <div class="case-kpi-label">일평균 채팅·이메일 상담</div>
-          </div>
-          <div>
-            <div class="case-kpi-num pu">옴니채널</div>
-            <div class="case-kpi-label">단일 App 통합</div>
-          </div>
-        </div>
-        <span class="case-brand-tag" style="background:rgba(0,198,255,.08);color:#0077AA;">DWorks · Cowork+</span>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:44px;">
-      <a class="btn btn-outline-light" href="https://www.spectra.co.kr/blog/" target="_blank">전체 고객 사례 보기 →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ⑦ TRUST 배지 -->
-<div class="trust-strip">
-  <div class="container">
-    <div class="trust-inner">
-      <div class="trust-item">
-        <div class="trust-icon hi">🛡️</div>
-        <div>
-          <div class="trust-title">ISO 27001 인증</div>
-          <div class="trust-sub">정보보안 국제표준 인증</div>
-        </div>
-      </div>
-      <div class="trust-div"></div>
-      <div class="trust-item">
-        <div class="trust-icon">🏢</div>
-        <div>
-          <div class="trust-title">설립 27년 · 1999</div>
-          <div class="trust-sub">기업 커뮤니케이션 인프라 전문</div>
-        </div>
-      </div>
-      <div class="trust-div"></div>
-      <div class="trust-item">
-        <div class="trust-icon">🏦</div>
-        <div>
-          <div class="trust-title">금융감독원 보안 심의</div>
-          <div class="trust-sub">금융권 보안 기준 적합 검증 완료</div>
-        </div>
-      </div>
-      <div class="trust-div"></div>
-      <div class="trust-item">
-        <div class="trust-icon">✅</div>
-        <div>
-          <div class="trust-title">250+ 고객사</div>
-          <div class="trust-sub">금융 · 제조 · 유통 · 통신 전 산업</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ⑧ Cowork+ 상세 -->
-<section class="section section-cowork" id="dworks">
-  <div class="container">
-    <div class="product-layout">
-      <div>
-        <div class="product-label">
-          <span style="width:8px;height:8px;border-radius:50%;background:var(--dworks);display:inline-block;"></span>
-          <span style="color:#0077AA;">Spectra DWorks · Cowork+</span>
-        </div>
-        <h2 class="product-h2">카카오 대화가<br>업무로 전환됩니다</h2>
-        <p class="product-sub">
-          설계매니저가 카카오톡으로 보낸 고객 정보를<br>
-          AI가 자동 추출해 등록 폼에 채웁니다.<br>
-          수동 입력 없이, 실수 없이.
-        </p>
-        <div class="feature-list">
-          <div class="feature-item">
-            <div class="feature-icon fi-dw">💬</div>
-            <div>
-              <div class="feature-title">상담 채널 — 고객 상담톡</div>
-              <div class="feature-desc">카카오 기반 인바운드 접수. 요청을 하나의 플랫폼에서 통합 관리</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon fi-dw">🤖</div>
-            <div>
-              <div class="feature-title">AI OCR/NER — 정보 자동 추출</div>
-              <div class="feature-desc">카톡 메시지·서류 이미지에서 고객 정보를 자동 파싱. 수동 입력 제로</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon fi-dw">🤝</div>
-            <div>
-              <div class="feature-title">협업 채널 — 거래처·파트너</div>
-              <div class="feature-desc">외부 협력사 소통을 공식 채널로 전환. 대규모 그룹 채널 운영 지원</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon fi-dw">🔗</div>
-            <div>
-              <div class="feature-title">시스템 연동</div>
-              <div class="feature-desc">보험·CRM·ERP 시스템과 API 연동. 대화 데이터가 업무 시스템에 자동 반영</div>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn btn-dworks" href="#" onclick="openModal();return false;">Cowork+ 상담 신청</a>
-          <a class="btn btn-outline-light" href="cowork_plus.html">제품 상세 보기</a>
-        </div>
-      </div>
-
-      <div>
-        <div class="mock-win">
-          <div class="mock-bar dw">
-            <div class="mock-dot" style="background:#FF5F57;"></div>
-            <div class="mock-dot" style="background:#FEBC2E;"></div>
-            <div class="mock-dot" style="background:#28C840;"></div>
-            <span style="margin-left:12px;font-size:11px;color:var(--text3);">Cowork+ · 파트너 채널</span>
-          </div>
-          <div class="mock-body dw">
-            <div style="font-size:11px;color:#0077AA;font-weight:700;margin-bottom:12px;letter-spacing:.06em;">● 설계매니저 요청 접수</div>
-            <div class="chat-mock">
-              <div class="chat-msg">
-                <div class="chat-av" style="background:#FEF9C3;color:#92400E;">담당</div>
-                <div>
-                  <div class="chat-bubble bubble-in">설계 요청드려요. 고객 정보 첨부했습니다.</div>
-                  <div class="chat-ts">11:22</div>
-                </div>
-              </div>
-              <div class="chat-msg r">
-                <div class="chat-av" style="background:rgba(0,198,255,.15);color:#0077AA;">CS</div>
-                <div>
-                  <div class="chat-bubble bubble-out">접수 완료했습니다! 바로 처리할게요 ✓</div>
-                  <div class="chat-ts" style="text-align:right;">11:23</div>
-                </div>
-              </div>
-              <div style="margin-top:12px;background:#fff;border-radius:10px;padding:12px 14px;border:1px solid var(--bdr);">
-                <div style="font-size:10px;color:#0077AA;font-weight:700;margin-bottom:8px;letter-spacing:.06em;">✦ AI OCR/NER 자동 추출</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                  <div style="font-size:11px;"><span style="color:var(--text3);">성명</span><br><strong style="font-size:13px;">홍길동</strong></div>
-                  <div style="font-size:11px;"><span style="color:var(--text3);">생년월일</span><br><strong style="font-size:13px;">1985.03.12</strong></div>
-                  <div style="font-size:11px;"><span style="color:var(--text3);">연락처</span><br><strong style="font-size:13px;">010-****-5678</strong></div>
-                  <div style="font-size:11px;"><span style="color:var(--text3);">신청 상품</span><br><strong style="font-size:13px;">다이렉트 플랜</strong></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑨ NOA 상세 -->
-<section class="section section-noa" id="noa">
-  <div class="container">
-    <div class="product-layout" style="direction:rtl;">
-      <div style="direction:ltr;">
-        <div class="product-label">
-          <span style="width:8px;height:8px;border-radius:50%;background:var(--noa);display:inline-block;"></span>
-          <span style="color:var(--noa);">Spectra DWorks · NOA</span>
-        </div>
-        <h2 class="product-h2">대화 데이터를<br>AI 인사이트로</h2>
-        <p class="product-sub">
-          고객과의 모든 대화를 NOA가 실시간으로 분석합니다.<br>
-          품질 이슈를 사전 감지하고, 경쟁사 비교·고객 니즈를<br>
-          자동으로 리포팅합니다.
-        </p>
-        <div class="feature-list">
-          <div class="feature-item">
-            <div class="feature-icon fi-noa">🤖</div>
-            <div>
-              <div class="feature-title">AI 챗봇 서비스</div>
-              <div class="feature-desc">다양한 업무에 맞춤 적용 가능한 지능형 AI 챗봇. 기업 내 지식을 연결해 고객 응대부터 업무 지원까지 자동화</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon fi-noa">✅</div>
-            <div>
-              <div class="feature-title">AI QA 서비스</div>
-              <div class="feature-desc">100% 대화 품질 평가 자동화. 응대 품질과 컴플라이언스 이슈 모니터링으로 서비스 품질 혁신</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon fi-noa">📊</div>
-            <div>
-              <div class="feature-title">AI Insight 서비스</div>
-              <div class="feature-desc">상담·협업 대화를 분석해 주제 분류, 고객 니즈 확인, 경쟁사 비교, 상품 품질 등 전략적 인사이트로 데이터 기반 의사결정 지원</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon fi-noa">📄</div>
-            <div>
-              <div class="feature-title">AI OCR/NER — 문서 처리</div>
-              <div class="feature-desc">비정형 문서 자동 인식·분류, 계약서·신청서 데이터 추출 자동화</div>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn btn-noa" href="#" onclick="openModal();return false;">NOA 상담 신청</a>
-          <a class="btn btn-outline-light" href="noa.html">제품 상세 보기</a>
-        </div>
-      </div>
-
-      <div style="direction:ltr;">
-        <div class="mock-win">
-          <div class="mock-bar no">
-            <div class="mock-dot" style="background:#FF5F57;"></div>
-            <div class="mock-dot" style="background:#FEBC2E;"></div>
-            <div class="mock-dot" style="background:#28C840;"></div>
-            <span style="margin-left:12px;font-size:11px;color:var(--text3);">NOA · AI Insight</span>
-          </div>
-          <div class="mock-body no">
-            <div style="font-size:11px;color:var(--noa);font-weight:700;margin-bottom:16px;letter-spacing:.06em;">● 실시간 인사이트</div>
-            <div class="ai-insight-card">
-              <div class="aic-label">리드 알림</div>
-              <div class="aic-text">92점의 HOT 리드가 발생하였습니다. 즉시 연락을 통해 집중 관리가 필요합니다.</div>
-              <div class="aic-bar"><div class="aic-bar-fill" style="width:92%;background:#EF4444;"></div></div>
-            </div>
-            <div class="ai-insight-card">
-              <div class="aic-label">경쟁사 비교</div>
-              <div class="aic-text">고객이 경쟁사와 주요 상품을 비교하였습니다.</div>
-              <div class="aic-bar"><div class="aic-bar-fill" style="width:68%;background:#F59E0B;"></div></div>
-            </div>
-            <div class="ai-insight-card">
-              <div class="aic-label">컴플레인 / 이슈</div>
-              <div class="aic-text">품질 문제로 전량 회수와 반품을 요청하는 강한 컴플레인이 발생하였습니다.</div>
-              <div class="aic-bar"><div class="aic-bar-fill" style="width:95%;background:#EF4444;"></div></div>
-            </div>
-            <div class="ai-row">
-              <div class="ai-mini-card">
-                <div class="amc-num">1,247</div>
-                <div class="amc-label">오늘 처리 상담</div>
-              </div>
-              <div class="ai-mini-card">
-                <div class="amc-num" style="color:var(--noa);">89%</div>
-                <div class="amc-label">자동화 처리율</div>
-              </div>
-              <div class="ai-mini-card">
-                <div class="amc-num">4.8</div>
-                <div class="amc-label">평균 만족 점수</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑩ 시너지 -->
-<section class="section-synergy">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow"><span class="pill pill-spectra">Why Together</span></div>
-      <h2 class="section-h2">Cowork+와 NOA가 만나면</h2>
-      <p class="section-sub">대화 인프라와 AI 인텔리전스의 결합으로 기업 커뮤니케이션의 완전한 전환을 이룹니다</p>
-    </div>
-    <div class="synergy-grid">
-      <div class="synergy-card" style="border-top:3px solid var(--dworks);">
-        <div class="syn-brand" style="color:#0077AA;">DWorks · Cowork+</div>
-        <div class="syn-product">대화 인프라</div>
-        <div class="syn-desc">카카오 기반으로 모든 외부 커뮤니케이션을 하나의 플랫폼에 통합합니다.</div>
-      </div>
-      <div class="synergy-plus">
-        <div class="syn-plus-icon">+</div>
-        <div class="syn-plus-label">결합</div>
-      </div>
-      <div class="synergy-card" style="border-top:3px solid var(--noa);">
-        <div class="syn-brand" style="color:var(--noa);">DWorks · NOA</div>
-        <div class="syn-product">AI 인텔리전스</div>
-        <div class="syn-desc">축적된 대화 데이터를 AI로 분석하여 비즈니스 인사이트를 자동 생성합니다.</div>
-      </div>
-    </div>
-    <div class="synergy-result">
-      <div class="syn-result-label">결과</div>
-      <div class="syn-result-text">고객과의 모든 대화가 비즈니스 자산이 됩니다</div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑪ 산업별 -->
-<section class="section section-industry">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow"><span class="pill pill-industry">Industry</span></div>
-      <h2 class="section-h2">산업별 최적화 솔루션</h2>
-      <p class="section-sub">각 산업의 규제와 특성에 맞게 설계된 SPECTRA 솔루션</p>
-    </div>
-    <div class="industry-grid">
-      <div class="industry-card">
-        <div class="industry-icon">🏦</div>
-        <div class="industry-name">금융</div>
-        <div class="industry-desc">금융감독원 보안 심의 대응, 불완전 판매 감지, 개인정보 보호 특화</div>
-        <div class="industry-clients"><strong>하나카드 · 카카오뱅크 · 키움증권</strong> 외 80여 개 금융사</div>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">🏭</div>
-        <div class="industry-name">제조</div>
-        <div class="industry-desc">거래처·글로벌 파트너와의 협업 채널 공식화, 설비 점검·정비 요청 관리</div>
-        <div class="industry-clients"><strong>삼성물산</strong> 외 제조업 다수</div>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">🛒</div>
-        <div class="industry-name">유통 · 서비스</div>
-        <div class="industry-desc">고객 CS 챗봇 자동화, 반품·배송 시나리오 셀프 처리, 상담사 생산성 향상</div>
-        <div class="industry-clients"><strong>롯데쇼핑 · 호텔신라 · SOOP</strong> 외 다수</div>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">📡</div>
-        <div class="industry-name">통신 · 공공</div>
-        <div class="industry-desc">대용량 상담 트래픽 처리, 멀티채널 통합, 공공기관 보안 규격 준수</div>
-        <div class="industry-clients"><strong>LG유플러스 · 국민연금공단 · 병무청</strong> 외 다수</div>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon">🏗</div>
-        <div class="industry-name">건설 · 플랜트</div>
-        <div class="industry-desc">산업안전보건법 현장 이력 디지털화, 다국어 현장 멀티채널 통합 관리</div>
-        <div class="industry-clients" style="color:#D97706;font-weight:600;font-size:11.5px;">적용 가능 산업</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑫ 인사이트 -->
-<section class="section section-insight">
-  <div class="container">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;">
-      <div>
-        <span class="pill pill-spectra" style="margin-bottom:14px;display:inline-block;">Insight</span>
-        <h2 class="section-h2" style="margin-bottom:0;">SPECTRA 인사이트</h2>
-      </div>
-      <a href="https://www.spectra.co.kr/blog/" target="_blank" style="font-size:14px;color:var(--text3);transition:color .15s;" onmouseover="this.style.color='var(--text1)'" onmouseout="this.style.color='var(--text3)'">전체 보기 →</a>
-    </div>
-    <div class="insights-grid">
-      <a href="https://www.spectra.co.kr/blog/" target="_blank" class="insight-card">
-        <div class="insight-thumb it-finance">🏦</div>
-        <div class="insight-body">
-          <div class="insight-cat" style="color:var(--spectra);">★ SEO 허브</div>
-          <div class="insight-title">금융권이 카카오톡 상담을 선택하는 5가지 이유</div>
-          <div class="insight-date">2025. 05. 14</div>
-        </div>
-      </a>
-      <a href="https://www.spectra.co.kr/blog/" target="_blank" class="insight-card">
-        <div class="insight-thumb it-ai">🤖</div>
-        <div class="insight-body">
-          <div class="insight-cat" style="color:var(--noa);">NOA</div>
-          <div class="insight-title">AI 챗봇 자동화 설계 원칙 — 시나리오봇 구조</div>
-          <div class="insight-date">2025. 04. 25</div>
-        </div>
-      </a>
-      <a href="https://www.spectra.co.kr/blog/" target="_blank" class="insight-card">
-        <div class="insight-thumb it-kakao">💬</div>
-        <div class="insight-body">
-          <div class="insight-cat" style="color:#0077AA;">Cowork+</div>
-          <div class="insight-title">업무 단체방을 공식 채널로 전환하는 법</div>
-          <div class="insight-date">2025. 03. 27</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ⑬ CTA -->
-<section class="section-cta" id="contact">
-  <div class="container">
-    <div class="cta-inner">
-      <h2 class="cta-h2">
-        지금 바로 시작하세요.<br>
-        <span style="color:var(--dworks);">27년의 기술</span>이 함께합니다.
-      </h2>
-      <p class="cta-sub">도입 방식(구축형 / 클라우드 구독형)과 산업에 맞는 맞춤 상담을 제공합니다.</p>
-      <div class="cta-btns">
-        <a class="btn btn-primary" href="#" onclick="openModal();return false;">도입 상담 신청 →</a>
-        <a class="btn btn-outline-dark" href="#">자료 다운로드</a>
-      </div>
-      <p class="cta-note">영업일 기준 24시간 내 담당자가 연락드립니다</p>
-    </div>
-  </div>
-</section>
-
-<!-- ⑭ FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-top">
-      <div>
-        <div class="footer-logo">
-          <img src="data:image/jpeg;base64,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HmXusY9frX6WeG/gf4C8I3C3Gj+FdOsJl5Dxxcj867dEWNQqqFUdAowKJ4ttWihql3MXwV4M0n4f+GbDQdEtUs9Os4xHHGg/U+pNblFFcG5uFfFf/BTTwfqeteCfC+tWlu81lpdxMtyyLnZ5gQKfzU19qVW1DT7bVrKa0vII7m2mUpJFIuVYHqCKunPkkpEyXMrH4T+H9Av/ABLrVnpem273N9dSrDFEgyWZjgCv3E8B6VLoXgnQNOnUrPa2EEMinsyxqGH5g1i+E/gn4E8C6o+o6D4X0/TL587p4Y/m5+prt62rVva2siIQ5QqvqEBurC5hHJkiZPzBFWKK5TU/DH4jeC9T8A+M9W0TVrd7e7s7ho2DDAPoR68Yr6e/4Jv+AdR1T4oXniTyHj07Tbcr5zLhXdgV2g9zzmvv7xx8G/BPxImim8TeGrHWZYhhHuE5H4git3w34X0nwfpcWm6Lp8Om2MX3ILddqiu+eJ5octtTBU7O5q0UUVwG4V8T/wDBS3wHqmteF/D/AIhs7d7iz052huPLBJTdyGPtxX2xUF5ZQajay211Ck9vKpV45BlWB7EVpTn7OSkTJcysfhDo+j3utalb2NjbSXV3M4SOGNcszHoK/bX4QeG7nwh8MvDmj3mPtVpaKkmOx5OP1qPw38GPA/g/Vn1PRvDOn6fftkm4hj+bn6mu0ratW9rZJEQhyhXzz+3R4G1Pxt8CdSXSrd7u6spEuDbxjLMgYbiPoATX0NSModSrAMpGCCODXPGXLJSRo1dWPwSW1maURCNjJnG0Dn8q/XT9iHwXqngX9nvRLHV4Gtrq4llvRG3BCSEMufwr0Ffgf4Cj8Qf24vhXTRq2/wAz7V5XzbvX0ruFAUAAYA6AV1Vq/tFypGUKfK7i0UUVxmwUUUUAIQGBBGRWAfBGmNqX2zbJnOfKyNmevTH9a6CivNxmW4PMOT63SU+V3V1ezNqdapSvyStcRVCqABgDgCloor0jEKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k=" alt="SPECTRA">
-          SPECTRA
-        </div>
-        <div class="footer-tagline">
-          기업 커뮤니케이션 인프라의 새로운 기준.<br>
-          Spectra DWorks · Spectra eNomix
-        </div>
-        <div style="margin-top:20px;display:flex;gap:8px;">
-          <a href="#" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:14px;">📘</a>
-          <a href="#" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:14px;">▶</a>
-        </div>
-      </div>
-      <div class="footer-nav-grid">
-        <div>
-          <div class="footer-col-title">제품</div>
-          <a class="footer-link" href="cowork_plus.html">DWorks · Cowork+</a>
-          <a class="footer-link" href="noa.html">DWorks · NOA</a>
-          <a class="footer-link legacy" href="eer.html">eNomix EER (기존 고객)</a>
-        </div>
-        <div>
-          <div class="footer-col-title">도입</div>
-          <a class="footer-link" href="cowork_plus.html">구축형 (On-Premise)</a>
-          <a class="footer-link" href="cowork_plus.html">클라우드 구독형</a>
-          <a class="footer-link" href="#" onclick="openModal();return false;">도입 상담 신청</a>
-        </div>
-        <div>
-          <div class="footer-col-title">리소스</div>
-          <a class="footer-link" href="https://www.spectra.co.kr/blog/" target="_blank">고객 사례</a>
-          <a class="footer-link" href="https://www.spectra.co.kr/blog/" target="_blank">인사이트 블로그</a>
-          <a class="footer-link" href="#">ISO 27001 인증</a>
-        </div>
-        <div>
-          <div class="footer-col-title">회사</div>
-          <a class="footer-link" href="about_spectra.html">SPECTRA 소개</a>
-          <a class="footer-link" href="#">채용</a>
-          <a class="footer-link" href="eer.html">고객 지원</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div>(주)스펙트라 · 서울특별시 서초구 반포대로 27길 16 · 02-508-7799</div>
-      <div class="footer-legal">
-        <a href="#">개인정보처리방침</a>
-        <a href="#">이용약관</a>
-        <span>© 2026 Spectra Inc.</span>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- STICKY CTA BAR -->
-<div class="sticky-bar" id="stickyBar" style="display:none;">
-  <span class="sticky-bar-text">대화를 비즈니스 자산으로 전환하세요</span>
-  <a class="btn btn-primary" href="#" onclick="openModal();return false;" style="padding:10px 20px;font-size:13.5px;">도입 상담 →</a>
-</div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  
-  // GNB 드롭다운 — click 전용 (hover 이탈 문제 해결)
-  document.querySelectorAll('.gnb-item.has-dd').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      var isOpen = item.classList.contains('open');
-      document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
-        el.classList.remove('open');
-      });
-      if (!isOpen) item.classList.add('open');
-      e.stopPropagation();
-    });
-  });
-  // 드롭다운 내 링크 클릭 시 닫기
-  document.querySelectorAll('.gnb-dd-item').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      e.stopPropagation();
-      document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
-        el.classList.remove('open');
-      });
-    });
-  });
-  // 외부 클릭 시 닫기
-  document.addEventListener('click', function() {
-    document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
-      el.classList.remove('open');
-    });
-  });
-
-  // Sticky bar on scroll
-  var stickyBar = document.getElementById('stickyBar');
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 500) {
-      stickyBar.style.display = 'flex';
-    } else {
-      stickyBar.style.display = 'none';
-    }
-  });
-
-  // Hide video placeholder if video plays
-  var vid = document.querySelector('video');
-  var ph = document.getElementById('videoPlaceholder');
-  if (vid) {
-    vid.addEventListener('playing', function() {
-      if (ph) ph
-<!-- ═══════════════════════════════════════════
-     도입 문의 팝업 모달
-═══════════════════════════════════════════ -->
-<div id="inquiryModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
-  <div style="background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;position:relative;padding:48px 44px;margin:20px;box-shadow:0 32px 80px rgba(0,0,0,.25);">
-    <!-- 닫기 버튼 -->
-    <button onclick="closeModal()" style="position:absolute;top:20px;right:20px;background:none;border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .15s;" onmouseover="this.style.background='#F1F5F9'" onmouseout="this.style.background='none'">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+<!-- ═══ 도입 문의 팝업 모달 ═══ -->
+<div id="inquiryModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
+  <div id="modalBox" style="background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;position:relative;padding:44px 40px;margin:20px;box-shadow:0 32px 80px rgba(0,0,0,0.25);">
+    <button onclick="closeInquiry()" style="position:absolute;top:18px;right:18px;background:none;border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='#F1F5F9'" onmouseout="this.style.background='none'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-
-    <h2 style="font-size:24px;font-weight:800;color:#0F172A;margin-bottom:8px;letter-spacing:-0.02em;">제품 도입 문의</h2>
-    <p style="font-size:14px;color:#64748B;margin-bottom:32px;line-height:1.6;">간단한 정보를 입력하면 영업 담당자가 신속하게 상담해 드립니다.</p>
-
-    <form id="inquiryForm" onsubmit="submitForm(event)" style="display:flex;flex-direction:column;gap:18px;">
-
-      <!-- 이름 -->
-      <div>
-        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">이름 <span style="color:#EF4444;">*</span></label>
-        <input type="text" name="name" placeholder="홍길동" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
-      </div>
-
-      <!-- 회사명 + 사업자등록번호 -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div id="modalContent">
+      <h2 style="font-size:22px;font-weight:800;color:#0F172A;margin-bottom:6px;letter-spacing:-0.02em;">제품 도입 문의</h2>
+      <p style="font-size:13.5px;color:#64748B;margin-bottom:28px;line-height:1.6;">간단한 정보를 입력하면 영업 담당자가 신속하게 상담해 드립니다.</p>
+      <form id="inquiryForm" style="display:flex;flex-direction:column;gap:16px;">
         <div>
-          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">회사명 <span style="color:#EF4444;">*</span></label>
-          <input type="text" name="company" placeholder="스펙트라" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">이름 <span style="color:#EF4444;">*</span></label>
+          <input id="iName" type="text" placeholder="홍길동" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">회사명 <span style="color:#EF4444;">*</span></label>
+            <input id="iCompany" type="text" placeholder="스펙트라" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">사업자등록번호</label>
+            <input id="iBiz" type="text" placeholder="000-00-00000" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+          </div>
         </div>
         <div>
-          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">사업자등록번호</label>
-          <input type="text" name="biznum" placeholder="000-00-00000" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">회사 URL</label>
+          <input id="iUrl" type="text" placeholder="https://www.spectra.co.kr" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
         </div>
-      </div>
-
-      <!-- 회사 URL -->
-      <div>
-        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">회사 URL</label>
-        <input type="url" name="url" placeholder="https://www.spectra.co.kr" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
-      </div>
-
-      <!-- 이메일 -->
-      <div>
-        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">이메일 <span style="color:#EF4444;">*</span></label>
-        <input type="email" name="email" placeholder="info@spectra.co.kr" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
-      </div>
-
-      <!-- 전화번호 -->
-      <div>
-        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">전화번호 <span style="color:#EF4444;">*</span></label>
-        <input type="tel" name="tel" placeholder="010-1234-5678" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
-      </div>
-
-      <!-- 문의내용 -->
-      <div>
-        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">문의내용</label>
-        <textarea name="message" placeholder="문의내용을 입력해주세요" rows="4" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;resize:vertical;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'"></textarea>
-      </div>
-
-      <!-- 개인정보 동의 -->
-      <div style="background:#F8FAFC;border-radius:10px;padding:16px;font-size:12.5px;color:#475569;line-height:1.7;border:1px solid #E2E8F0;">
-        개인정보보호법에 따라 제품문의를 하시는 고객님에게 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.<br><br>
-        <span style="color:#64748B;">* 회사의 서비스는 원칙적으로 만 14세 미만의 아동에게 서비스를 제공하지 않으며, 만 14세 미만 아동의 개인정보를 수집하지 않습니다. 제품도입문의 서비스는 만 14세 이상부터 이용이 가능합니다.</span>
-      </div>
-
-      <div style="text-align:center;font-size:14px;font-weight:600;color:#374151;margin:-4px 0;">
-        위와 같이 개인정보를 수집·이용하는데 동의하십니까?
-        <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin-top:10px;">
-          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:500;">
-            <input type="radio" name="privacy" value="agree" required style="accent-color:#1A6BFF;width:16px;height:16px;"> 동의
-          </label>
-          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:500;">
-            <input type="radio" name="privacy" value="disagree" style="accent-color:#1A6BFF;width:16px;height:16px;"> 미동의
-          </label>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">이메일 <span style="color:#EF4444;">*</span></label>
+          <input id="iEmail" type="email" placeholder="info@spectra.co.kr" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
         </div>
-      </div>
-
-      <!-- 제출 버튼 -->
-      <button type="submit" style="width:100%;padding:15px;background:#1A6BFF;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;font-family:inherit;margin-top:4px;" onmouseover="this.style.background='#1258DD'" onmouseout="this.style.background='#1A6BFF'">
-        문의 제출하기
-      </button>
-    </form>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">전화번호 <span style="color:#EF4444;">*</span></label>
+          <input id="iTel" type="tel" placeholder="010-1234-5678" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">문의내용</label>
+          <textarea id="iMsg" placeholder="문의내용을 입력해주세요" rows="4" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;resize:vertical;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'"></textarea>
+        </div>
+        <div style="background:#F8FAFC;border-radius:10px;padding:14px;font-size:12px;color:#475569;line-height:1.7;border:1px solid #E2E8F0;">
+          개인정보보호법에 따라 제품문의를 하시는 고객님에게 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.<br><br>
+          <span style="color:#94A3B8;">* 회사의 서비스는 원칙적으로 만 14세 미만의 아동에게 서비스를 제공하지 않으며, 만 14세 미만 아동의 개인정보를 수집하지 않습니다.</span>
+        </div>
+        <div style="text-align:center;font-size:13.5px;font-weight:600;color:#374151;">
+          위와 같이 개인정보를 수집·이용하는데 동의하십니까?
+          <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin-top:10px;">
+            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-weight:500;font-size:14px;">
+              <input type="radio" name="iPrivacy" value="agree" style="width:16px;height:16px;accent-color:#1A6BFF;"> 동의
+            </label>
+            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-weight:500;font-size:14px;">
+              <input type="radio" name="iPrivacy" value="disagree" style="width:16px;height:16px;accent-color:#1A6BFF;"> 미동의
+            </label>
+          </div>
+        </div>
+        <button type="button" onclick="submitInquiry()" style="width:100%;padding:14px;background:#1A6BFF;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;" onmouseover="this.style.background='#1258DD'" onmouseout="this.style.background='#1A6BFF'">
+          문의 제출하기
+        </button>
+      </form>
+    </div>
   </div>
 </div>
 
 <script>
-  function openModal() {
-    var m = document.getElementById('inquiryModal');
-    m.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+function openModal() {
+  document.getElementById("inquiryModal").style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+function closeInquiry() {
+  document.getElementById("inquiryModal").style.display = "none";
+  document.body.style.overflow = "";
+}
+function submitInquiry() {
+  var name = document.getElementById("iName").value;
+  var company = document.getElementById("iCompany").value;
+  var email = document.getElementById("iEmail").value;
+  var tel = document.getElementById("iTel").value;
+  var privacy = document.querySelector("input[name='iPrivacy']:checked");
+  if (!name || !company || !email || !tel) {
+    alert("필수 항목(이름, 회사명, 이메일, 전화번호)을 입력해주세요.");
+    return;
   }
-  function closeModal() {
-    var m = document.getElementById('inquiryModal');
-    m.style.display = 'none';
-    document.body.style.overflow = '';
+  if (!privacy) {
+    alert("개인정보 수집·이용 동의 여부를 선택해주세요.");
+    return;
   }
-  function submitForm(e) {
-    e.preventDefault();
-    var privacy = document.querySelector('input[name="privacy"]:checked');
-    if (!privacy) { alert('개인정보 수집·이용 동의 여부를 선택해주세요.'); return; }
-    if (privacy.value === 'disagree') { alert('개인정보 수집에 동의하셔야 문의를 제출할 수 있습니다.'); return; }
-    // 제출 성공 처리
-    var form = document.getElementById('inquiryForm');
-    form.innerHTML = '<div style="text-align:center;padding:40px 0;"><div style="font-size:48px;margin-bottom:16px;">✅</div><div style="font-size:20px;font-weight:800;color:#0F172A;margin-bottom:8px;">문의가 접수되었습니다.</div><div style="font-size:14px;color:#64748B;line-height:1.7;">영업일 기준 24시간 내에<br>담당자가 연락드리겠습니다.</div><button onclick="closeModal()" style="margin-top:24px;padding:12px 28px;background:#1A6BFF;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">닫기</button></div>';
+  if (privacy.value === "disagree") {
+    alert("개인정보 수집에 동의하셔야 문의를 제출할 수 있습니다.");
+    return;
   }
-  // 모달 외부 클릭 시 닫기
-  document.getElementById('inquiryModal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-  // ESC 키로 닫기
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-  // CTA buttons are handled via inline onclick
-    });
-    // Notice bar 도입 상담 링크
-    document.querySelectorAll('a[href="#contact"]').forEach(function(el) {
-      el.addEventListener('click', function(e) {
-        e.preventDefault();
-        openModal();
-      });
-    });
-  });
+  document.getElementById("modalContent").innerHTML =
+    "<div style='text-align:center;padding:48px 0;'>" +
+    "<div style='font-size:52px;margin-bottom:16px;'>&#x2705;</div>" +
+    "<div style='font-size:20px;font-weight:800;color:#0F172A;margin-bottom:10px;'>문의가 접수되었습니다.</div>" +
+    "<div style='font-size:14px;color:#64748B;line-height:1.8;'>영업일 기준 24시간 내에<br>담당자가 연락드리겠습니다.</div>" +
+    "<button onclick='closeInquiry()' style='margin-top:28px;padding:12px 32px;background:#1A6BFF;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;'>닫기</button>" +
+    "</div>";
+}
+document.getElementById("inquiryModal").addEventListener("click", function(e) {
+  if (e.target === this) closeInquiry();
+});
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeInquiry();
+});
 </script>
+
+</body>
+</html>
