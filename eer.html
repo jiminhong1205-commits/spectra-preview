@@ -260,7 +260,7 @@
 </head>
 <body>
 
-<div style="background:#1A6BFF;padding:9px 24px;text-align:center;font-size:13.5px;font-weight:600;color:#fff;"><a href="#contact" style="color:#fff;text-decoration:none;letter-spacing:0.01em;">도입 상담 →</a></div>
+<div style="background:#1A6BFF;padding:9px 24px;text-align:center;font-size:13.5px;font-weight:600;color:#fff;"><a href="#" onclick="openModal();return false;" style="color:#fff;text-decoration:none;letter-spacing:0.01em;">도입 상담 →</a></div>
 
 <nav class="gnb">
   <div class="gnb-inner">
@@ -368,7 +368,7 @@
         <h1 class="hero-h1">끊기지 않는<br>고객 경험을<br><em>하나의 화면</em>으로</h1>
         <p class="hero-desc">카카오톡, PC 웹, 앱, 이메일 — 채널이 달라도 상담사는 한 화면에서 응대합니다. AI가 단순 문의를 처리하고, 복합 문의는 사람이 완결합니다.</p>
         <div class="hero-actions">
-          <a class="btn btn-eer" href="#contact">고객 지원</a>
+          <a class="btn btn-eer" href="#" onclick="openModal();return false;">고객 지원</a>
           <a class="btn-outline-dark" href="#modules">기능 살펴보기</a>
         </div>
         <div class="hero-kpi-row">
@@ -744,7 +744,7 @@
       <h2 class="cta-h2"><em>86%</em>가 신뢰한 플랫폼,<br>지금도 함께합니다.</h2>
       <p class="cta-sub">유지보수 · 운영 컨설팅 · 기능 고도화 · NOA 연계 전환까지 함께 지원합니다.</p>
       <div class="cta-actions">
-        <a class="btn btn-eer" href="#contact">고객 지원 →</a>
+        <a class="btn btn-eer" href="#" onclick="openModal();return false;">고객 지원 →</a>
         <a class="btn-outline-dark" href="noa.html">NOA 알아보기</a>
       </div>
       <p class="cta-note">영업일 기준 24시간 내 담당자가 연락드립니다</p>
@@ -882,30 +882,9 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
   });
-  // 모든 CTA 버튼/링크를 모달로 연결
-  document.addEventListener('DOMContentLoaded', function() {
-    var ctaSelectors = [
-      'a[href="#contact"]',
-      'a[href="mailto:sales@spectra.co.kr"]',
-      '.btn-primary', '.btn-dworks', '.btn-noa', '.btn-enomix', '.btn-eer',
-      '.gnb-cta',
-    ];
-    ctaSelectors.forEach(function(sel) {
-      document.querySelectorAll(sel).forEach(function(el) {
-        // EER 링크나 외부 링크는 제외
-        if (el.href && (el.href.includes('eer.html') || el.href.includes('blog') || el.href.includes('http') && !el.href.includes('#'))) return;
-        el.addEventListener('click', function(e) {
-          e.preventDefault();
-          openModal();
-        });
-      });
+  // CTA buttons handled via inline onclick
     });
-    // Notice bar 도입 상담 링크
-    document.querySelectorAll('a[href="#contact"]').forEach(function(el) {
-      el.addEventListener('click', function(e) {
-        e.preventDefault();
-        openModal();
-      });
+    
     });
   });
 </script>

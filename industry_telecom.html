@@ -162,7 +162,7 @@
 </head>
 <body>
 
-<div style="background:#1A6BFF;padding:9px 24px;text-align:center;font-size:13.5px;font-weight:600;color:#fff;"><a href="#contact" style="color:#fff;text-decoration:none;letter-spacing:0.01em;">도입 상담 →</a></div>
+<div style="background:#1A6BFF;padding:9px 24px;text-align:center;font-size:13.5px;font-weight:600;color:#fff;"><a href="#" onclick="openModal();return false;" style="color:#fff;text-decoration:none;letter-spacing:0.01em;">도입 상담 →</a></div>
 
 <nav class="gnb">
   <div class="gnb-inner">
@@ -288,7 +288,7 @@
           고객의 목소리가 쌓여도 의사결정에 쓰이지 못합니다.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-tel" href="#contact">도입 상담 신청</a>
+          <a class="btn btn-tel" href="#" onclick="openModal();return false;">도입 상담 신청</a>
           <a class="btn-outline-dark" href="#pain">우리 이야기인지 확인하기</a>
         </div>
       </div>
@@ -367,7 +367,7 @@
         <div class="section-eyebrow" style="margin-bottom:14px;"><span class="tag tag-tel">체크리스트</span></div>
         <h2 class="section-h2" style="margin-bottom:16px;">하나라도 해당된다면<br>이야기를 나눠보세요</h2>
         <p style="font-size:16px;color:var(--text-secondary);line-height:1.75;margin-bottom:32px;">스펙트라가 통신·공공 현장에서 반복적으로 해결해온 문제들입니다. 어떤 부분이 해당되는지 확인하고 상담을 신청해 주세요.</p>
-        <a class="btn btn-tel" href="#contact">30분 상담 신청 →</a>
+        <a class="btn btn-tel" href="#" onclick="openModal();return false;">30분 상담 신청 →</a>
       </div>
       <div class="cl-box">
         <div class="cl-title">✋ 해당되는 항목을 확인하세요</div>
@@ -461,7 +461,7 @@
     <div style="text-align:center;margin-top:40px;padding:24px;background:var(--tel-light);border-radius:14px;border:1px solid var(--tel-border);max-width:560px;margin-left:auto;margin-right:auto;">
       <div style="font-size:14px;color:var(--tel);font-weight:600;margin-bottom:6px;">구체적인 사례가 궁금하시다면</div>
       <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">어떤 문제가 해당되는지 말씀해 주시면, 같은 문제를 먼저 해결한 사례를 직접 보여드립니다.<br>자료 요청 없이 30분 상담으로 시작합니다.</div>
-      <a class="btn btn-tel" href="#contact" style="margin-top:16px;">30분 상담 신청 →</a>
+      <a class="btn btn-tel" href="#" onclick="openModal();return false;" style="margin-top:16px;">30분 상담 신청 →</a>
     </div>
 
   </div>
@@ -504,7 +504,7 @@
         어떤 부분이 해당되는지 말씀해 주시면, 같은 문제를 해결한 사례를 직접 보여드립니다.
       </p>
       <div class="cta-actions">
-        <a class="btn btn-tel" href="#contact">30분 상담 신청 →</a>
+        <a class="btn btn-tel" href="#" onclick="openModal();return false;">30분 상담 신청 →</a>
         <a class="btn-outline-dark" href="#">자료 다운로드</a>
       </div>
       <p class="cta-note">영업일 기준 24시간 내 담당자가 연락드립니다</p>
@@ -642,30 +642,9 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
   });
-  // 모든 CTA 버튼/링크를 모달로 연결
-  document.addEventListener('DOMContentLoaded', function() {
-    var ctaSelectors = [
-      'a[href="#contact"]',
-      'a[href="mailto:sales@spectra.co.kr"]',
-      '.btn-primary', '.btn-dworks', '.btn-noa', '.btn-enomix', '.btn-eer',
-      '.gnb-cta',
-    ];
-    ctaSelectors.forEach(function(sel) {
-      document.querySelectorAll(sel).forEach(function(el) {
-        // EER 링크나 외부 링크는 제외
-        if (el.href && (el.href.includes('eer.html') || el.href.includes('blog') || el.href.includes('http') && !el.href.includes('#'))) return;
-        el.addEventListener('click', function(e) {
-          e.preventDefault();
-          openModal();
-        });
-      });
+  // CTA buttons handled via inline onclick
     });
-    // Notice bar 도입 상담 링크
-    document.querySelectorAll('a[href="#contact"]').forEach(function(el) {
-      el.addEventListener('click', function(e) {
-        e.preventDefault();
-        openModal();
-      });
+    
     });
   });
 </script>
