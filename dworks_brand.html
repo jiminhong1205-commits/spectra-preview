@@ -70,6 +70,47 @@
   }
   .btn-outline:hover { background:var(--bg-soft); }
 
+  /* ── GNB ── */
+  .gnb {
+    position:sticky; top:0; z-index:99;
+    background:rgba(255,255,255,0.97);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+    padding:0 24px;
+  }
+  .gnb-inner {
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; height:64px;
+  }
+  .gnb-logo {
+    font-family:'Syne',sans-serif; font-size:20px; font-weight:800;
+    color:var(--text-primary); letter-spacing:-0.02em;
+    margin-right:48px; text-decoration:none; flex-shrink:0;
+    display:flex; align-items:center; gap:8px;
+  }
+  .gnb-back {
+    display:flex; align-items:center; gap:6px;
+    font-size:13px; color:var(--text-muted);
+    text-decoration:none; transition:color 0.15s;
+    margin-right:auto;
+  }
+  .gnb-back:hover { color:var(--text-primary); }
+  .gnb-breadcrumb {
+    display:flex; align-items:center; gap:8px;
+    font-size:13px; color:var(--text-muted);
+  }
+  .gnb-breadcrumb a { color:var(--text-muted); text-decoration:none; }
+  .gnb-breadcrumb a:hover { color:var(--text-primary); }
+  .gnb-breadcrumb .sep { opacity:0.4; }
+  .gnb-breadcrumb .current { color:var(--text-primary); font-weight:600; }
+  .gnb-cta {
+    padding:9px 20px; border-radius:100px;
+    background:var(--spectra); color:white;
+    font-size:13px; font-weight:700;
+    text-decoration:none; transition:all 0.2s; white-space:nowrap;
+  }
+  .gnb-cta:hover { background:#1258DD; }
+
   /* ── HERO ── */
   .hero {
     background: var(--bg-dark);
@@ -454,8 +495,7 @@
     .how-steps::before { display:none; }
   }
 
-  
-  /* ── GNB ── */
+  /* ── GNB (full nav) ── */
   .gnb { position:sticky; top:0; z-index:100; background:#ffffff; border-bottom:1px solid rgba(0,0,0,.07); padding:0 28px; }
   .gnb-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:68px; gap:4px; }
   .gnb-logo-wrap { display:flex; align-items:center; gap:20px; margin-right:44px; flex-shrink:0; }
@@ -463,50 +503,44 @@
   .gnb-blog { font-size:15px; font-weight:500; color:#374151; transition:color .15s; text-decoration:none; }
   .gnb-blog:hover { color:#1A6BFF; }
   .gnb-nav { display:flex; align-items:center; gap:2px; flex:1; }
-  .gnb-item {
-    position:relative; padding:8px 14px; font-size:15px; font-weight:500;
-    color:#475569; cursor:pointer; border-radius:8px;
-    transition:all .15s; white-space:nowrap; text-decoration:none;
-    display:inline-block;
-  }
+  .gnb-item { position:relative; padding:8px 14px; font-size:15px; font-weight:500; color:#475569; cursor:pointer; border-radius:8px; transition:all .15s; white-space:nowrap; text-decoration:none; }
   .gnb-item:hover { color:#0F172A; background:#F8FAFC; }
-  .gnb-item.has-dd::after {
-    content:''; display:inline-block; width:5px; height:5px;
-    margin-left:6px; vertical-align:2px;
-    border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor;
-    transform:rotate(45deg) translateY(-2px);
-  }
-  /* 투명 브리지: 메뉴와 드롭다운 사이 gap hover 끊김 방지 */
-  .gnb-item.has-dd { padding-bottom:8px; }
-  .gnb-dd {
-    display:none; position:absolute; top:calc(100%); left:0;
-    padding-top:4px; min-width:220px; z-index:200;
-  }
-  .gnb-dd-inner {
-    background:#fff; border:1px solid rgba(0,0,0,.07);
-    border-radius:14px; padding:8px;
-    box-shadow:0 16px 48px rgba(0,0,0,.1);
-  }
-  .gnb-item:hover .gnb-dd,
-  .gnb-item.open .gnb-dd { display:block; }
+  .gnb-item.has-dd::after { content:''; display:inline-block; width:5px; height:5px; margin-left:6px; vertical-align:2px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg) translateY(-2px); }
+  .gnb-dd { display:none; position:absolute; top:calc(100% + 6px); left:0; background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:14px; padding:8px; min-width:220px; box-shadow:0 16px 48px rgba(0,0,0,.1); z-index:200; }
+  .gnb-item:hover .gnb-dd, .gnb-item.open .gnb-dd { display:block; }
   .gnb-dd-sec { font-size:10px; font-weight:700; color:#94A3B8; letter-spacing:.08em; text-transform:uppercase; padding:6px 10px 3px; }
   .gnb-dd-div { height:1px; background:rgba(0,0,0,.07); margin:6px 8px; }
-  .gnb-dd-item {
-    display:flex; align-items:center; gap:10px; padding:9px 12px;
-    border-radius:8px; font-size:13.5px; font-weight:500; color:#475569;
-    cursor:pointer; transition:background .15s; text-decoration:none;
-  }
+  .gnb-dd-item { display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:8px; font-size:13.5px; font-weight:500; color:#475569; cursor:pointer; transition:background .15s; text-decoration:none; }
   .gnb-dd-item:hover { background:#F8FAFC; color:#0F172A; }
   .gnb-dd-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
   .gnb-cta { padding:10px 22px; border-radius:100px; background:#1A6BFF; color:#fff; font-size:13.5px; font-weight:700; transition:all .2s; white-space:nowrap; text-decoration:none; }
   .gnb-cta:hover { background:#1258DD; box-shadow:0 4px 16px rgba(26,107,255,.35); }
+  *, input, textarea, select, button { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+
+  .gnb{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid rgba(0,0,0,.07);padding:0 28px;}
+  .gnb-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:68px;gap:4px;}
+  .gnb-logo-wrap{display:flex;align-items:center;gap:20px;margin-right:44px;flex-shrink:0;}
+  .gnb-logo img{height:32px;display:block;}
+  .gnb-blog{font-size:15px;font-weight:500;color:#374151;transition:color .15s;text-decoration:none;}
+  .gnb-blog:hover{color:#1A6BFF;}
+  .gnb-nav{display:flex;align-items:center;gap:2px;flex:1;}
+  .gnb-item{position:relative;padding:8px 14px;font-size:15px;font-weight:500;color:#475569;cursor:pointer;border-radius:8px;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-block;}
+  .gnb-item:hover{color:#0F172A;background:#F8FAFC;}
+  .gnb-item.has-dd::after{content:'';display:inline-block;width:5px;height:5px;margin-left:6px;vertical-align:2px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);}
+  .gnb-dd{display:none;position:absolute;top:100%;left:0;padding-top:4px;min-width:220px;z-index:200;}
+  .gnb-dd-inner{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:8px;box-shadow:0 16px 48px rgba(0,0,0,.1);}
+  .gnb-item:hover .gnb-dd,.gnb-item.open .gnb-dd{display:block;}
+  .gnb-dd-sec{font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px 3px;}
+  .gnb-dd-div{height:1px;background:rgba(0,0,0,.07);margin:6px 8px;}
+  .gnb-dd-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13.5px;font-weight:500;color:#475569;cursor:pointer;transition:background .15s;text-decoration:none;}
+  .gnb-dd-item:hover{background:#F8FAFC;color:#0F172A;}
+  .gnb-dd-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 
 </style>
 </head>
 <body>
-
 <div style="background:#1A6BFF;padding:9px 24px;text-align:center;font-size:13.5px;font-weight:600;color:#fff;"><a href="#" onclick="openModal();return false;" style="color:#fff;text-decoration:none;letter-spacing:0.01em;">도입 상담 →</a></div>
-
 <nav class="gnb">
   <div class="gnb-inner">
     <div class="gnb-logo-wrap">
@@ -515,12 +549,633 @@
       </a>
       <a href="https://www.spectra.co.kr/blog/" target="_blank" class="gnb-blog">BLOG</a>
     </div>
-
     <div class="gnb-nav">
-      
+      <div class="gnb-item has-dd">브랜드
+        <div class="gnb-dd"><div class="gnb-dd-inner">
+          <div class="gnb-dd-sec">Spectra DWorks</div>
+          <a class="gnb-dd-item" href="cowork_plus.html"><span class="gnb-dd-dot" style="background:#00C6FF;"></span>Cowork+</a>
+          <a class="gnb-dd-item" href="noa.html"><span class="gnb-dd-dot" style="background:#5B21B6;"></span>NOA</a>
+          <div class="gnb-dd-div"></div>
+          <div class="gnb-dd-sec">Spectra eNomix</div>
+          <a class="gnb-dd-item" href="eer.html"><span class="gnb-dd-dot" style="background:#94A3B8;"></span>EER <span style="font-size:11px;color:#94A3B8;margin-left:auto;">기존 고객</span></a>
+        </div></div>
+      </div>
+      <div class="gnb-item has-dd">솔루션
+        <div class="gnb-dd"><div class="gnb-dd-inner" style="min-width:220px;">
+          <div class="gnb-dd-sec">DWorks Cowork+</div>
+          <a class="gnb-dd-item" href="cowork_plus.html"><span class="gnb-dd-dot" style="background:#00C6FF;"></span>Cowork+</a>
+          <div class="gnb-dd-div"></div>
+          <div class="gnb-dd-sec">DWorks NOA</div>
+          <a class="gnb-dd-item" href="noa.html"><span class="gnb-dd-dot" style="background:#7C3AED;"></span>NOA</a>
+          <div class="gnb-dd-div"></div>
+          <div class="gnb-dd-sec">eNomix</div>
+          <a class="gnb-dd-item" href="eer.html"><span class="gnb-dd-dot" style="background:#94A3B8;"></span>EER (기존 고객)</a>
+        </div></div>
+      </div>
+      <div class="gnb-item has-dd">적용 산업
+        <div class="gnb-dd"><div class="gnb-dd-inner">
+          <a class="gnb-dd-item" href="industry_finance.html">🏦 금융</a>
+          <a class="gnb-dd-item" href="industry_manufacturing.html">🏭 제조</a>
+          <a class="gnb-dd-item" href="industry_retail.html">🛒 유통 · 서비스</a>
+          <a class="gnb-dd-item" href="industry_telecom.html">📡 통신 · 공공</a>
+          <a class="gnb-dd-item" href="industry_construction.html">🏗 건설 · 플랜트</a>
+        </div></div>
+      </div>
+      <a class="gnb-item" href="https://www.spectra.co.kr/blog/" target="_blank">인사이트</a>
+      <div class="gnb-item has-dd">회사 소개
+        <div class="gnb-dd"><div class="gnb-dd-inner">
+          <a class="gnb-dd-item" href="about_spectra.html">🏢 회사 소개</a>
+          <a class="gnb-dd-item" href="#">📋 채용 정보</a>
+          <a class="gnb-dd-item" href="#">🔒 ISO 27001 인증</a>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</nav>
 
 
-<!-- ═══ 도입 문의 팝업 모달 ═══ -->
+<div style="background:#1A6BFF;padding:9px 24px;text-align:center;font-size:13.5px;font-weight:600;color:#fff;"><a href="#" onclick="openModal();return false;" style="color:#fff;text-decoration:none;letter-spacing:0.01em;">도입 상담 →</a></div>
+
+
+
+
+<!-- GNB -->
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="tag tag-dworks">Spectra DWorks</span>
+          <span class="hero-eyebrow-text">Digitize your Works</span>
+        </div>
+        <h1 class="hero-h1">
+          시작이<br><em>일을 바꾼다.</em>
+        </h1>
+        <p class="hero-tagline">말에서 기록으로, 기록은 실행으로,<br>실행은 신뢰로.</p>
+        <p class="hero-desc">
+          모든 업무는 대화에서 시작됩니다.<br>
+          하지만 그 시작은 기록되지 않고,<br>
+          연결되지 않으며, 책임이 사라집니다.<br>
+          DWorks는 그 시작을 공식적인 업무로 전환합니다.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-dworks" href="#">DWorks 솔루션 보기</a>
+          <a class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);" href="#" onclick="openModal();return false;">도입 상담 신청</a>
+        </div>
+      </div>
+
+      <div class="hero-stats-card">
+        <div class="hero-stats-title">DWorks 도입 효과</div>
+        <div class="hero-stats-grid">
+          <div class="hero-stat">
+            <div class="hero-stat-num">100<span>%</span></div>
+            <div class="hero-stat-label">업무 요청 추적</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">0<span>건</span></div>
+            <div class="hero-stat-label">업무 누락</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">24<span>/7</span></div>
+            <div class="hero-stat-label">실시간 모니터링</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">3<span>초</span></div>
+            <div class="hero-stat-label">Task 자동 생성</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DWORKS — 문제 정의 -->
+<section class="section-why">
+  <div class="container">
+    <div class="why-header">
+      <div style="margin-bottom:14px;"><span class="tag tag-spectra">Why DWorks</span></div>
+      <h2 class="section-h2">연결되지 않은 시작의 대가</h2>
+      <p class="section-sub">시작이 분산되면, 연결이 끊기고 성과는 낮아집니다.</p>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📡</div>
+        <div>
+          <div class="pain-title">채널 분산 — 요청 추적 불가</div>
+          <div class="pain-desc">카카오톡, 문자, 전화, 이메일... 누구에게 어떤 요청이 왔으며 어떻게 응대했는지 파악이 불가능합니다.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📭</div>
+        <div>
+          <div class="pain-title">기록 부재 — 처리 이력 없음</div>
+          <div class="pain-desc">대화는 했는데 처리 기록이 없습니다. 담당자가 바뀌면 모든 맥락이 사라집니다.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">❓</div>
+        <div>
+          <div class="pain-title">책임 실종 — 담당자 불명</div>
+          <div class="pain-desc">요청 전화는 받았는데 누가 담당하는지 불명확합니다. 일의 책임이 모호해지고 반복됩니다.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔁</div>
+        <div>
+          <div class="pain-title">반복 발생 — 불필요한 재작업</div>
+          <div class="pain-desc">같은 요청을 반복해야 하고 진행 상황을 확인할 수 없습니다. 결과에 대한 신뢰도 무너집니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-arrow">
+      <div class="why-arrow-label">DWorks가 해결합니다</div>
+      <div class="why-arrow-line"></div>
+    </div>
+
+    <div class="value-box">
+      <div class="value-box-quote">
+        "시작을 연결해, 업무로 만든다."<br>
+        <span style="font-size:0.7em;color:var(--text-secondary);font-weight:500;">말에서 기록으로, 기록은 실행으로, 실행은 신뢰로.</span>
+      </div>
+      <p class="value-box-sub">
+        비공식 채널의 대화를 공식적인 업무 기록으로 전환합니다.
+        모든 요청에 담당자가 지정되고, 이력이 자동 생성되며,
+        시작과 결과가 하나로 연결됩니다.
+      </p>
+    </div>
+
+    <!-- 3가지 개성 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;">
+      <div style="padding:28px;border-radius:16px;background:var(--bg-softer);border:1px solid var(--border);text-align:center;">
+        <div style="font-size:28px;margin-bottom:12px;">📋</div>
+        <div style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:8px;">공식성</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">일의 시작인 '말'을 '기록'으로 전환합니다. 대화가 아니라 공식 업무 기록으로 남습니다.</div>
+      </div>
+      <div style="padding:28px;border-radius:16px;background:var(--bg-softer);border:1px solid var(--border);text-align:center;">
+        <div style="font-size:28px;margin-bottom:12px;">🎯</div>
+        <div style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:8px;">정돈성</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">복잡한 말 대신 요점으로 시작합니다. 핵심이 보이니 이해와 실행이 빨라집니다.</div>
+      </div>
+      <div style="padding:28px;border-radius:16px;background:var(--bg-softer);border:1px solid var(--border);text-align:center;">
+        <div style="font-size:28px;margin-bottom:12px;">👤</div>
+        <div style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:8px;">선명성</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">'어떤 일인가', '누가 담당하는가'가 처음부터 명확합니다. 책임도 처음부터 확실합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS — 탭 전환 -->
+<section class="section-products">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:20px;">
+      <span class="tag tag-dworks">DWorks 솔루션</span>
+    </div>
+    <h2 class="section-h2" style="text-align:center;margin-bottom:12px;">두 가지 제품으로<br>커뮤니케이션 전체를 커버합니다</h2>
+    <p class="section-sub" style="text-align:center;margin-bottom:48px;">상담과 협업 인프라를 구축하는 Cowork+,<br>그 위에서 작동하는 AI 인텔리전스 NOA.</p>
+
+    <div class="product-tabs">
+      <button class="ptab active" onclick="switchTab('cowork',this)">Cowork+ — 협업 · 상담</button>
+      <button class="ptab" onclick="switchTab('noa',this)">NOA — AI All-in-One</button>
+    </div>
+
+    <!-- Cowork+ 패널 -->
+    <div class="product-panel active" id="panel-cowork">
+      <div class="product-layout">
+        <div>
+          <div class="product-label">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--dworks);display:inline-block;"></span>
+            <span style="color:var(--dworks-dark);">DWorks · Cowork+</span>
+          </div>
+          <h2 class="product-h2">카카오로 연결하고,<br>업무로 전환합니다</h2>
+          <p class="product-desc">
+            고객 상담, 거래처 협업, 영업 파이프라인까지.
+            외부 사용자는 카카오톡 그대로 소통하고,
+            기업은 모든 대화를 체계적으로 관리합니다.
+          </p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="fi-icon fi-dworks">💬</div>
+              <div>
+                <div class="fi-title">상담 — 고객 채널 통합</div>
+                <div class="fi-desc">카카오 상담톡 기반 CS 운영. 멀티채널 통합 관리, AI 자동 배분, 100% 요청 추적</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon fi-dworks">🤝</div>
+              <div>
+                <div class="fi-title">협업 — 외부 파트너 채널</div>
+                <div class="fi-desc">거래처·파트너는 카카오·메일 그대로. 앱 설치 불필요. 기업은 Cowork+에서 통합 관리</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon fi-dworks">⚡</div>
+              <div>
+                <div class="fi-title">3초 Task 자동 생성</div>
+                <div class="fi-desc">메시지 자동 인식 → AI 정보 추출(OCR/NER) → Task 즉시 생성 → 담당자 자동 배분</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon fi-dworks">🔗</div>
+              <div>
+                <div class="fi-title">시스템 연동</div>
+                <div class="fi-desc">CRM · ERP · 그룹웨어와 API 연동. 대화 데이터가 기존 시스템에 자동 반영</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;">
+            <a class="btn btn-dworks" href="#">Cowork+ 상담 신청</a>
+            <a class="btn btn-outline" href="#">자세히 보기</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="mock-wrap">
+            <div class="mock-topbar" style="background:#EBF8FF;">
+              <div class="mock-dot" style="background:#FF5F57;"></div>
+              <div class="mock-dot" style="background:#FEBC2E;"></div>
+              <div class="mock-dot" style="background:#28C840;"></div>
+              <span class="mock-title">Cowork+ · 외부 협업 채널</span>
+            </div>
+            <div class="mock-body">
+              <div class="mock-row-title" style="color:var(--dworks-dark);">● 가온전선 협업 채널 · 오전</div>
+              <div class="chat-wrap">
+
+                <!-- 거래처 긴급 파일 전송 -->
+                <div class="chat-row">
+                  <div class="chat-av" style="background:#FEF3C7;color:#92400E;font-size:10px;">거래처</div>
+                  <div>
+                    <div class="chat-bbl bbl-in" style="font-size:11px;">안녕하십니까, 이건 언제쯤 받아볼 수 있을까요?</div>
+                    <div class="chat-ts">09:02</div>
+                  </div>
+                </div>
+
+                <!-- 파일 첨부 -->
+                <div class="chat-row">
+                  <div class="chat-av" style="background:#FEF3C7;color:#92400E;font-size:10px;">거래처</div>
+                  <div>
+                    <div class="chat-bbl bbl-in" style="font-size:11px;display:flex;align-items:center;gap:8px;">
+                      <span style="font-size:14px;">📎</span>
+                      <span>er250624-0003_견적요청서.xls</span>
+                    </div>
+                    <div style="margin-top:4px;" class="chat-bbl bbl-in" style="font-size:11px;">견적으로 긴급으로 부탁드리겠습니다!</div>
+                    <div class="chat-ts">09:09</div>
+                  </div>
+                </div>
+
+                <!-- 다른 거래처 PDF 전송 -->
+                <div class="chat-row">
+                  <div class="chat-av" style="background:#D1FAE5;color:#065F46;font-size:10px;">협력사</div>
+                  <div>
+                    <div class="chat-bbl bbl-in" style="font-size:11px;display:flex;align-items:center;gap:8px;">
+                      <span style="font-size:14px;">📄</span>
+                      <span>20250625_사양서.pdf</span>
+                    </div>
+                    <div style="margin-top:4px;" class="chat-bbl bbl-in" style="font-size:11px;">안녕하세요~! 감사합니다</div>
+                    <div class="chat-ts">09:47</div>
+                  </div>
+                </div>
+
+                <!-- 발주 문의 -->
+                <div class="chat-row">
+                  <div class="chat-av" style="background:#FEF3C7;color:#92400E;font-size:10px;">거래처</div>
+                  <div>
+                    <div class="chat-bbl bbl-in" style="font-size:11px;">TFR-GV 500×2 — 언제 도착 가능해여?</div>
+                    <div class="chat-ts">14:39</div>
+                  </div>
+                </div>
+
+                <!-- 내부 담당자 답변 -->
+                <div class="chat-row right">
+                  <div class="chat-av" style="background:var(--dworks);color:#0A1A2E;">담</div>
+                  <div style="display:flex;flex-direction:column;align-items:flex-end;">
+                    <div class="chat-bbl bbl-out" style="font-size:11px;">내일 확인하고 전화드리겠습니다</div>
+                    <div class="chat-ts">19:03</div>
+                  </div>
+                </div>
+
+                <!-- Cowork+ Task 자동 생성 표시 -->
+                <div class="chat-ai" style="font-size:11px;">
+                  ✅ <strong>Task 자동 생성됨</strong> — TFR-GV 500×2 납기 확인 · 담당자 배정 완료
+                </div>
+
+              </div>
+
+              <!-- 하단 KPI — 협업 기준 -->
+              <div class="mock-kpi">
+                <div class="kpi-cell">
+                  <div class="kpi-num">12</div>
+                  <div class="kpi-lbl">진행 중 건</div>
+                </div>
+                <div class="kpi-cell">
+                  <div class="kpi-num" style="color:var(--dworks-dark);">3개사</div>
+                  <div class="kpi-lbl">오늘 연결</div>
+                </div>
+                <div class="kpi-cell">
+                  <div class="kpi-num">100%</div>
+                  <div class="kpi-lbl">이력 기록</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOA 패널 -->
+    <div class="product-panel" id="panel-noa">
+      <div class="product-layout" style="direction:rtl;">
+        <div style="direction:ltr;">
+          <div class="product-label">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--noa);display:inline-block;"></span>
+            <span style="color:var(--noa);">DWorks · NOA</span>
+          </div>
+          <h2 class="product-h2">DX를 넘어<br><span style="color:var(--noa);">AX</span>로의 전환</h2>
+          <p class="product-desc">
+            대화 데이터를 자산화하고 AI로 분석·자동화합니다.
+            Cowork+로 쌓인 모든 대화가 비즈니스 인텔리전스가 됩니다.
+          </p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="fi-icon fi-noa">🤖</div>
+              <div>
+                <div class="fi-title">AI Agent — 자동화</div>
+                <div class="fi-desc">반복 상담 자동 처리, 시나리오 봇, 복잡한 업무 흐름 자동화</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon fi-noa">📊</div>
+              <div>
+                <div class="fi-title">AI Insight — 분석</div>
+                <div class="fi-desc">상담 데이터 실시간 분석, 고객 감성 트래킹, 경영진 대시보드 자동 생성</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon fi-noa">✅</div>
+              <div>
+                <div class="fi-title">AI QA — 품질 관리</div>
+                <div class="fi-desc">100% 상담 품질 자동 평가. 불완전 판매 사전 감지, 컴플라이언스 대응</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="fi-icon fi-noa">📄</div>
+              <div>
+                <div class="fi-title">AI OCR/NER — 문서 처리</div>
+                <div class="fi-desc">비정형 문서 자동 인식·분류, 계약서·신청서 데이터 추출 자동화</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;">
+            <a class="btn btn-noa" href="#">NOA 상담 신청</a>
+            <a class="btn btn-outline" href="#">자세히 보기</a>
+          </div>
+        </div>
+
+        <div style="direction:ltr;">
+          <div class="mock-wrap">
+            <div class="mock-topbar" style="background:#F5F3FF;">
+              <div class="mock-dot" style="background:#FF5F57;"></div>
+              <div class="mock-dot" style="background:#FEBC2E;"></div>
+              <div class="mock-dot" style="background:#28C840;"></div>
+              <span class="mock-title">NOA · AI Insight</span>
+            </div>
+            <div class="mock-body">
+              <div class="mock-row-title" style="color:var(--noa);">● 실시간 인사이트</div>
+              <div class="ai-card">
+                <div class="ai-card-label">감성 분석</div>
+                <div class="ai-card-text">이번 주 고객 긍정 반응 비율이 전주 대비 12% 상승했습니다.</div>
+                <div class="ai-bar-bg"><div class="ai-bar-fill" style="width:78%;background:var(--noa);"></div></div>
+              </div>
+              <div class="ai-card">
+                <div class="ai-card-label">QA 알림</div>
+                <div class="ai-card-text">오늘 상담 중 스크립트 이탈 3건이 감지되었습니다.</div>
+                <div class="ai-bar-bg"><div class="ai-bar-fill" style="width:95%;background:#EF4444;"></div></div>
+              </div>
+              <div class="ai-mini-row">
+                <div class="ai-mini">
+                  <div class="ai-mini-num">1,247</div>
+                  <div class="ai-mini-lbl">오늘 처리 상담</div>
+                </div>
+                <div class="ai-mini">
+                  <div class="ai-mini-num" style="color:var(--noa);">89%</div>
+                  <div class="ai-mini-lbl">자동화 처리율</div>
+                </div>
+                <div class="ai-mini">
+                  <div class="ai-mini-num">4.8</div>
+                  <div class="ai-mini-lbl">평균 만족 점수</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-how">
+  <div class="container">
+    <div style="text-align:center;">
+      <div style="margin-bottom:14px;"><span class="tag tag-dworks">How it works</span></div>
+      <h2 class="section-h2">메시지가 Task로 변환되는<br>3초의 과정</h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-title">메시지 수신</div>
+        <div class="how-step-desc">카카오톡·메일·채팅 등 모든 채널의 메시지가 Cowork+로 통합됩니다</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-title">AI 자동 분석</div>
+        <div class="how-step-desc">OCR/NER로 고객 정보·요청 사항을 자동 파싱합니다</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-title">Task 즉시 생성</div>
+        <div class="how-step-desc">구조화된 할 일로 자동 변환되고 우선순위가 설정됩니다</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">4</div>
+        <div class="how-step-title">AI 인사이트</div>
+        <div class="how-step-desc">NOA가 모든 대화를 분석해 비즈니스 인텔리전스로 전환합니다</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="section-scope">
+  <div class="container">
+    <div style="text-align:center;">
+      <div style="margin-bottom:14px;"><span class="tag tag-dworks">Coverage</span></div>
+      <h2 class="section-h2">대화가 시작되는 곳이라면<br>어디든 DWorks가 연결합니다</h2>
+      <p class="section-sub" style="margin:16px auto 0;">상담, 협업, 관리 — 채널과 산업을 가리지 않습니다.</p>
+    </div>
+
+    <!-- 5개 카드: 3+2 레이아웃 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;">
+      <div class="scope-card">
+        <div class="scope-icon" style="background:#EBF8FF;">💬</div>
+        <div class="scope-title">고객 상담</div>
+        <div class="scope-desc">인바운드 CS, 챗봇 자동화, 상담사 지원. 고객은 카카오톡으로, 기업은 Cowork+에서 통합 관리합니다.</div>
+        <div class="scope-tags">
+          <span class="scope-tag">카카오 상담톡</span>
+          <span class="scope-tag">AI 챗봇</span>
+          <span class="scope-tag">멀티채널</span>
+        </div>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon" style="background:#F0FFF4;">🤝</div>
+        <div class="scope-title">거래처 협업</div>
+        <div class="scope-desc">외부 파트너는 앱 설치 없이 카카오·메일 그대로. 협업 내용 전체가 기업 자산으로 자동 저장됩니다.</div>
+        <div class="scope-tags">
+          <span class="scope-tag">파트너 채널</span>
+          <span class="scope-tag">이력 관리</span>
+          <span class="scope-tag">보안</span>
+        </div>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon" style="background:#FFF7ED;">📊</div>
+        <div class="scope-title">영업 관리</div>
+        <div class="scope-desc">영업 대화에서 고객 정보를 자동 추출하고 CRM에 반영. 개인폰 사용으로 인한 정보 유실을 방지합니다.</div>
+        <div class="scope-tags">
+          <span class="scope-tag">CRM 연동</span>
+          <span class="scope-tag">자동 추출</span>
+          <span class="scope-tag">파이프라인</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:20px;">
+
+      <!-- 제조 현장 관리 — 실제 인바운드 케이스 기반 -->
+      <div class="scope-card" style="border-left:3px solid var(--dworks);">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;">
+          <div class="scope-icon" style="background:#F0F9FF;margin-bottom:0;">🏭</div>
+          <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--dworks-light);color:var(--dworks-dark);border:1px solid var(--dworks-border);">실제 도입 사례</span>
+        </div>
+        <div class="scope-title">현장 업무 관리</div>
+        <div class="scope-desc" style="margin-bottom:14px;">카카오톡으로 접수된 현장 요청을 담당팀이 Cowork+에서 확인·처리·완료 안내합니다. 접수번호 자동 생성, 상태 알림, 이력 데이터 외부 시스템(ERP·SharePoint) 연동까지 지원합니다.</div>
+        <!-- 실제 인바운드 케이스 인용 -->
+        <div style="padding:14px 16px;border-radius:10px;background:var(--bg-softer);border:1px solid var(--border);margin-bottom:14px;">
+          <div style="font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">도입 문의 실제 사례</div>
+          <div style="font-size:12px;color:var(--text-secondary);line-height:1.7;">
+            <strong style="color:var(--text-primary);">제조사 생산기술센터</strong> — "생산팀의 설비 점검·정비 요청을 카카오톡으로 접수하고, 설비관리팀이 대응 후 결과를 회신하는 정비요청 관리 프로세스를 구축하고자 합니다."
+          </div>
+        </div>
+        <div class="scope-tags">
+          <span class="scope-tag">설비 점검</span>
+          <span class="scope-tag">티켓 관리</span>
+          <span class="scope-tag">상태 알림</span>
+          <span class="scope-tag">ERP 연동</span>
+          <span class="scope-tag">이력 시각화</span>
+        </div>
+      </div>
+
+      <!-- 건설·플랜트 -->
+      <div class="scope-card" style="border-left:3px solid #F59E0B;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;">
+          <div class="scope-icon" style="background:#FFFBEB;margin-bottom:0;">🏗</div>
+          <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:#FFFBEB;color:#92400E;border:1px solid #FDE68A;">적용 가능 산업</span>
+        </div>
+        <div class="scope-title">건설·플랜트 현장 관리</div>
+        <div class="scope-desc" style="margin-bottom:14px;">산업안전보건법에 따른 현장 보고·점검 이력을 디지털화합니다. 다국적 현장에서 카카오톡·WhatsApp 등 각자가 쓰는 채널로 소통해도 Cowork+에서 하나로 통합 관리됩니다.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+          <div style="padding:10px 12px;border-radius:8px;background:var(--bg-softer);border:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:700;color:var(--text-primary);margin-bottom:3px;">안전 보고</div>
+            <div style="font-size:11px;color:var(--text-muted);">법정 이력 자동 기록</div>
+          </div>
+          <div style="padding:10px 12px;border-radius:8px;background:var(--bg-softer);border:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:700;color:var(--text-primary);margin-bottom:3px;">다국어 현장</div>
+            <div style="font-size:11px;color:var(--text-muted);">KakaoTalk · WhatsApp 통합</div>
+          </div>
+          <div style="padding:10px 12px;border-radius:8px;background:var(--bg-softer);border:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:700;color:var(--text-primary);margin-bottom:3px;">하도급 관리</div>
+            <div style="font-size:11px;color:var(--text-muted);">협력사 소통 공식화</div>
+          </div>
+          <div style="padding:10px 12px;border-radius:8px;background:var(--bg-softer);border:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:700;color:var(--text-primary);margin-bottom:3px;">현장 보고</div>
+            <div style="font-size:11px;color:var(--text-muted);">사진·영상 포함 접수</div>
+          </div>
+        </div>
+        <div class="scope-tags">
+          <span class="scope-tag">산업안전보건법</span>
+          <span class="scope-tag">멀티채널</span>
+          <span class="scope-tag">다국어</span>
+          <span class="scope-tag">WhatsApp</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="section-clients">
+  <div class="container">
+    <div class="clients-label">DWorks와 함께하는 기업들</div>
+    <div class="client-logos">
+      <div class="client-chip">하나은행</div>
+      <div class="client-chip">카카오뱅크</div>
+      <div class="client-chip">케이뱅크</div>
+      <div class="client-chip">신한생명</div>
+      <div class="client-chip">GS홈쇼핑</div>
+      <div class="client-chip">SK텔레콤</div>
+      <div class="client-chip">G전선</div>
+      <div class="client-chip">롯데카드</div>
+      <div class="client-chip">현대카드</div>
+      <div class="client-chip">KB증권</div>
+      <div class="client-chip">풀무원</div>
+      <div class="client-chip">W캐피탈</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-cta" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-h2">
+        시작이 달라지면,<br>
+        <em>일의 흐름도 달라집니다.</em>
+      </h2>
+      <p class="cta-sub">구축형 · 클라우드 구독형 모두 가능합니다. 산업과 규모에 맞는 맞춤 제안을 드립니다.</p>
+      <div class="cta-actions">
+        <a class="btn btn-dworks" href="#">도입 상담 신청 →</a>
+        <a class="btn-outline-dark" href="#">자료 다운로드</a>
+      </div>
+      <p class="cta-note">영업일 기준 24시간 내 담당자가 연락드립니다</p>
+    </div>
+  </div>
+</section>
+
+<script>
+function switchTab(type, btn) {
+  document.querySelectorAll('.ptab').forEach(t => {
+    t.classList.remove('active','active-noa');
+  });
+  document.querySelectorAll('.product-panel').forEach(p => {
+    p.classList.remove('active');
+  });
+
+  if(type === 'cowork') {
+    btn.classList.add('active');
+    document.getElementById('panel-cowork').classList.add('active');
+  } else {
+    btn.classList.add('active-noa');
+    document.getElementById('panel-noa').classList.add('active');
+  }
+}
+</script>
+
 <div id="inquiryModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
   <div id="modalBox" style="background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;position:relative;padding:44px 40px;margin:20px;box-shadow:0 32px 80px rgba(0,0,0,0.25);">
     <button onclick="closeInquiry()" style="position:absolute;top:18px;right:18px;background:none;border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='#F1F5F9'" onmouseout="this.style.background='none'">
@@ -529,15 +1184,15 @@
     <div id="modalContent">
       <h2 style="font-size:22px;font-weight:800;color:#0F172A;margin-bottom:6px;letter-spacing:-0.02em;">제품 도입 문의</h2>
       <p style="font-size:13.5px;color:#64748B;margin-bottom:28px;line-height:1.6;">간단한 정보를 입력하면 영업 담당자가 신속하게 상담해 드립니다.</p>
-      <form id="inquiryForm" style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:16px;">
         <div>
           <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">이름 <span style="color:#EF4444;">*</span></label>
-          <input id="iName" type="text" placeholder="홍길동" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+          <input id="iName" type="text" placeholder="홍길동" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
           <div>
             <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">회사명 <span style="color:#EF4444;">*</span></label>
-            <input id="iCompany" type="text" placeholder="스펙트라" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+            <input id="iCompany" type="text" placeholder="스펙트라" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
           </div>
           <div>
             <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">사업자등록번호</label>
@@ -550,11 +1205,11 @@
         </div>
         <div>
           <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">이메일 <span style="color:#EF4444;">*</span></label>
-          <input id="iEmail" type="email" placeholder="info@spectra.co.kr" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+          <input id="iEmail" type="email" placeholder="info@spectra.co.kr" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
         </div>
         <div>
           <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">전화번호 <span style="color:#EF4444;">*</span></label>
-          <input id="iTel" type="tel" placeholder="010-1234-5678" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+          <input id="iTel" type="tel" placeholder="010-1234-5678" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
         </div>
         <div>
           <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:5px;">문의내용</label>
@@ -567,64 +1222,31 @@
         <div style="text-align:center;font-size:13.5px;font-weight:600;color:#374151;">
           위와 같이 개인정보를 수집·이용하는데 동의하십니까?
           <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin-top:10px;">
-            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-weight:500;font-size:14px;">
-              <input type="radio" name="iPrivacy" value="agree" style="width:16px;height:16px;accent-color:#1A6BFF;"> 동의
-            </label>
-            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-weight:500;font-size:14px;">
-              <input type="radio" name="iPrivacy" value="disagree" style="width:16px;height:16px;accent-color:#1A6BFF;"> 미동의
-            </label>
+            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-weight:500;font-size:14px;"><input type="radio" name="iPrivacy" value="agree" style="width:16px;height:16px;accent-color:#1A6BFF;"> 동의</label>
+            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-weight:500;font-size:14px;"><input type="radio" name="iPrivacy" value="disagree" style="width:16px;height:16px;accent-color:#1A6BFF;"> 미동의</label>
           </div>
         </div>
-        <button type="button" onclick="submitInquiry()" style="width:100%;padding:14px;background:#1A6BFF;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;" onmouseover="this.style.background='#1258DD'" onmouseout="this.style.background='#1A6BFF'">
-          문의 제출하기
-        </button>
-      </form>
+        <button type="button" onclick="submitInquiry()" style="width:100%;padding:14px;background:#1A6BFF;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;" onmouseover="this.style.background='#1258DD'" onmouseout="this.style.background='#1A6BFF'">문의 제출하기</button>
+      </div>
     </div>
   </div>
 </div>
-
 <script>
-function openModal() {
-  document.getElementById("inquiryModal").style.display = "flex";
-  document.body.style.overflow = "hidden";
+function openModal(){document.getElementById("inquiryModal").style.display="flex";document.body.style.overflow="hidden";}
+function closeInquiry(){document.getElementById("inquiryModal").style.display="none";document.body.style.overflow="";}
+function submitInquiry(){
+  var n=document.getElementById("iName").value;
+  var co=document.getElementById("iCompany").value;
+  var em=document.getElementById("iEmail").value;
+  var tel=document.getElementById("iTel").value;
+  var pr=document.querySelector("input[name='iPrivacy']:checked");
+  if(!n||!co||!em||!tel){alert("필수 항목(이름, 회사명, 이메일, 전화번호)을 입력해주세요.");return;}
+  if(!pr){alert("개인정보 수집·이용 동의 여부를 선택해주세요.");return;}
+  if(pr.value==="disagree"){alert("개인정보 수집에 동의하셔야 문의를 제출할 수 있습니다.");return;}
+  document.getElementById("modalContent").innerHTML="<div style='text-align:center;padding:48px 0'><div style='font-size:52px;margin-bottom:16px'>&#x2705;</div><div style='font-size:20px;font-weight:800;color:#0F172A;margin-bottom:10px'>문의가 접수되었습니다.</div><div style='font-size:14px;color:#64748B;line-height:1.8'>영업일 기준 24시간 내에<br>담당자가 연락드리겠습니다.</div><button onclick='closeInquiry()' style='margin-top:28px;padding:12px 32px;background:#1A6BFF;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit'>닫기</button></div>";
 }
-function closeInquiry() {
-  document.getElementById("inquiryModal").style.display = "none";
-  document.body.style.overflow = "";
-}
-function submitInquiry() {
-  var name = document.getElementById("iName").value;
-  var company = document.getElementById("iCompany").value;
-  var email = document.getElementById("iEmail").value;
-  var tel = document.getElementById("iTel").value;
-  var privacy = document.querySelector("input[name='iPrivacy']:checked");
-  if (!name || !company || !email || !tel) {
-    alert("필수 항목(이름, 회사명, 이메일, 전화번호)을 입력해주세요.");
-    return;
-  }
-  if (!privacy) {
-    alert("개인정보 수집·이용 동의 여부를 선택해주세요.");
-    return;
-  }
-  if (privacy.value === "disagree") {
-    alert("개인정보 수집에 동의하셔야 문의를 제출할 수 있습니다.");
-    return;
-  }
-  document.getElementById("modalContent").innerHTML =
-    "<div style='text-align:center;padding:48px 0;'>" +
-    "<div style='font-size:52px;margin-bottom:16px;'>&#x2705;</div>" +
-    "<div style='font-size:20px;font-weight:800;color:#0F172A;margin-bottom:10px;'>문의가 접수되었습니다.</div>" +
-    "<div style='font-size:14px;color:#64748B;line-height:1.8;'>영업일 기준 24시간 내에<br>담당자가 연락드리겠습니다.</div>" +
-    "<button onclick='closeInquiry()' style='margin-top:28px;padding:12px 32px;background:#1A6BFF;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;'>닫기</button>" +
-    "</div>";
-}
-document.getElementById("inquiryModal").addEventListener("click", function(e) {
-  if (e.target === this) closeInquiry();
-});
-document.addEventListener("keydown", function(e) {
-  if (e.key === "Escape") closeInquiry();
-});
+document.getElementById("inquiryModal").addEventListener("click",function(e){if(e.target===this)closeInquiry();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeInquiry();});
 </script>
-
 </body>
 </html>
