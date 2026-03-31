@@ -127,7 +127,8 @@
     .trust-inner{gap:28px}
   }
 
-  /* ── GNB (full nav) ── */
+  
+  /* ── GNB ── */
   .gnb { position:sticky; top:0; z-index:100; background:#ffffff; border-bottom:1px solid rgba(0,0,0,.07); padding:0 28px; }
   .gnb-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:68px; gap:4px; }
   .gnb-logo-wrap { display:flex; align-items:center; gap:20px; margin-right:44px; flex-shrink:0; }
@@ -135,19 +136,43 @@
   .gnb-blog { font-size:15px; font-weight:500; color:#374151; transition:color .15s; text-decoration:none; }
   .gnb-blog:hover { color:#1A6BFF; }
   .gnb-nav { display:flex; align-items:center; gap:2px; flex:1; }
-  .gnb-item { position:relative; padding:8px 14px; font-size:15px; font-weight:500; color:#475569; cursor:pointer; border-radius:8px; transition:all .15s; white-space:nowrap; text-decoration:none; }
+  .gnb-item {
+    position:relative; padding:8px 14px; font-size:15px; font-weight:500;
+    color:#475569; cursor:pointer; border-radius:8px;
+    transition:all .15s; white-space:nowrap; text-decoration:none;
+    display:inline-block;
+  }
   .gnb-item:hover { color:#0F172A; background:#F8FAFC; }
-  .gnb-item.has-dd::after { content:''; display:inline-block; width:5px; height:5px; margin-left:6px; vertical-align:2px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg) translateY(-2px); }
-  .gnb-dd { display:none; position:absolute; top:calc(100% + 6px); left:0; background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:14px; padding:8px; min-width:220px; box-shadow:0 16px 48px rgba(0,0,0,.1); z-index:200; }
-  .gnb-item:hover .gnb-dd, .gnb-item.open .gnb-dd { display:block; }
+  .gnb-item.has-dd::after {
+    content:''; display:inline-block; width:5px; height:5px;
+    margin-left:6px; vertical-align:2px;
+    border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor;
+    transform:rotate(45deg) translateY(-2px);
+  }
+  /* 투명 브리지: 메뉴와 드롭다운 사이 gap hover 끊김 방지 */
+  .gnb-item.has-dd { padding-bottom:8px; }
+  .gnb-dd {
+    display:none; position:absolute; top:calc(100%); left:0;
+    padding-top:4px; min-width:220px; z-index:200;
+  }
+  .gnb-dd-inner {
+    background:#fff; border:1px solid rgba(0,0,0,.07);
+    border-radius:14px; padding:8px;
+    box-shadow:0 16px 48px rgba(0,0,0,.1);
+  }
+  .gnb-item:hover .gnb-dd,
+  .gnb-item.open .gnb-dd { display:block; }
   .gnb-dd-sec { font-size:10px; font-weight:700; color:#94A3B8; letter-spacing:.08em; text-transform:uppercase; padding:6px 10px 3px; }
   .gnb-dd-div { height:1px; background:rgba(0,0,0,.07); margin:6px 8px; }
-  .gnb-dd-item { display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:8px; font-size:13.5px; font-weight:500; color:#475569; cursor:pointer; transition:background .15s; text-decoration:none; }
+  .gnb-dd-item {
+    display:flex; align-items:center; gap:10px; padding:9px 12px;
+    border-radius:8px; font-size:13.5px; font-weight:500; color:#475569;
+    cursor:pointer; transition:background .15s; text-decoration:none;
+  }
   .gnb-dd-item:hover { background:#F8FAFC; color:#0F172A; }
   .gnb-dd-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
   .gnb-cta { padding:10px 22px; border-radius:100px; background:#1A6BFF; color:#fff; font-size:13.5px; font-weight:700; transition:all .2s; white-space:nowrap; text-decoration:none; }
   .gnb-cta:hover { background:#1258DD; box-shadow:0 4px 16px rgba(26,107,255,.35); }
-  *, input, textarea, select, button { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 
 </style>
 </head>
@@ -519,6 +544,164 @@
     </div>
   </div>
 </section>
+
+<script>
+  // GNB 드롭다운
+  document.querySelectorAll('.gnb-item.has-dd').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.gnb-item.has-dd.open').forEach(function(el) {
+      el.classList.remove('open');
+    });
+  });
+</script>
+
+<!-- ═══════════════════════════════════════════
+     도입 문의 팝업 모달
+═══════════════════════════════════════════ -->
+<div id="inquiryModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;position:relative;padding:48px 44px;margin:20px;box-shadow:0 32px 80px rgba(0,0,0,.25);">
+    <!-- 닫기 버튼 -->
+    <button onclick="closeModal()" style="position:absolute;top:20px;right:20px;background:none;border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .15s;" onmouseover="this.style.background='#F1F5F9'" onmouseout="this.style.background='none'">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <h2 style="font-size:24px;font-weight:800;color:#0F172A;margin-bottom:8px;letter-spacing:-0.02em;">제품 도입 문의</h2>
+    <p style="font-size:14px;color:#64748B;margin-bottom:32px;line-height:1.6;">간단한 정보를 입력하면 영업 담당자가 신속하게 상담해 드립니다.</p>
+
+    <form id="inquiryForm" onsubmit="submitForm(event)" style="display:flex;flex-direction:column;gap:18px;">
+
+      <!-- 이름 -->
+      <div>
+        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">이름 <span style="color:#EF4444;">*</span></label>
+        <input type="text" name="name" placeholder="홍길동" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+      </div>
+
+      <!-- 회사명 + 사업자등록번호 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div>
+          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">회사명 <span style="color:#EF4444;">*</span></label>
+          <input type="text" name="company" placeholder="스펙트라" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">사업자등록번호</label>
+          <input type="text" name="biznum" placeholder="000-00-00000" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+      </div>
+
+      <!-- 회사 URL -->
+      <div>
+        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">회사 URL</label>
+        <input type="url" name="url" placeholder="https://www.spectra.co.kr" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+      </div>
+
+      <!-- 이메일 -->
+      <div>
+        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">이메일 <span style="color:#EF4444;">*</span></label>
+        <input type="email" name="email" placeholder="info@spectra.co.kr" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+      </div>
+
+      <!-- 전화번호 -->
+      <div>
+        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">전화번호 <span style="color:#EF4444;">*</span></label>
+        <input type="tel" name="tel" placeholder="010-1234-5678" required style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'">
+      </div>
+
+      <!-- 문의내용 -->
+      <div>
+        <label style="display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:6px;">문의내용</label>
+        <textarea name="message" placeholder="문의내용을 입력해주세요" rows="4" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#0F172A;outline:none;transition:border .15s;resize:vertical;font-family:inherit;" onfocus="this.style.borderColor='#1A6BFF'" onblur="this.style.borderColor='#E2E8F0'"></textarea>
+      </div>
+
+      <!-- 개인정보 동의 -->
+      <div style="background:#F8FAFC;border-radius:10px;padding:16px;font-size:12.5px;color:#475569;line-height:1.7;border:1px solid #E2E8F0;">
+        개인정보보호법에 따라 제품문의를 하시는 고객님에게 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.<br><br>
+        <span style="color:#64748B;">* 회사의 서비스는 원칙적으로 만 14세 미만의 아동에게 서비스를 제공하지 않으며, 만 14세 미만 아동의 개인정보를 수집하지 않습니다. 제품도입문의 서비스는 만 14세 이상부터 이용이 가능합니다.</span>
+      </div>
+
+      <div style="text-align:center;font-size:14px;font-weight:600;color:#374151;margin:-4px 0;">
+        위와 같이 개인정보를 수집·이용하는데 동의하십니까?
+        <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin-top:10px;">
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:500;">
+            <input type="radio" name="privacy" value="agree" required style="accent-color:#1A6BFF;width:16px;height:16px;"> 동의
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:500;">
+            <input type="radio" name="privacy" value="disagree" style="accent-color:#1A6BFF;width:16px;height:16px;"> 미동의
+          </label>
+        </div>
+      </div>
+
+      <!-- 제출 버튼 -->
+      <button type="submit" style="width:100%;padding:15px;background:#1A6BFF;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;font-family:inherit;margin-top:4px;" onmouseover="this.style.background='#1258DD'" onmouseout="this.style.background='#1A6BFF'">
+        문의 제출하기
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    var m = document.getElementById('inquiryModal');
+    m.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    var m = document.getElementById('inquiryModal');
+    m.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function submitForm(e) {
+    e.preventDefault();
+    var privacy = document.querySelector('input[name="privacy"]:checked');
+    if (!privacy) { alert('개인정보 수집·이용 동의 여부를 선택해주세요.'); return; }
+    if (privacy.value === 'disagree') { alert('개인정보 수집에 동의하셔야 문의를 제출할 수 있습니다.'); return; }
+    // 제출 성공 처리
+    var form = document.getElementById('inquiryForm');
+    form.innerHTML = '<div style="text-align:center;padding:40px 0;"><div style="font-size:48px;margin-bottom:16px;">✅</div><div style="font-size:20px;font-weight:800;color:#0F172A;margin-bottom:8px;">문의가 접수되었습니다.</div><div style="font-size:14px;color:#64748B;line-height:1.7;">영업일 기준 24시간 내에<br>담당자가 연락드리겠습니다.</div><button onclick="closeModal()" style="margin-top:24px;padding:12px 28px;background:#1A6BFF;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">닫기</button></div>';
+  }
+  // 모달 외부 클릭 시 닫기
+  document.getElementById('inquiryModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  // ESC 키로 닫기
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+  // 모든 CTA 버튼/링크를 모달로 연결
+  document.addEventListener('DOMContentLoaded', function() {
+    var ctaSelectors = [
+      'a[href="#contact"]',
+      'a[href="mailto:sales@spectra.co.kr"]',
+      '.btn-primary', '.btn-dworks', '.btn-noa', '.btn-enomix', '.btn-eer',
+      '.gnb-cta',
+    ];
+    ctaSelectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el) {
+        // EER 링크나 외부 링크는 제외
+        if (el.href && (el.href.includes('eer.html') || el.href.includes('blog') || el.href.includes('http') && !el.href.includes('#'))) return;
+        el.addEventListener('click', function(e) {
+          e.preventDefault();
+          openModal();
+        });
+      });
+    });
+    // Notice bar 도입 상담 링크
+    document.querySelectorAll('a[href="#contact"]').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
