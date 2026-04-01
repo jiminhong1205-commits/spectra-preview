@@ -384,51 +384,72 @@
   .section-brand { background: var(--s-brand); }
 
   .brand-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;
   }
   .brand-card {
-    border-radius: 20px; padding: 40px;
+    border-radius: 24px; padding: 36px 32px 36px;
     position: relative; overflow: hidden;
-    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-    text-decoration: none; display: block;
+    cursor: pointer; transition: transform 0.22s, box-shadow 0.22s;
+    text-decoration: none; display: flex; flex-direction: column;
+    min-height: 420px;
   }
-  .brand-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .brand-card:hover { transform: translateY(-5px); box-shadow: 0 24px 48px rgba(0,0,0,0.12); }
 
   .brand-card-dworks {
-    background: linear-gradient(135deg, #EBF8FF 0%, #F0FAFF 100%);
-    border: 1px solid rgba(0,198,255,0.2);
+    background: linear-gradient(145deg, #EBF8FF 0%, #DCF1FF 100%);
+    border: 1px solid rgba(0,198,255,0.25);
   }
   .brand-card-dworks::before {
-    content: ''; position: absolute; top: 0; right: 0;
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(0,198,255,0.12) 0%, transparent 70%);
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(0,198,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .brand-card-noa {
+    background: linear-gradient(145deg, #F5F3FF 0%, #EDE9FE 100%);
+    border: 1px solid rgba(91,33,182,0.2);
+  }
+  .brand-card-noa::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(91,33,182,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
   .brand-card-enomix {
-    grid-column: span 2;
     background: var(--bg-softer);
     border: 1px solid var(--border-light);
-    display: flex; align-items: center; gap: 40px;
-    padding: 28px 40px; opacity: 0.75;
+    opacity: 0.55;
+    filter: grayscale(25%);
   }
-  .bc-brand  { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
-  .bc-product { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; color: var(--text-primary); }
-  .bc-desc { font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 28px; }
-  .bc-modules { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bc-breadcrumb {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 16px; display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 100px;
+  }
+  .bc-breadcrumb-cyan  { background: rgba(0,198,255,0.12); color: #0077AA; border: 1px solid rgba(0,198,255,0.2); }
+  .bc-breadcrumb-noa   { background: rgba(91,33,182,0.1);  color: #5B21B6; border: 1px solid rgba(91,33,182,0.18); }
+  .bc-breadcrumb-gray  { background: rgba(100,116,139,0.1); color: #64748B; border: 1px solid rgba(100,116,139,0.15); }
+  .bc-headline { font-size: 26px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.3; color: var(--text-primary); margin-bottom: 12px; }
+  .bc-sub { font-size: 13px; line-height: 1.65; color: var(--text-secondary); }
+  .bc-modules { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 18px; }
   .bc-module {
-    font-size: 12px; font-weight: 600;
-    padding: 5px 12px; border-radius: 100px;
+    font-size: 11px; font-weight: 600;
+    padding: 4px 11px; border-radius: 100px;
     background: rgba(0,0,0,0.05); color: var(--text-secondary);
     border: 1px solid var(--border-light);
   }
+  .bc-illus {
+    flex: 1; display: flex; align-items: flex-end; justify-content: flex-end;
+    margin-top: 20px; pointer-events: none;
+  }
   .bc-arrow {
-    position: absolute; bottom: 32px; right: 32px;
-    width: 40px; height: 40px; border-radius: 50%;
+    position: absolute; bottom: 28px; right: 28px;
+    width: 36px; height: 36px; border-radius: 50%;
     background: rgba(0,0,0,0.06);
     display: flex; align-items: center; justify-content: center;
-    font-size: 18px; transition: background 0.2s; color: var(--text-primary);
+    font-size: 16px; transition: background 0.2s; color: var(--text-primary);
   }
-  .brand-card:hover .bc-arrow { background: rgba(0,0,0,0.1); }
+  .brand-card:hover .bc-arrow { background: rgba(0,0,0,0.12); }
 
   /* ════════════════════════════════════════
      ⑥ COWORK+ 상세
@@ -525,7 +546,7 @@
   .mock-stat-label { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
 
   /* NOA AI 목업 */
-  .ai-mock { display: flex; flex-direction: column; gap: 12px; }
+  .ai-mock { display: flex; flex-direction: column; gap: 10px; }
   .ai-insight-card {
     padding: 14px 16px; border-radius: 12px;
     background: white; border: 1px solid var(--noa-border);
@@ -534,13 +555,77 @@
   .aic-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
   .aic-bar { height: 5px; border-radius: 3px; background: var(--bg-soft); margin-top: 10px; overflow: hidden; }
   .aic-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--noa-mid), var(--noa)); }
-  .ai-row { display: flex; gap: 10px; }
+  .ai-row { display: flex; gap: 8px; }
   .ai-mini-card {
-    flex: 1; padding: 12px 14px; border-radius: 10px;
+    flex: 1; padding: 10px 12px; border-radius: 10px;
     background: white; border: 1px solid var(--border-light);
   }
-  .amc-num   { font-size: 22px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; }
-  .amc-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .amc-num   { font-size: 20px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; }
+  .amc-label { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* 확장 NOA 목업 */
+  .noa-mock-header {
+    background: white; border-radius: 10px; padding: 11px 14px;
+    border: 1px solid var(--border-light); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .noa-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg,#7C3AED,#4C1D95);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: white; font-weight: 700; flex-shrink: 0;
+  }
+  .noa-stats-row {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-bottom: 10px;
+  }
+  .noa-stat-box {
+    background: white; border: 1px solid var(--border-light);
+    border-radius: 8px; padding: 8px 10px;
+  }
+  .noa-stat-key { font-size: 9px; color: var(--text-muted); margin-bottom: 3px; }
+  .noa-stat-val { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  .noa-section-label {
+    font-size: 10px; font-weight: 700; color: var(--noa);
+    letter-spacing: 0.06em; margin-bottom: 7px;
+  }
+  .noa-summary-box {
+    background: white; border: 1px solid var(--border-light);
+    border-radius: 10px; padding: 11px 14px; margin-bottom: 10px;
+  }
+  .noa-bullet { font-size: 11px; color: var(--text-secondary); line-height: 1.6; padding-left: 12px; position: relative; }
+  .noa-bullet::before { content: '·'; position: absolute; left: 0; color: var(--noa); font-weight: 700; }
+  .noa-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .noa-tag {
+    font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 100px;
+    background: var(--noa-light); color: var(--noa); border: 1px solid var(--noa-border);
+  }
+  .noa-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .noa-analysis-card {
+    background: white; border-radius: 10px; padding: 11px 13px;
+    border: 1px solid var(--border-light);
+  }
+  .noa-card-icon { font-size: 13px; margin-bottom: 5px; }
+  .noa-card-title { font-size: 10px; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; }
+  .noa-card-body { font-size: 10px; color: var(--text-secondary); line-height: 1.55; }
+  .noa-risk-box {
+    background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18);
+    border-radius: 10px; padding: 11px 13px; margin-bottom: 10px;
+  }
+  .noa-todo-box {
+    background: linear-gradient(135deg,rgba(91,33,182,0.06),rgba(91,33,182,0.03));
+    border: 1px solid var(--noa-border); border-radius: 10px; padding: 11px 13px;
+  }
+  .noa-todo-item { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 5px; }
+  .noa-todo-item:last-child { margin-bottom: 0; }
+  .noa-todo-check {
+    width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--noa);
+    flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center;
+  }
+  .noa-ai-badge {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 100px;
+    background: var(--noa); color: white; margin-left: 6px; vertical-align: middle;
+  }
 
   /* ════════════════════════════════════════
      ⑧ 시너지
@@ -550,43 +635,52 @@
     padding: 100px 0; position: relative; overflow: hidden;
   }
   .synergy-grid {
-    display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center;
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: stretch;
   }
   .synergy-card {
-    border-radius: 20px; padding: 36px; text-align: center;
-    background: white; border: 1px solid var(--border-light);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 24px; padding: 40px 36px;
+    text-align: left;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    border: none;
+    backdrop-filter: blur(10px);
   }
-  .syn-dworks { border-top: 3px solid var(--dworks); }
-  .syn-noa    { border-top: 3px solid var(--noa); }
+  .syn-dworks {
+    background: linear-gradient(135deg, rgba(0,198,255,0.72) 0%, rgba(26,107,255,0.72) 100%);
+  }
+  .syn-noa {
+    background: linear-gradient(135deg, rgba(124,58,237,0.72) 0%, rgba(76,29,149,0.72) 100%);
+  }
   .synergy-plus {
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-width: 64px;
   }
   .syn-plus-icon {
     width: 56px; height: 56px; border-radius: 50%;
-    background: var(--spectra-light); border: 1px solid var(--spectra-border);
+    background: white; border: 1px solid rgba(26,107,255,0.2);
     display: flex; align-items: center; justify-content: center;
     font-size: 24px; color: var(--spectra); font-weight: 700;
+    box-shadow: 0 4px 16px rgba(26,107,255,0.12);
   }
-  .syn-plus-label { font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
-  .syn-brand-name { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .syn-plus-label { font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.06em; }
+  .syn-brand-name { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
   .syn-product-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 26px; font-weight: 800; letter-spacing: -0.02em;
-    margin-bottom: 10px; color: var(--text-primary);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 32px; font-weight: 900; letter-spacing: -0.03em;
+    margin-bottom: 14px;
   }
-  .syn-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+  .syn-desc { font-size: 14px; line-height: 1.7; }
   .synergy-result {
-    margin-top: 48px;
-    background: white; border: 1px solid var(--spectra-border);
-    border-radius: 16px; padding: 32px 40px; text-align: center;
-    box-shadow: 0 4px 20px rgba(26,107,255,0.08);
+    margin-top: 24px;
+    background: #0C1A4D;
+    border-radius: 20px; padding: 44px 48px; text-align: center;
+    box-shadow: 0 8px 32px rgba(12,26,77,0.25);
   }
-  .syn-result-label { font-size: 12px; font-weight: 700; color: var(--spectra); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
   .syn-result-text {
-    font-family: 'Syne', sans-serif;
-    font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);
+    font-family: 'Pretendard', sans-serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 900; letter-spacing: -0.03em;
+    color: white; line-height: 1.25;
   }
+  .syn-result-text .accent-cyan { color: #38BDF8; }
 
   /* ════════════════════════════════════════
      ⑨ 고객 사례
@@ -628,26 +722,49 @@
      ⑩ 산업별
   ════════════════════════════════════════ */
   .section-industry { background: var(--s-industry); }
-  .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .industry-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
   .industry-card {
-    background: white; border-radius: 16px; padding: 28px 24px;
+    background: white; border-radius: 20px;
     border: 1px solid var(--border-light);
-    transition: all 0.2s; cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.22s, box-shadow 0.22s;
+    cursor: pointer; text-decoration: none; display: block; color: inherit;
   }
-  .industry-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.09); }
-  .industry-icon {
-    width: 48px; height: 48px; border-radius: 14px;
+  .industry-card:hover { transform: translateY(-5px); box-shadow: 0 20px 44px rgba(0,0,0,0.11); }
+  /* 이미지 영역 */
+  .ind-img-wrap {
+    position: relative; width: 100%; aspect-ratio: 4/3;
+    overflow: hidden; background: var(--bg-soft);
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px; margin-bottom: 16px;
   }
-  .ii-finance { background: #EFF6FF; }
-  .ii-mfg     { background: #ECFDF5; }
-  .ii-retail  { background: #FDF4FF; }
-  .ii-telco   { background: #FFF7ED; }
-  .industry-name { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
-  .industry-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
-  .industry-clients { font-size: 12px; color: var(--text-muted); }
-  .industry-clients strong { color: var(--text-secondary); font-weight: 600; }
+  .ind-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .industry-card:hover .ind-img-wrap img { transform: scale(1.04); }
+  /* 이미지 없을 때 플레이스홀더 */
+  .ind-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 56px; transition: transform 0.3s;
+  }
+  .industry-card:hover .ind-placeholder { transform: scale(1.08); }
+  /* 화살표 버튼 */
+  .ind-arrow {
+    position: absolute; top: 12px; right: 12px;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--text-primary);
+    opacity: 0; transform: translateY(4px);
+    transition: opacity 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+  .industry-card:hover .ind-arrow { opacity: 1; transform: translateY(0); }
+  /* 텍스트 영역 */
+  .ind-body { padding: 18px 18px 20px; }
+  .ind-name { font-size: 16px; font-weight: 800; color: var(--text-primary); margin-bottom: 7px; letter-spacing: -0.02em; }
+  .ind-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
 
   /* ════════════════════════════════════════
      ⑪ 인사이트
@@ -743,9 +860,10 @@
     .insight-grid,
     .footer-top,
     .footer-nav-grid { grid-template-columns: 1fr !important; }
-    .brand-card-enomix { grid-column: span 1; flex-direction: column; }
+    .brand-card-enomix { grid-column: span 1; }
     .hero-stats { gap: 24px; flex-wrap: wrap; }
     .hero-visual { display: none; }
+    .trust-grid { grid-template-columns: 1fr 1fr !important; }
   }
 
   .gnb{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid rgba(0,0,0,.07);padding:0 28px;}
@@ -857,7 +975,7 @@
       position:relative;">
       <video autoplay loop muted playsinline
         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
-        <source src="video.mp4" type="video/mp4">
+        <source src="spectra_main.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -866,31 +984,33 @@
 
       <!-- 통계 3개 -->
       <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;">
-        <div style="text-align:center;padding:0 36px;">
-          <div style="font-size:32px;font-weight:800;color:#0F172A;letter-spacing:-0.03em;line-height:1;">250<span style="color:#1A6BFF;">+</span></div>
-          <div style="font-size:13px;color:#94A3B8;margin-top:5px;">도입 기업</div>
+        <div style="text-align:left;padding:0 40px;">
+          <div style="font-size:52px;font-weight:800;color:#0F172A;letter-spacing:-0.04em;line-height:1;">250<span style="color:#1A6BFF;">+</span></div>
+          <div style="font-size:13px;color:#64748B;margin-top:8px;font-weight:500;">도입 기업</div>
         </div>
-        <div style="width:1px;height:40px;background:rgba(0,0,0,.1);"></div>
-        <div style="text-align:center;padding:0 36px;">
-          <div style="font-size:32px;font-weight:800;color:#0F172A;letter-spacing:-0.03em;line-height:1;">86<span style="color:#1A6BFF;">%</span></div>
-          <div style="font-size:13px;color:#94A3B8;margin-top:5px;">채팅상담 시장점유율</div>
+        <div style="width:1px;height:52px;background:rgba(0,0,0,.1);"></div>
+        <div style="text-align:left;padding:0 40px;">
+          <div style="font-size:52px;font-weight:800;color:#0F172A;letter-spacing:-0.04em;line-height:1;">86<span style="color:#1A6BFF;">%</span></div>
+          <div style="font-size:13px;color:#64748B;margin-top:8px;font-weight:500;">채팅상담 시장점유율</div>
         </div>
-        <div style="width:1px;height:40px;background:rgba(0,0,0,.1);"></div>
-        <div style="text-align:center;padding:0 36px;">
-          <div style="font-size:32px;font-weight:800;color:#0F172A;letter-spacing:-0.03em;line-height:1;">26<span style="color:#1A6BFF;">년</span></div>
-          <div style="font-size:13px;color:#94A3B8;margin-top:5px;">커뮤니케이션 기술 축적</div>
+        <div style="width:1px;height:52px;background:rgba(0,0,0,.1);"></div>
+        <div style="text-align:left;padding:0 40px;">
+          <div style="font-size:52px;font-weight:800;color:#0F172A;letter-spacing:-0.04em;line-height:1;">27<span style="color:#1A6BFF;">년</span></div>
+          <div style="font-size:13px;color:#64748B;margin-top:8px;font-weight:500;">커뮤니케이션 기술 축적</div>
         </div>
       </div>
 
       <!-- 구분선 -->
-      <div style="width:1px;height:40px;background:rgba(0,0,0,.1);margin:0 20px;" class="stat-div-hide"></div>
+      <div style="width:1px;height:52px;background:rgba(0,0,0,.1);margin:0 20px;" class="stat-div-hide"></div>
 
       <!-- CTA 버튼 -->
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;padding:0 12px;">
         <a href="#" onclick="openModal();return false;"
-          style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;background:#1A6BFF;color:#fff;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(26,107,255,.35);transition:all .2s;"
-          onmouseover="this.style.background='#1258DD'" onmouseout="this.style.background='#1A6BFF'">
-          도입 상담 신청 →
+          style="display:inline-flex;align-items:center;gap:0;padding:6px 6px 6px 24px;border-radius:100px;background:linear-gradient(135deg,#1A6BFF 0%,#00AAFF 100%);color:#fff;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 8px 28px rgba(26,107,255,.45), 0 2px 8px rgba(26,107,255,.25), inset 0 1px 0 rgba(255,255,255,.2);transition:all .25s;letter-spacing:-0.01em;"
+          onmouseover="this.style.boxShadow='0 12px 36px rgba(26,107,255,.55), 0 2px 8px rgba(26,107,255,.3), inset 0 1px 0 rgba(255,255,255,.2)';this.style.transform='translateY(-1px)'"
+          onmouseout="this.style.boxShadow='0 8px 28px rgba(26,107,255,.45), 0 2px 8px rgba(26,107,255,.25), inset 0 1px 0 rgba(255,255,255,.2)';this.style.transform='translateY(0)'">
+          도입 상담 신청
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.22);margin-left:12px;font-size:16px;">→</span>
         </a>
         <a href="cowork_plus.html"
           style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;background:transparent;color:#0F172A;font-size:15px;font-weight:700;text-decoration:none;border:1.5px solid rgba(0,0,0,.15);transition:all .2s;"
@@ -946,51 +1066,325 @@
   <div class="container">
     <div class="section-header">
       <div class="section-eyebrow"><span class="tag tag-spectra">Our Brands</span></div>
-      <h2 class="section-h2">Spectra의 두 가지 브랜드</h2>
+      <h2 class="section-h2"><span style="font-family:'Pretendard',sans-serif;font-weight:900;letter-spacing:-0.04em;">SPECTRA</span>의 두 가지 브랜드</h2>
       <p class="section-sub">각기 다른 역할로, 기업 커뮤니케이션의 모든 과제를 해결합니다</p>
     </div>
     <div class="brand-grid">
 
-      <!-- DWorks 카드 -->
-      <a class="brand-card brand-card-dworks" href="#dworks">
-        <div class="bc-brand" style="color:#0077AA;">Spectra DWorks</div>
-        <div class="bc-product">Cowork+</div>
-        <div class="bc-desc">카카오톡 기반 상담 & 외부 협업 인프라.<br>고객 상담부터 거래처 협업, 영업까지 하나의 플랫폼으로.</div>
-        <div class="bc-modules">
-          <span class="bc-module">CStalk</span>
-          <span class="bc-module">SalesBridge</span>
-          <span class="bc-module">구축형</span>
-          <span class="bc-module">클라우드 구독형</span>
+      <!-- ① Cowork+ 카드 -->
+      <a class="brand-card brand-card-dworks" href="cowork_plus.html">
+        <div>
+          <div class="bc-breadcrumb bc-breadcrumb-cyan">SPECTRA DWorks &nbsp;›&nbsp; Cowork+</div>
+          <div class="bc-headline">카카오톡 기반<br>상담 &amp; 외부<br>협업 인프라</div>
+          <div class="bc-sub">고객 상담·거래처 협업·영업까지<br>하나의 플랫폼으로 통합합니다.</div>
+          <div class="bc-modules">
+            <span class="bc-module">CStalk</span>
+            <span class="bc-module">SalesBridge</span>
+            <span class="bc-module">구축형</span>
+            <span class="bc-module">클라우드</span>
+          </div>
+        </div>
+        <!-- 일러스트 — 더블 말풍선 + 자물쇠 뱃지 -->
+        <div class="bc-illus" style="align-items:flex-end;justify-content:center;padding-bottom:4px;">
+          <svg width="196" height="158" viewBox="0 0 196 158" fill="none" xmlns="http://www.w3.org/2000/svg"
+               style="filter:drop-shadow(0 14px 32px rgba(0,100,200,0.2)) drop-shadow(0 4px 10px rgba(0,100,200,0.12));">
+            <defs>
+              <!-- 말풍선 A — 파랑 (상단) -->
+              <radialGradient id="bA" cx="38%" cy="32%" r="65%">
+                <stop offset="0%" stop-color="#60A5FA"/>
+                <stop offset="100%" stop-color="#1A6BFF"/>
+              </radialGradient>
+              <!-- 말풍선 B — 시안/민트 (하단) -->
+              <radialGradient id="bB" cx="40%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#0EA5E9"/>
+              </radialGradient>
+              <!-- 테두리 테 (은색 느낌) -->
+              <linearGradient id="rim" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#B8D4F0" stop-opacity="0.4"/>
+              </linearGradient>
+              <!-- 자물쇠 뱃지 -->
+              <linearGradient id="lock-g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#DBEAFE"/>
+                <stop offset="100%" stop-color="#BFDBFE"/>
+              </linearGradient>
+              <filter id="bub-sh">
+                <feDropShadow dx="2" dy="4" stdDeviation="8" flood-color="#1A6BFF" flood-opacity="0.22"/>
+              </filter>
+              <filter id="lock-sh">
+                <feDropShadow dx="1" dy="3" stdDeviation="5" flood-color="#0050CC" flood-opacity="0.18"/>
+              </filter>
+            </defs>
+
+            <!-- 바닥 그림자 타원 -->
+            <ellipse cx="98" cy="153" rx="68" ry="7" fill="rgba(0,100,200,0.1)"/>
+
+            <!-- ══ 말풍선 B — 하단 시안 (뒤에 깔림) ══ -->
+            <!-- 테두리 테 (두께감) -->
+            <path d="M34,68 Q28,68 24,72 L24,128 Q24,136 32,136 L130,136 Q138,136 138,128 L138,80 Q138,72 130,72 L80,72 L68,148 L56,72 L34,72 Z"
+                  fill="rgba(14,165,233,0.3)" filter="url(#bub-sh)"/>
+            <!-- 본체 -->
+            <path d="M30,65 Q22,65 18,73 L18,126 Q18,136 28,136 L126,136 Q136,136 136,126 L136,78 Q136,68 126,68 L78,68 L66,146 L54,68 Z"
+                  fill="url(#bB)" stroke="url(#rim)" stroke-width="1.2"/>
+            <!-- 상단 하이라이트 -->
+            <path d="M30,65 Q22,65 18,73 L18,86 Q18,78 28,78 L126,78 Q136,78 136,78 L136,68 Q136,68 126,68 L78,68 L66,146 L54,68 Z"
+                  fill="rgba(255,255,255,0.18)"/>
+            <!-- 점 3개 (타이핑 인디케이터) -->
+            <circle cx="52" cy="102" r="8" fill="#1A6BFF" opacity="0.85"/>
+            <circle cx="78" cy="102" r="8" fill="#1A6BFF" opacity="0.85"/>
+            <circle cx="104" cy="102" r="8" fill="#1A6BFF" opacity="0.85"/>
+
+            <!-- ══ 말풍선 A — 상단 블루 (앞에 배치) ══ -->
+            <!-- 테두리 테 -->
+            <path d="M62,12 Q54,12 50,20 L50,78 Q50,88 60,88 L152,88 Q162,88 162,78 L162,28 Q162,18 152,18 L110,18 L100,96 L88,18 L62,18 Z"
+                  fill="rgba(26,107,255,0.25)" filter="url(#bub-sh)"/>
+            <!-- 본체 -->
+            <path d="M58,8 Q48,8 44,18 L44,76 Q44,88 56,88 L150,88 Q160,88 160,76 L160,24 Q160,12 150,12 L108,12 L98,94 L86,12 Z"
+                  fill="url(#bA)" stroke="url(#rim)" stroke-width="1.4"/>
+            <!-- 상단 하이라이트 -->
+            <path d="M58,8 Q48,8 44,18 L44,32 Q44,22 56,22 L150,22 Q160,22 160,24 L160,12 Q160,12 150,12 L108,12 L98,94 L86,12 Z"
+                  fill="rgba(255,255,255,0.22)"/>
+            <!-- 점 3개 (타이핑 인디케이터) -->
+            <circle cx="82" cy="52" r="8.5" fill="#FACC15" opacity="0.95"/>
+            <circle cx="102" cy="52" r="8.5" fill="#FACC15" opacity="0.95"/>
+            <circle cx="122" cy="52" r="8.5" fill="#FACC15" opacity="0.95"/>
+
+            <!-- ══ 자물쇠 뱃지 (우상단) ══ -->
+            <!-- 테두리 테 -->
+            <rect x="141" y="4" width="52" height="52" rx="13" fill="rgba(147,197,253,0.4)" filter="url(#lock-sh)"/>
+            <!-- 본체 -->
+            <rect x="138" y="2" width="52" height="52" rx="13" fill="url(#lock-g)" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
+            <!-- 하이라이트 -->
+            <rect x="138" y="2" width="52" height="20" rx="10" fill="rgba(255,255,255,0.5)"/>
+            <!-- 자물쇠 아이콘 -->
+            <!-- 몸통 -->
+            <rect x="152" y="30" width="24" height="18" rx="5" fill="#1A6BFF" opacity="0.85"/>
+            <!-- 잠금 고리 -->
+            <path d="M157,30 L157,23 Q157,16 164,16 Q171,16 171,23 L171,30"
+                  stroke="#1A6BFF" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.85"/>
+            <!-- 키홀 -->
+            <circle cx="164" cy="37" r="3.5" fill="white" opacity="0.9"/>
+            <rect x="162" y="38" width="4" height="5" rx="2" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="bc-arrow" style="color:#0077AA;">→</div>
+      </a>
+
+      <!-- ② NOA 카드 -->
+      <a class="brand-card brand-card-noa" href="noa.html">
+        <div>
+          <div class="bc-breadcrumb bc-breadcrumb-noa">SPECTRA DWorks &nbsp;›&nbsp; NOA</div>
+          <div class="bc-headline" style="color:#3B0F8F;">대화 데이터를<br>분석·자산화하는<br>AI 솔루션</div>
+          <div class="bc-sub">상담 데이터를 인사이트·자동화로 전환.<br>DX를 넘어 AX로.</div>
+          <div class="bc-modules">
+            <span class="bc-module" style="background:rgba(91,33,182,0.08);border-color:rgba(91,33,182,0.15);color:#5B21B6;">AI Agent</span>
+            <span class="bc-module" style="background:rgba(91,33,182,0.08);border-color:rgba(91,33,182,0.15);color:#5B21B6;">AI Insight</span>
+            <span class="bc-module" style="background:rgba(91,33,182,0.08);border-color:rgba(91,33,182,0.15);color:#5B21B6;">AI QA</span>
+            <span class="bc-module" style="background:rgba(91,33,182,0.08);border-color:rgba(91,33,182,0.15);color:#5B21B6;">AI OCR/NER</span>
+          </div>
+        </div>
+        <!-- 네리 캐릭터 -->
+        <div class="bc-illus" style="justify-content:center;align-items:flex-end;">
+          <svg width="210" height="162" viewBox="0 0 210 162" fill="none" xmlns="http://www.w3.org/2000/svg"
+               style="filter:drop-shadow(0 12px 32px rgba(91,33,182,0.22));">
+            <defs>
+              <!-- 폰 본체 그라디언트 -->
+              <linearGradient id="ph-face" x1="108" y1="8" x2="185" y2="155" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#8B5CF6"/>
+                <stop offset="100%" stop-color="#4C1D95"/>
+              </linearGradient>
+              <!-- 폰 측면 그라디언트 (3D 두께) -->
+              <linearGradient id="ph-side" x1="185" y1="8" x2="196" y2="155" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3B0F8F"/>
+                <stop offset="100%" stop-color="#2E0A78"/>
+              </linearGradient>
+              <linearGradient id="ph-bot" x1="108" y1="150" x2="185" y2="162" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3B0F8F"/>
+                <stop offset="100%" stop-color="#2E0A78"/>
+              </linearGradient>
+              <!-- 스크린 -->
+              <linearGradient id="ph-scr" x1="113" y1="22" x2="180" y2="145" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#6D28D9"/>
+                <stop offset="100%" stop-color="#3730A3"/>
+              </linearGradient>
+              <!-- 글래스모피즘 카드 -->
+              <linearGradient id="card-g" x1="0" y1="0" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(237,233,254,0.92)"/>
+                <stop offset="100%" stop-color="rgba(221,214,254,0.82)"/>
+              </linearGradient>
+              <!-- AI 배지 -->
+              <linearGradient id="ai-g" x1="0" y1="0" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7C3AED"/>
+                <stop offset="100%" stop-color="#5B21B6"/>
+              </linearGradient>
+              <filter id="card-sh">
+                <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#4C1D95" flood-opacity="0.18"/>
+              </filter>
+              <filter id="ai-sh">
+                <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#5B21B6" flood-opacity="0.4"/>
+              </filter>
+            </defs>
+
+            <!-- ══ 폰 3D 본체 ══ -->
+            <!-- 측면 (깊이감) -->
+            <rect x="183" y="14" width="12" height="140" rx="6" fill="url(#ph-side)"/>
+            <!-- 하단면 -->
+            <rect x="108" y="149" width="76" height="12" rx="5" fill="url(#ph-bot)"/>
+            <!-- 정면 본체 -->
+            <rect x="108" y="8" width="76" height="144" rx="18" fill="url(#ph-face)"/>
+            <!-- 하이라이트 (상단 광택) -->
+            <rect x="108" y="8" width="76" height="36" rx="18" fill="rgba(255,255,255,0.12)"/>
+
+            <!-- 노치/다이나믹 아일랜드 -->
+            <rect x="132" y="16" width="28" height="8" rx="4" fill="#1E0052"/>
+
+            <!-- 스크린 영역 -->
+            <rect x="114" y="28" width="64" height="116" rx="10" fill="url(#ph-scr)"/>
+
+            <!-- 스크린 내 채팅 UI -->
+            <!-- 채팅 버블 1 (우측 — 사용자) -->
+            <rect x="130" y="38" width="42" height="18" rx="7" fill="rgba(255,255,255,0.18)"/>
+            <rect x="134" y="43" width="28" height="4" rx="2" fill="white" opacity="0.6"/>
+            <rect x="134" y="49" width="18" height="4" rx="2" fill="white" opacity="0.4"/>
+            <!-- 채팅 버블 2 (좌측 — AI) -->
+            <rect x="116" y="62" width="46" height="22" rx="7" fill="rgba(167,139,250,0.3)"/>
+            <rect x="120" y="68" width="32" height="4" rx="2" fill="white" opacity="0.5"/>
+            <rect x="120" y="74" width="20" height="4" rx="2" fill="white" opacity="0.35"/>
+            <!-- 채팅 버블 3 (우측) -->
+            <rect x="128" y="90" width="44" height="18" rx="7" fill="rgba(255,255,255,0.18)"/>
+            <rect x="132" y="95" width="30" height="4" rx="2" fill="white" opacity="0.55"/>
+            <rect x="132" y="101" width="16" height="4" rx="2" fill="white" opacity="0.35"/>
+            <!-- 입력창 -->
+            <rect x="116" y="132" width="62" height="10" rx="5" fill="rgba(0,0,0,0.25)"/>
+            <circle cx="172" cy="137" r="4" fill="#A78BFA" opacity="0.8"/>
+
+            <!-- 측면 버튼 -->
+            <rect x="105" y="45" width="4" height="18" rx="2" fill="#3B0F8F"/>
+            <rect x="105" y="68" width="4" height="12" rx="2" fill="#3B0F8F"/>
+            <rect x="192" y="50" width="4" height="14" rx="2" fill="#3B0F8F"/>
+
+            <!-- ══ 플로팅 카드 1 (상단) ══ -->
+            <rect x="14" y="18" width="98" height="46" rx="12" fill="url(#card-g)" stroke="rgba(167,139,254,0.5)" stroke-width="1" filter="url(#card-sh)"/>
+            <!-- 아이콘 썸네일 -->
+            <rect x="22" y="26" width="28" height="30" rx="8" fill="#7C3AED"/>
+            <rect x="22" y="26" width="28" height="12" rx="5" fill="#9F67FA" opacity="0.7"/>
+            <!-- 텍스트 -->
+            <rect x="56" y="29" width="48" height="6" rx="3" fill="#7C3AED" opacity="0.5"/>
+            <rect x="56" y="39" width="38" height="5" rx="2.5" fill="#A78BFA" opacity="0.4"/>
+            <rect x="56" y="48" width="28" height="5" rx="2.5" fill="#C4B5FD" opacity="0.35"/>
+
+            <!-- ══ 플로팅 카드 2 (중간) ══ -->
+            <rect x="6" y="74" width="98" height="44" rx="12" fill="url(#card-g)" stroke="rgba(167,139,254,0.45)" stroke-width="1" filter="url(#card-sh)"/>
+            <!-- 아이콘 썸네일 (흰색) -->
+            <rect x="14" y="82" width="26" height="28" rx="8" fill="rgba(255,255,255,0.85)"/>
+            <rect x="19" y="88" width="16" height="3" rx="1.5" fill="#C4B5FD"/>
+            <rect x="19" y="94" width="10" height="3" rx="1.5" fill="#DDD6FE"/>
+            <!-- 텍스트 -->
+            <rect x="46" y="85" width="50" height="5" rx="2.5" fill="#7C3AED" opacity="0.45"/>
+            <rect x="46" y="94" width="38" height="5" rx="2.5" fill="#A78BFA" opacity="0.38"/>
+            <rect x="46" y="103" width="24" height="5" rx="2.5" fill="#C4B5FD" opacity="0.3"/>
+
+            <!-- ══ AI 배지 (빨간 커서 대체) ══ -->
+            <rect x="8" y="128" width="58" height="28" rx="14" fill="url(#ai-g)" filter="url(#ai-sh)"/>
+            <!-- 광택 -->
+            <rect x="8" y="128" width="58" height="14" rx="10" fill="rgba(255,255,255,0.15)"/>
+            <text x="37" y="147" text-anchor="middle"
+                  font-family="'Pretendard','Syne',sans-serif"
+                  font-size="13" font-weight="800" letter-spacing="0.04em"
+                  fill="white">AI</text>
+            <!-- AI 배지 우측 빛 점 -->
+            <circle cx="55" cy="142" r="4" fill="rgba(255,255,255,0.35)"/>
+
+            <!-- 파티클 -->
+            <circle cx="104" cy="68" r="3" fill="#C4B5FD" opacity="0.7"/>
+            <circle cx="100" cy="56" r="2" fill="#A78BFA" opacity="0.5"/>
+            <circle cx="107" cy="120" r="2.5" fill="#DDD6FE" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="bc-arrow" style="color:#5B21B6;">→</div>
+      </a>
+
+      <!-- ③ EER 카드 (회색 반투명) -->
+      <a href="eer.html" class="brand-card brand-card-enomix" style="text-decoration:none;">
+        <div>
+          <div class="bc-breadcrumb bc-breadcrumb-gray">SPECTRA eNomix &nbsp;›&nbsp; EER</div>
+          <div class="bc-headline" style="font-size:22px;color:#475569;">기업 채팅상담<br>플랫폼</div>
+          <div class="bc-sub" style="color:#94A3B8;">eNomix EER을 이용 중이신<br>기존 고객을 위한 지원 페이지입니다.</div>
+          <div style="margin-top:20px;">
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:7px 16px;border-radius:100px;background:rgba(100,116,139,0.12);color:#64748B;border:1px solid rgba(100,116,139,0.2);">고객 지원 →</span>
+          </div>
+        </div>
+        <div class="bc-illus" style="justify-content:center;align-items:flex-end;position:relative;">
+          <svg width="180" height="150" viewBox="0 0 180 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="eer-bg" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#E2D9F3" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#D4C5EE" stop-opacity="0.4"/>
+              </radialGradient>
+              <linearGradient id="eer-hand" x1="70" y1="70" x2="115" y2="135" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#C8A882"/>
+                <stop offset="100%" stop-color="#B8926A"/>
+              </linearGradient>
+              <linearGradient id="eer-phone" x1="55" y1="20" x2="100" y2="110" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#6B4FCF"/>
+                <stop offset="100%" stop-color="#4A2FA8"/>
+              </linearGradient>
+              <filter id="eer-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#6B4FCF" flood-opacity="0.2"/>
+              </filter>
+            </defs>
+
+            <!-- 배경 원 -->
+            <circle cx="90" cy="82" r="60" fill="url(#eer-bg)"/>
+            <circle cx="90" cy="82" r="60" fill="none" stroke="rgba(180,150,230,0.3)" stroke-width="1"/>
+
+            <!-- 핑크 포인트 닷 -->
+            <circle cx="90" cy="138" r="7" fill="#F472B6" opacity="0.9"/>
+            <circle cx="90" cy="138" r="4" fill="#EC4899"/>
+
+            <!-- ── 전화기 수화기 ── -->
+            <!-- 수화기 상단 귀 부분 -->
+            <path d="M72,28 C58,28 46,40 46,56 C46,62 48,68 52,72"
+                  stroke="url(#eer-phone)" stroke-width="16" stroke-linecap="round" fill="none" filter="url(#eer-shadow)"/>
+            <!-- 수화기 하단 입 부분 (손으로 쥔 부분) -->
+            <path d="M86,86 C90,94 92,104 90,112"
+                  stroke="url(#eer-phone)" stroke-width="16" stroke-linecap="round" fill="none"/>
+
+            <!-- ── 손 (수화기를 쥠) ── -->
+            <!-- 손바닥 -->
+            <ellipse cx="88" cy="92" rx="18" ry="14" fill="url(#eer-hand)" transform="rotate(-20 88 92)"/>
+            <!-- 손가락 4개 -->
+            <rect x="70" y="82" width="8" height="18" rx="4" fill="#C8A882" transform="rotate(-15 74 91)"/>
+            <rect x="80" y="78" width="8" height="20" rx="4" fill="#C8A882" transform="rotate(-8 84 88)"/>
+            <rect x="90" y="78" width="8" height="20" rx="4" fill="#C8A882" transform="rotate(2 94 88)"/>
+            <rect x="99" y="80" width="8" height="18" rx="4" fill="#C8A882" transform="rotate(12 103 89)"/>
+            <!-- 손가락 음영 -->
+            <rect x="70" y="82" width="8" height="18" rx="4" fill="#B8926A" opacity="0.3" transform="rotate(-15 74 91)"/>
+
+            <!-- ── 말풍선 1 — 좌측 ── -->
+            <rect x="16" y="42" width="46" height="28" rx="9" fill="white" opacity="0.95"
+                  filter="url(#eer-shadow)"/>
+            <polygon points="36,70 28,80 48,70" fill="white" opacity="0.95"/>
+            <rect x="24" y="52" width="22" height="4" rx="2" fill="#CBD5E1" opacity="0.8"/>
+            <rect x="24" y="60" width="32" height="4" rx="2" fill="#CBD5E1" opacity="0.55"/>
+
+            <!-- ── 말풍선 2 — 우측 ── -->
+            <rect x="116" y="30" width="50" height="28" rx="9" fill="white" opacity="0.95"
+                  filter="url(#eer-shadow)"/>
+            <polygon points="128,58 120,68 140,58" fill="white" opacity="0.95"/>
+            <rect x="124" y="40" width="26" height="4" rx="2" fill="#CBD5E1" opacity="0.8"/>
+            <rect x="124" y="48" width="18" height="4" rx="2" fill="#CBD5E1" opacity="0.55"/>
+
+            <!-- 반짝이 -->
+            <circle cx="148" cy="22" r="3" fill="#F472B6" opacity="0.7"/>
+            <circle cx="156" cy="34" r="2" fill="#A78BFA" opacity="0.6"/>
+            <circle cx="28" y2="36" r="2" fill="#A78BFA" opacity="0.5"/>
+            <circle cx="18" cy="28" r="3" fill="#F9A8D4" opacity="0.6"/>
+          </svg>
         </div>
         <div class="bc-arrow">→</div>
       </a>
-
-      <!-- NOA 카드 — DWorks 브랜드 산하 -->
-      <a class="brand-card" href="#noa" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1px solid var(--noa-border);">
-        <div style="position:absolute;top:0;right:0;width:280px;height:280px;background:radial-gradient(circle,rgba(91,33,182,0.1) 0%,transparent 70%);pointer-events:none;"></div>
-        <div class="bc-brand" style="color:var(--noa);">Spectra DWorks · NOA</div>
-        <div class="bc-product">AI All-in-One</div>
-        <div class="bc-desc">대화 데이터를 분석·자산화하는 AI 솔루션.<br>DX를 넘어 AX(AI Transformation)로의 전환을 지원합니다.</div>
-        <div class="bc-modules">
-          <span class="bc-module">AI Agent</span>
-          <span class="bc-module">AI Insight</span>
-          <span class="bc-module">AI QA</span>
-          <span class="bc-module">AI OCR/NER</span>
-        </div>
-        <div class="bc-arrow" style="color:var(--noa);">→</div>
-      </a>
-
-      <!-- eNomix 카드 -->
-      <a href="eer.html" class="brand-card brand-card-enomix" style="text-decoration:none;cursor:pointer;grid-column:span 2;opacity:0.85;">
-        <div style="flex:1;">
-          <div class="bc-brand" style="color:var(--enomix);font-size:10px;">Spectra eNomix · EER</div>
-          <div style="font-size:18px;font-weight:700;margin-bottom:6px;color:var(--text-primary);">기업 채팅상담 플랫폼</div>
-          <div style="font-size:13px;color:var(--text-muted);">eNomix EER을 이용 중이신 기존 고객을 위한 지원 페이지입니다.</div>
-        </a>
-        <a href="eer.html" style="font-size:13px;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border-medium);padding:9px 18px;border-radius:100px;white-space:nowrap;transition:all 0.15s;">
-          고객 지원 →
-        </a>
-      </div>
 
     </div>
   </div>
@@ -1038,49 +1432,72 @@
   </div>
 </section>
 
-<!-- ISO 인증 배지 -->
-<div style="background:var(--bg-softer);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);padding:28px 0;">
+<!-- 신뢰 지표 카드 섹션 -->
+<div style="background:var(--bg-softer);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);padding:60px 0;">
   <div class="container">
-    <div style="display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:14px;">
-        <div style="width:52px;height:52px;border-radius:12px;background:white;border:1.5px solid #1A6BFF;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(26,107,255,0.12);">
-          <span style="font-size:22px;">🛡️</span>
-        </div>
-        <div>
-          <div style="font-size:14px;font-weight:700;color:var(--text-primary);">ISO 27001 인증</div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">정보보안 경영 시스템 국제표준 인증</div>
-        </div>
-      </div>
-      <div style="width:1px;height:40px;background:var(--border-light);"></div>
-      <div style="display:flex;align-items:center;gap:14px;">
-        <div style="width:52px;height:52px;border-radius:12px;background:white;border:1.5px solid var(--border-medium);display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:22px;">🏢</span>
-        </div>
-        <div>
-          <div style="font-size:14px;font-weight:700;color:var(--text-primary);">설립 26년 · 1999</div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">기업 커뮤니케이션 인프라 전문</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+
+      <!-- 카드 1: ISO 27001 -->
+      <div style="background:white;border-radius:20px;border:1px solid var(--border-light);
+                  padding:32px 24px 28px;display:flex;flex-direction:column;
+                  box-shadow:0 2px 16px rgba(0,0,0,0.05);transition:transform .2s,box-shadow .2s;
+                  position:relative;overflow:hidden;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(26,107,255,0.1)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.05)'">
+        <!-- 상단 컬러 라인 -->
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#1A6BFF,#00C6FF);border-radius:20px 20px 0 0;"></div>
+        <div style="font-size:18px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:8px;">ISO 27001 인증</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">정보보안 경영 시스템<br>국제표준 인증</div>
+        <div style="flex:1;display:flex;align-items:flex-end;justify-content:center;padding-top:28px;">
+          <span style="font-size:72px;line-height:1;filter:drop-shadow(0 6px 14px rgba(26,107,255,0.2));">🛡️</span>
         </div>
       </div>
-      <div style="width:1px;height:40px;background:var(--border-light);"></div>
-      <div style="display:flex;align-items:center;gap:14px;">
-        <div style="width:52px;height:52px;border-radius:12px;background:white;border:1.5px solid var(--border-medium);display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:22px;">🏦</span>
-        </div>
-        <div>
-          <div style="font-size:14px;font-weight:700;color:var(--text-primary);">금융감독원 보안 심의</div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">금융권 보안 기준 적합 검증 완료</div>
-        </div>
-      </div>
-      <div style="width:1px;height:40px;background:var(--border-light);"></div>
-      <div style="display:flex;align-items:center;gap:14px;">
-        <div style="width:52px;height:52px;border-radius:12px;background:white;border:1.5px solid var(--border-medium);display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:22px;">✅</span>
-        </div>
-        <div>
-          <div style="font-size:14px;font-weight:700;color:var(--text-primary);">250+ 고객사</div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">금융 · 제조 · 유통 · 통신 전 산업</div>
+
+      <!-- 카드 2: 설립 27년 -->
+      <div style="background:white;border-radius:20px;border:1px solid var(--border-light);
+                  padding:32px 24px 28px;display:flex;flex-direction:column;
+                  box-shadow:0 2px 16px rgba(0,0,0,0.05);transition:transform .2s,box-shadow .2s;
+                  position:relative;overflow:hidden;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(0,198,255,0.1)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.05)'">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00C6FF,#0EA5E9);border-radius:20px 20px 0 0;"></div>
+        <div style="font-size:18px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:8px;">설립 27년 · 1999</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">기업 커뮤니케이션<br>인프라 전문기업</div>
+        <div style="flex:1;display:flex;align-items:flex-end;justify-content:center;padding-top:28px;">
+          <span style="font-size:72px;line-height:1;filter:drop-shadow(0 6px 14px rgba(0,150,200,0.2));">🏆</span>
         </div>
       </div>
+
+      <!-- 카드 3: 금융감독원 보안 심의 -->
+      <div style="background:white;border-radius:20px;border:1px solid var(--border-light);
+                  padding:32px 24px 28px;display:flex;flex-direction:column;
+                  box-shadow:0 2px 16px rgba(0,0,0,0.05);transition:transform .2s,box-shadow .2s;
+                  position:relative;overflow:hidden;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(91,33,182,0.1)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.05)'">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7C3AED,#A78BFA);border-radius:20px 20px 0 0;"></div>
+        <div style="font-size:18px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:8px;">금융감독원 보안 심의</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">금융권 보안 기준<br>적합 검증 완료</div>
+        <div style="flex:1;display:flex;align-items:flex-end;justify-content:center;padding-top:28px;">
+          <span style="font-size:72px;line-height:1;filter:drop-shadow(0 6px 14px rgba(91,33,182,0.2));">🏦</span>
+        </div>
+      </div>
+
+      <!-- 카드 4: 250+ 고객사 -->
+      <div style="background:white;border-radius:20px;border:1px solid var(--border-light);
+                  padding:32px 24px 28px;display:flex;flex-direction:column;
+                  box-shadow:0 2px 16px rgba(0,0,0,0.05);transition:transform .2s,box-shadow .2s;
+                  position:relative;overflow:hidden;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(16,185,129,0.1)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.05)'">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#10B981,#34D399);border-radius:20px 20px 0 0;"></div>
+        <div style="font-size:18px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:8px;">250+ 고객사</div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">금융 · 제조 · 유통 · 통신<br>전 산업 도입</div>
+        <div style="flex:1;display:flex;align-items:flex-end;justify-content:center;padding-top:28px;">
+          <span style="font-size:72px;line-height:1;filter:drop-shadow(0 6px 14px rgba(16,185,129,0.2));">🤝</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1268,40 +1685,105 @@
 
       <div class="product-visual" style="direction:ltr;">
         <div class="mock-window">
+          <!-- 타이틀 바 -->
           <div class="mock-bar mock-bar-noa">
             <div class="mock-dot" style="background:#FF5F57;"></div>
             <div class="mock-dot" style="background:#FEBC2E;"></div>
             <div class="mock-dot" style="background:#28C840;"></div>
             <span style="margin-left:12px;font-size:11px;color:var(--text-muted);">NOA · AI Insight</span>
           </div>
-          <div class="mock-content mock-content-noa">
-            <div style="font-size:11px;color:var(--noa);font-weight:700;margin-bottom:16px;letter-spacing:0.06em;">● 실시간 인사이트</div>
-            <div class="ai-mock">
-              <div class="ai-insight-card">
-                <div class="aic-label">감성 분석</div>
-                <div class="aic-text">이번 주 고객 긍정 반응 비율이 전주 대비 12% 상승했습니다.</div>
-                <div class="aic-bar"><div class="aic-bar-fill" style="width:78%;"></div></div>
-              </div>
-              <div class="ai-insight-card">
-                <div class="aic-label">QA 알림</div>
-                <div class="aic-text">오늘 상담 중 스크립트 이탈 3건이 감지되었습니다. 확인이 필요합니다.</div>
-                <div class="aic-bar"><div class="aic-bar-fill" style="width:95%;background:#EF4444;"></div></div>
-              </div>
-              <div class="ai-row">
-                <div class="ai-mini-card">
-                  <div class="amc-num">1,247</div>
-                  <div class="amc-label">오늘 처리 상담</div>
+
+          <div class="mock-content mock-content-noa" style="padding:16px;overflow-y:auto;max-height:420px;">
+
+            <!-- 상담 헤더 -->
+            <div class="noa-mock-header">
+              <div class="noa-avatar">상</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:11px;font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                  서비스 문의 상담 &nbsp;<span style="color:var(--text-muted);font-weight:400;">→ 고객</span>
                 </div>
-                <div class="ai-mini-card">
-                  <div class="amc-num" style="color:var(--noa);">89%</div>
-                  <div class="amc-label">자동화 처리율</div>
+                <div style="font-size:10px;color:var(--text-muted);margin-top:1px;">📅 2025-11-18</div>
+              </div>
+            </div>
+
+            <!-- 4개 통계 -->
+            <div class="noa-stats-row">
+              <div class="noa-stat-box">
+                <div class="noa-stat-key">Q&A 건수</div>
+                <div class="noa-stat-val">24/30 건</div>
+              </div>
+              <div class="noa-stat-box">
+                <div class="noa-stat-key">평균 응답 속도</div>
+                <div class="noa-stat-val">38초</div>
+              </div>
+              <div class="noa-stat-box">
+                <div class="noa-stat-key">총 대화시간</div>
+                <div class="noa-stat-val">105분</div>
+              </div>
+              <div class="noa-stat-box">
+                <div class="noa-stat-key">대화 ID</div>
+                <div class="noa-stat-val" style="font-size:11px;">CONV-089</div>
+              </div>
+            </div>
+
+            <!-- 대화 요약 -->
+            <div class="noa-section-label">● 대화 요약</div>
+            <div class="noa-summary-box">
+              <div class="noa-bullet">제품 도입 관련 기능 및 연동 방식 안내 완료</div>
+              <div class="noa-bullet">계약 조건 및 견적 추가 검토 요청 접수</div>
+              <div class="noa-bullet">담당 팀 연결 및 후속 미팅 일정 협의 중</div>
+            </div>
+
+            <!-- 주제 태그 -->
+            <div class="noa-tags">
+              <span class="noa-tag">#도입 문의</span>
+              <span class="noa-tag">#견적</span>
+              <span class="noa-tag">#일정 조율</span>
+            </div>
+
+            <!-- 2열 분석 카드 -->
+            <div class="noa-cards-grid">
+              <div class="noa-analysis-card" style="border-top:2px solid #F59E0B;">
+                <div class="noa-card-icon">⚠️</div>
+                <div class="noa-card-title">리스크 유형 분석</div>
+                <div class="noa-card-body">후속 미팅 미확정<br>
+                  <span style="color:#F59E0B;font-weight:600;">"일정 다시 연락" 패턴 감지</span>
                 </div>
-                <div class="ai-mini-card">
-                  <div class="amc-num">4.8</div>
-                  <div class="amc-label">평균 만족 점수</div>
+              </div>
+              <div class="noa-analysis-card" style="border-top:2px solid #3B82F6;">
+                <div class="noa-card-icon">🔍</div>
+                <div class="noa-card-title">감성 흐름 분석</div>
+                <div class="noa-card-body">초반 중립 → 후반 긍정 전환<br>
+                  <span style="color:#3B82F6;font-weight:600;">만족도 상승 신호 감지</span>
                 </div>
               </div>
             </div>
+
+            <!-- 예상 리스크 -->
+            <div class="noa-risk-box">
+              <div style="font-size:10px;font-weight:700;color:#EF4444;margin-bottom:5px;">⚡ 예상 리스크</div>
+              <div style="font-size:11px;color:#475569;line-height:1.55;">후속 일정 미확정으로 인한 고객 이탈 가능성 — 48시간 내 재연락 권장</div>
+            </div>
+
+            <!-- AI 할 일 추천 -->
+            <div class="noa-todo-box">
+              <div style="font-size:10px;font-weight:700;color:var(--noa);margin-bottom:8px;">
+                할 일(To-Do) 추천 <span class="noa-ai-badge">AI 추천</span>
+              </div>
+              <div class="noa-todo-item">
+                <div class="noa-todo-check"></div>
+                <span style="font-size:11px;color:var(--text-secondary);">후속 미팅 일정 확인 및 캘린더 등록</span>
+              </div>
+              <div class="noa-todo-item">
+                <div class="noa-todo-check"></div>
+                <span style="font-size:11px;color:var(--text-secondary);">견적서 업데이트 후 재발송</span>
+              </div>
+              <div class="noa-todo-item">
+                <div class="noa-todo-check"></div>
+                <span style="font-size:11px;color:var(--text-secondary);">고객 담당자 정보 CRM 등록 여부 확인</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -1314,28 +1796,44 @@
   <div class="container">
     <div class="section-header">
       <div class="section-eyebrow"><span class="tag tag-spectra">Why Together</span></div>
-      <h2 class="section-h2">Cowork+와 NOA가 만나면</h2>
+      <h2 class="section-h2"><span style="font-family:'Pretendard',sans-serif;font-weight:900;">Cowork+</span>와 <span style="font-family:'Pretendard',sans-serif;font-weight:900;">NOA</span>가 만나면</h2>
       <p class="section-sub">대화 인프라와 AI 인텔리전스의 결합으로 기업 커뮤니케이션의 완전한 혁신을 이룹니다</p>
     </div>
-    <div class="synergy-grid">
+
+    <!-- 전체 가로 한 줄 -->
+    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:16px;align-items:stretch;">
+
+      <!-- Cowork+ 카드 -->
       <div class="synergy-card syn-dworks">
-        <div class="syn-brand-name" style="color:#0077AA;">DWorks · Cowork+</div>
-        <div class="syn-product-name">대화 인프라</div>
-        <div class="syn-desc">카카오 기반으로 모든 외부 커뮤니케이션을 하나의 플랫폼에 통합합니다.</div>
+        <div class="syn-brand-name" style="color:rgba(255,255,255,0.7);">DWorks · Cowork+</div>
+        <div class="syn-product-name" style="color:white;">대화 인프라</div>
+        <div class="syn-desc" style="color:rgba(255,255,255,0.85);">카카오 기반으로 모든 외부 커뮤니케이션을 하나의 플랫폼에 통합합니다.</div>
       </div>
+
+      <!-- + 연결 -->
       <div class="synergy-plus">
         <div class="syn-plus-icon">+</div>
         <div class="syn-plus-label">결합</div>
       </div>
+
+      <!-- NOA 카드 -->
       <div class="synergy-card syn-noa">
-        <div class="syn-brand-name" style="color:var(--noa);">DWorks · NOA</div>
-        <div class="syn-product-name">AI 인텔리전스</div>
-        <div class="syn-desc">축적된 대화 데이터를 AI로 분석하여 비즈니스 인사이트를 자동 생성합니다.</div>
+        <div class="syn-brand-name" style="color:rgba(255,255,255,0.7);">DWorks · NOA</div>
+        <div class="syn-product-name" style="color:white;">AI 인텔리전스</div>
+        <div class="syn-desc" style="color:rgba(255,255,255,0.85);">축적된 대화 데이터를 AI로 분석하여 비즈니스 인사이트를 자동 생성합니다.</div>
       </div>
-    </div>
-    <div class="synergy-result">
-      <div class="syn-result-label">결과</div>
-      <div class="syn-result-text">고객과의 모든 대화가 비즈니스 자산이 됩니다</div>
+
+      <!-- = 연결 -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-width:48px;">
+        <div style="width:48px;height:48px;border-radius:50%;background:white;border:1px solid rgba(12,26,77,0.15);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#0C1A4D;box-shadow:0 4px 16px rgba(12,26,77,0.1);">=</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);">결과</div>
+      </div>
+
+      <!-- 결과 카드 -->
+      <div style="background:#0C1A4D;border-radius:24px;padding:40px 32px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(12,26,77,0.25);">
+        <div class="syn-result-text" style="text-align:center;">고객과의 모든 대화가<br><span class="accent-cyan">비즈니스 자산</span>이 됩니다</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1348,37 +1846,74 @@
       <h2 class="section-h2">산업별 최적화 솔루션</h2>
       <p class="section-sub">각 산업의 규제와 특성에 맞게 설계된 Spectra 솔루션</p>
     </div>
-    <div class="industry-grid" style="grid-template-columns:repeat(5,1fr);">
-      <div class="industry-card">
-        <div class="industry-icon ii-finance">🏦</div>
-        <div class="industry-name">금융</div>
-        <div class="industry-desc">금융감독원 보안 심의 대응, 불완전 판매 감지, 개인정보 보호 특화</div>
-        <div class="industry-clients"><strong>하나은행 · 카카오뱅크 · 케이뱅크</strong> 외 80여 개 금융사</div>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon ii-mfg">🏭</div>
-        <div class="industry-name">제조</div>
-        <div class="industry-desc">거래처·글로벌 파트너와의 협업 채널 공식화, 설비 점검·정비 요청 관리</div>
-        <div class="industry-clients"><strong>G전선</strong> 외 제조업 다수</div>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon ii-retail">🛒</div>
-        <div class="industry-name">유통 · 서비스</div>
-        <div class="industry-desc">고객 CS 챗봇 자동화, 반품·배송 시나리오 셀프 처리, 상담사 생산성 향상</div>
-        <div class="industry-clients"><strong>GS홈쇼핑 · 풀무원</strong> 외 다수</div>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon ii-telco">📡</div>
-        <div class="industry-name">통신 · 공공</div>
-        <div class="industry-desc">대용량 상담 트래픽 처리, 멀티채널 통합, 공공기관 보안 규격 준수</div>
-        <div class="industry-clients"><strong>SK텔레콤</strong> 외 통신·공공 다수</div>
-      </div>
-      <div class="industry-card">
-        <div class="industry-icon" style="background:#FFF8F0;">🏗</div>
-        <div class="industry-name">건설 · 플랜트</div>
-        <div class="industry-desc">산업안전보건법 현장 이력 디지털화, 다국어 현장 멀티채널(카카오·WhatsApp) 통합 관리</div>
-        <div class="industry-clients" style="color:#D97706;font-weight:600;font-size:12px;">적용 가능 산업</div>
-      </div>
+    <div class="industry-grid">
+
+      <!-- 금융 — 이미지: img src에 실제 이미지 경로 교체 가능 -->
+      <a href="industry_finance.html" class="industry-card">
+        <div class="ind-img-wrap" style="background:linear-gradient(135deg,#DBEAFE,#EFF6FF);">
+          <!-- <img src="img_finance.jpg" alt="금융"> -->
+          <div class="ind-placeholder">🏦</div>
+          <div class="ind-arrow">↗</div>
+        </div>
+        <div class="ind-body">
+          <div class="ind-name">금융</div>
+          <div class="ind-desc">금융감독원 보안 심의 대응, 불완전 판매 감지, 개인정보 보호 특화</div>
+        </div>
+      </a>
+
+      <!-- 제조 -->
+      <a href="industry_manufacturing.html" class="industry-card">
+        <div class="ind-img-wrap" style="background:linear-gradient(135deg,#DCFCE7,#ECFDF5);">
+          <!-- <img src="img_manufacturing.jpg" alt="제조"> -->
+          <div class="ind-placeholder">🏭</div>
+          <div class="ind-arrow">↗</div>
+        </div>
+        <div class="ind-body">
+          <div class="ind-name">제조</div>
+          <div class="ind-desc">거래처·글로벌 파트너와의 협업 채널 공식화, 설비 점검·정비 요청 관리</div>
+        </div>
+      </a>
+
+      <!-- 유통·서비스 -->
+      <a href="industry_retail.html" class="industry-card">
+        <div class="ind-img-wrap" style="background:linear-gradient(135deg,#FAE8FF,#FDF4FF);">
+          <!-- <img src="img_retail.jpg" alt="유통·서비스"> -->
+          <div class="ind-placeholder">🛒</div>
+          <div class="ind-arrow">↗</div>
+        </div>
+        <div class="ind-body">
+          <div class="ind-name">유통 · 서비스</div>
+          <div class="ind-desc">고객 CS 챗봇 자동화, 반품·배송 시나리오 셀프 처리, 상담사 생산성 향상</div>
+        </div>
+      </a>
+
+      <!-- 통신·공공 -->
+      <a href="industry_telecom.html" class="industry-card">
+        <div class="ind-img-wrap" style="background:linear-gradient(135deg,#FEF3C7,#FFFBEB);">
+          <!-- <img src="img_telecom.jpg" alt="통신·공공"> -->
+          <div class="ind-placeholder">📡</div>
+          <div class="ind-arrow">↗</div>
+        </div>
+        <div class="ind-body">
+          <div class="ind-name">통신 · 공공</div>
+          <div class="ind-desc">대용량 상담 트래픽 처리, 멀티채널 통합, 공공기관 보안 규격 준수</div>
+        </div>
+      </a>
+
+      <!-- 건설·플랜트 -->
+      <a href="#" class="industry-card">
+        <div class="ind-img-wrap" style="background:linear-gradient(135deg,#F1F5F9,#F8FAFC);">
+          <!-- <img src="img_construction.jpg" alt="건설·플랜트"> -->
+          <div class="ind-placeholder">🏗️</div>
+          <div class="ind-arrow" style="background:var(--spectra);color:white;">↗</div>
+        </div>
+        <div class="ind-body">
+          <div class="ind-name">건설 · 플랜트</div>
+          <div class="ind-desc">현장 안전관리 이력 디지털화, 다국어 현장 멀티채널(카카오·WhatsApp) 통합 관리</div>
+          <div style="margin-top:8px;font-size:11px;font-weight:700;color:var(--spectra);">적용 문의 →</div>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -1452,20 +1987,45 @@
     <div class="footer-top">
       <div>
         <div class="footer-logo">
-          <svg viewBox="0 0 54 36" fill="none" width="28" height="18">
-            <g transform="translate(9,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#00C6FF"/></g>
-            <g transform="translate(27,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#1A6BFF"/></g>
-            <g transform="translate(45,18) rotate(45)"><rect x="-9" y="-9" width="18" height="18" rx="3" fill="#5B21B6"/></g>
-          </svg>
-          SPECTRA
+          <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAB4AYADASIAAhEBAxEB/8QAHQABAAIDAQEBAQAAAAAAAAAAAAgJBQYHBAEDAv/EAFEQAAEEAQIDBAUGCQYKCwAAAAEAAgMEBQYRBxIhCDFBURMiYXGBCRQVMkJ1Fzc4UpGVsrPSI1VXYpPRJDNDVnOCoaKxwTQ1U2NydISStPDx/8QAHAEBAAIDAAMAAAAAAAAAAAAAAAMHBAUGAQII/8QAMREBAAEDAgQEBAUFAQAAAAAAAAECAwQFETFRYXEGEiFBEzKB0SOhscHwBxQiYuGR/9oADAMBAAIRAxEAPwCGSIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIi/qJj5ZGxxsc97yGta0blxPcAEH2vDLYnjggifLNI4MjjY0uc9xOwAA6kk+Cktw57LxmxLMvxCzM2Ma5npDRplokib3/AMpI4EA/1QD71uvZq4K1dGY+LWWroWfTr4/SQwygcuPYR3nf/KEd5+z3DxW0631O7LymtWcY6ER369PSEfaPs8h/9Fd5mvZms5v9lpNXlt0/Pc23+lP39/b0jefOoZWPpON8bIjeuflp/eenP7uP6g4McOvnAGImz8cMbjzSS2oyJB7vR7gfFaze4U6UMzfmtjKNY0+tvMw83+50XRsleM5MURIiHefzl4Fdnh3wvFixTVmTNU+0VTMz3nr04R+lUZniTOu3JqpubdvSPp/N3Pb/AAowkkJFO7dry+Dnlr2/EbA/7VzHVWncjpzIfNL7AWuG8UrPqSD2Hz8wpILHaiw1HPYyShfi5mO6tcPrRu8HNPgVuNQ8P4963M2I8tX5T3T6X4oyce7EZFXnonjzjrH2RoRZnV2nb2m8maltvNG7cwzAerI3z9h8x4LDLg7tqu1XNFcbTCy7N6i/RFy3O8TwkXrxWNyOWuNp4uhav2XDdsNaF0jz7mtBK2LhBobIcR+ImJ0jjn+iddl/lp+XmEELRzSSEexoOw8TsPFWg8NNAaU4caaiwumMbDTgjYPT2CB6aw4DrJK/vcT+gdwAHRRpFYcfCnijIxskfDbWL2OALXNwdkgg+I9ReHOaC11gqbrmb0XqPF1mjd01zFzQsA9rnNAVs/0tiv5zpf27f71itWar0dhtPXb2o83iYcY2F/zgTzMc17Nju3l68+43HKASe7YoKiV9aC5wa0EknYAeK/awGT35BTieI5JT6GPbd2xPqjbz7lYv2WeAGF4cafp57PUYbmsbMYllmlaHChzD/FRb9A4A7OcOpO4B2QQZx/CDinkKjLdTh5qeSB43Y/6NlAcPMbjqPatYz+DzWn7xoZ7EZDFWwNzBcrPhft58rgCrhJZooiwSysYXu5WBzgOY+Q8ysFr3RemNdYGXCaqw9bJVJAQ30jPXiJ+1G/vY72ggoKh1k9Pafz+orTqmn8Hk8vYYOZ0VGo+d4HduQwEreO0bwqu8JeIMuEfJJZxVlvzjGW3jrLCTtyu26c7T0O3sOwBCmL8n3RqV+AgtwV42WLeUsOnkA9aQt5Wt3PkAOg9/mUEIvwT8U/6NNZ/qKz/An4J+Kf8ARprP9RWf4Fa/at1avL85swwc2/L6SQN3279t1+H0tiv5zpf27f70FQWbw+Xwd40M3ir2MtgcxguV3wyAefK4A7dD+heFTL+UZ1DpLIY/TOJpXKN3P17Msshgka99euWgFryO7mdykA/mFcr7IfBCPitqSzlM96Vml8S9osiNxa61MRuIWu8Bt1cR1AIA2LtwHGsFgc7nrBr4LC5LKzN23jpVXzOG/d0YCV69QaN1fp2L02oNK53ER7gc97HywDr3dXtCtp0/hcJpnDRYvCY2nisdXb6kNeNscbQB1J28enUnqfFevenkaj2b17daUFj29HseO4g+B9yCm5ZnTelNUalMg05pvM5kxnaT5hRkscnv5GnZSj7afZ8xWnsTLxG0NRZSpRvAy2OhG0cXM7YTRN+y3mIDmjoNwQAAV2LsV6o0VNwJw2KxWQx9XI0RI3J1XSNZMJi8kyOB6uDgW7O6jbYb+rsAgp+Cfin/AEaaz/UVn+BPwT8U/wCjTWf6is/wK12vfo2ZPR17leZ+2/LHK1x29wK/SxPBXj9JYmjhZvtzPcGj9JQVK5PhtxExdKS9k9Baqo1YgXST2MRYjjYB1JLnMAC1VXB5HUWnsfRluZDOYytViaXSyzWmNY0eJJJ2VUHFG5hMhxI1Jf01E2LDWMpYlosazkaIXSOLdm/ZG3cPAdEGtrYdKaH1lqvc6a0rmcuwHZ0lOlJKxp9rgNh8Spddlvst46DF1tX8T8c23cnaJKeGm6xQsPUOnb9p5/MPQD6wJ6Nlo0UcXjmtaK1GlWYAAOWOKJg7h4BoCCpjW/D3W+iWV36s0xk8RHYO0MtiEiN5/NDh036b7b77LV1YJ23uIegn8FsnpduZxuUzWQlg+Z1qs7ZXwlkrHmV3KTyANDgN+/m27iduQ9irgJjdbRv19rOt85wlacw0KDx6luRv1nv842npy/acDv0BDgjjgdLamz7ebBaczGVHNy70qUk3reXqA9V+Wb0/nsGWDN4TJYwyfUFyq+Hm93MBurgKdWtSqx1KdeGtXibyxxRMDGMHkAOgC/HMYzHZjHTY3LUKt+lO3llr2YmyRvHkWkbFBTkikV2zOBlPhplqup9LQyM01lJTE6AuLvmVjYu5AT15HNBLd9yOVw8lHVAREQEREBERAREQFJrsS6ApZGxf13lK7J/mM4q45rxuGyhoc+TY+IDmhp8N3eIG0ZVNvsTXa9jg9JViI9NVyczJW+O7mscD+g7fAri/H+XextGr+FO3mmKZnpPH/wB4fVn6bRTXfjzezb+KGXkdbZiIXlsTGh82x+s49QD7ANj8fYuZZyw4Ftdp2BG7vb5BbrxCifHqy2X77SBjmk+I5QP+RHwWhZlpF4k+LQQuk/pfp+NRax4piPk8/eqYjefpv9NuipfFmVdvZ96bk8Kpp7RE7Q8SLy5hlyTFW2Y57Y7joXCBzu4P26H9KwPDmpqSniZ2akmfJMZd4hJKJHtbt13cCem/cN1dNV6ab1NvyztMT6+0d3N0Y8VWKrvniJiYjb3nf3js2hFpuhqWsa2eyMmoLJlpPB9EDKHAu5hsWAfVbtv06d4RtLWP4RjbNo/Qe31fSDk5eX6vJvvzb+O3x8FBTm1TRTX8Kr1nbbb1jrPRk1afRTcro+NT/jTvvv6T0jq2DUmFpZ7FSY+8zdrurHgetG7wcPauAaqwF/TuUdSus3B6xSgerK3zH/MeCkiuX8bM9jZKjMFEGz3GSCR7x19D07t/M793ktV4iw7Fdib9U7VRw69G68K5+TbyIx6I81FXGOXX78+7oHyc5qDjblfTH/CDgJvQb7bE+ng5tvHfb/ZzKTnbKxGq83wHy1LSMVqez6WJ9uvVBMs9YH12NA6u+ySB3gEde5V58K9a5Xh5r3F6uw+z7FGXd8LnbNnjI5Xxu9jmkjfwOx7wrKuFXGrh7xFxENrEZ6pWvOYDNjbczYrMLvEcpPrAfnN3H/BcEsxWM7SmqWtLnabzIAG5JoydP91Yd7XMeWPaWuadiCNiCrl1yrj5wP0nxUwFkTU62P1E1hNPLRRASNeO5shHV7D3EHfbfcbFBAXsv4mrm+0Bo2hcY2SD6RbO5jhuHGJrpQCPEEsCsz4gahj0noXO6nli9M3FY+a36P8A7QsYXBvxIA+Kro7LONu4btVabxGSgdXu0cjZrWInd7JGQytc0+4gqyPUuHpah07ksDkmOfSyNWSrYa07ExyNLXbHwOxPVBUprrV2otbaisZ7U2UsZC7O4nmkcS2Mb9GMb3NaPADopdfJ78TtQZq7luH2cvz5CCnS+f4+Sd5e+FjZGsfHzHqW7yMIHhsduh6cd172WOLGA1JLRwuDdqHGukIq3qssbQ9vXbnY5wLHbd+/q79xKlF2POBl7hXir+c1M6B2o8rG2J0MLw9tSAHm9HzDo5xdsXbbj1W7E9SQwfyjOIqWuEOHzL2gW6GYZHE/b/JyxP52/EsYf9VZ7sCfk81PvK1+0Fpnyj+q6lbRmn9FxyNddu3fpCVg2JZDE1zGk+XM552/0blufYE/J5qfeVr9oIOKdvrSOs8zxix9/F6dzWTxxw0UcUtSpJNG1wklLm7tBAPrAke0KO/4Pdff5j6m/VU/8KtrtXKlUtFm1BAXfV9JIG7+7dfj9LYr+c6X9u3+9BT/AJbGZLEXDTy2Pt4+yBuYbMLongefK4AqyrsYYaDDdnPTPoow2W82a7O4beu58rtif9QMHwXHPlF9QaNv6f05iqlyjc1LBddL/ISNe+CqWEPa8j6vM/0ZAPfyHyXeuyv+Tzor7tb+05BE3t+cQs5kuKk+gob08GFw8EPpasbi1k88kbZS9/52zXsAB3A2O3Ulcd4LcSs9wv1tT1Bh55nV2vAvUhIWx24ftMcO7fbudt0OxW3dtr8p3V3/AKL/AOFAuMoJc9oLtX6e1twwv6S0pgMvXs5RjYbc+RbE1sMe4c4MDHu5iduXc8uwO/eojIiCRnyef4+5/uSx+8iUje33+Tzb+8qv7RUcvk8/x9z/AHJY/eRKRvb7/J5t/eVX9ooK5l23sV6Fra3430TkYWzY7Cwuyc8bhu2RzHNETT5jnc0keIaQuJKXvyaUTDqLWsxb/KNqVWtPkC+Qkf7B+hBLniVq/F6D0NltW5gn5pjoDIWNIDpXk7Mjbv4ucWtHvVYfF/itrHihnpcjqPJS/Necmtjonltas3wDWdxPm47uPiVNX5QiWSPgExjHlrZMzWa8D7Q5ZDt+kA/BV4ICth4B4mvg+CejMdWaGsZhq0jtu4ySRiR5+L3OPxVTyty4T/is0l9yUv3DEEBu2txCzmp+MmZ067IztwWEmFStTbIRGXtaPSSOaOjnF/N1PUAAeC2HsCcQ87jeKlfQU16xYwuYgm9FWkeXMgmjjdKHs3+ru1jwQOh3G/cFkuMXZg4q6o4qan1FiqmJdRyOTms1zJea1xY55I3G3Q7LNdmns5cS9B8bNP6s1BVxjMZR+c+mdDdD3jnrSxt2bt19Z7UHfe1vhoM32eNXwTNaXVqYuxuPe10L2ybj3hpHuJVXitY7R/4hNcfcln92VVOgIiICIiAiIgIiIC6f2d+KcvDTVUj7ccljCZANjvQs+szY+rK0eLm7np4gn2bcwRYmfg2M/Hrxr8b01RtP85xxh727lVuqK6eMLHtS46nq/BVM3g7MNrnhEleWN27Z4z1AB/4fEFcpy9F8oLC0sniJHK4bH2grjPZ14z3eHmRbiMu+W1pizJvJGPWdUce+SMeX5zfHvHXvlrqXDUdUYuHUOn7ENkzRCSN8TgWWWEdCD5//AIq/0jUczwbnUYuTV+DM/h1+0f61fvy7cNT4j0GjVbdWXjR+JHzU8+sdf178eIuBa4tcCCOhBXxZ7K48yOd6hjnYdi1w2J28D7VgnNLXFrgQR3gr6V0jV7Op2fPR6VRxjl/zlKn71mq1VtL4iLRuJWt48HA7HY2RkmSkGziOorjzP9byHxPhvnZWVbxbc3Lk7RCXDw7uZeizajeZ/LrL5xL1vHg4X4zGvbJknt2c4dRAD4n+t5D4n28Tke+SR0kjnPe4kuc47kk95JX2aSSaV8sr3SSPcXOc47lxPeSV/CrfUdRuZ13z1ekRwjktrSdKtabZ8lHrVPGef/OQi6F2cK2mrnHDSlXV7az8NJd2mZZ29E9/I70TXg9C0ycgIPQg9VaPFhcPFG2OPE0GMYA1rW12ANA7gBste2inyibQuwGiZhaEjfQeh39Jz7+ry7debfbbbrurb+F30+eG+mzqkSDO/Rdf6QEn1/Tejbz839bfff27rMw47HwytlhoVY5G9zmQtBHxAXKO0Zx201wt0/brV7ta9quSItpY5jg8xvI6STAfUYO/Y7F22w8SAjdh5ac3yjD30f8AFDNzsd/pG1XiT/fDlOTUGWo4HA5DOZOUw0MdVlt2ZAwuLIo2F7zsOp2APQdVWh2WsqZe05pXK5e4DNayUrpp5XbeklljkA3Pm57gPeVYB2ib0OP4D65nsOa1j8FbgBc7b1pYnRtH/uePegyeE4kcP81jRkcZrTAWKxbzF4vxtLR/WBILT7CAVzni32nOGuiKE0eLytfVGY2IiqY2USRh3/eTDdjR57Eu9irXRBsXEbWee1/q+7qjUdr09627uaNo4mDo2NjfBrR0A+J3JJM9+wJ+TzU+8rX7QVcysO+T6yNK1wINCCzG+1Syc4sRA+tHz7OaSPIjuPsPkUHBflE2XBxvx75mzfNnYOEQF2/IdpZeYN8O89feFGtXJ2a1aywMs14pmg7gSMDgD8V5/onFfzZS/sG/3IKdFZr2MczBmeznpn0T2ulotlpTtH2HMldsD/qFh+K4v8o5htJ0sZpfIVatKrqKaxJG70LGsfLWDdyXgd4a/lAJ/Odt4rlnZB44R8K9RWMRqB0rtLZV4dOWNLnVJgNhMGjvBGwcB1IDSN+XYhn+37w/zWL4qTa8ZSllwuZhga+0wEshnjjbF6N/5u7WNI36Hc7dQVxrg3w4z/E7W1PTmEglEb3g3Lvoi6KnD9qR57u4HYEjmOwHerVMJlsNqPDR5LD5CnlMdZZ6k1eRssbwe8bjp7wvSxlShWeWMgqwMBe8gBjWgDqT4DoO9BCXtBdlDA6I4ZXdW6U1BlbM+LjbLcr5AxubNHuA4xljW8pG++x5twNt9++JCl/21O0Fic9iJ+G2iLkd6pK9py2ShdvHIGuDhDEftDmALnDp02G4JUQEEjPk8/x9z/clj95EpG9vv8nm395Vf2io09gC/Up9oGOGzOyJ9zFWYIA47c8m7H8o9vKxx+Ckf8oHcqwcAnVZrEbJ7OUrtgjLvWkLeZx2HjsBugrtUv8A5NH/AK81v/5an+1KogKWnybGSpQay1Zipp2Mt26MEsEZOxkbG9/Pt5kc7UHWPlDPxCQffdf93Kq81YF8opkadfgtjcdLYY23bzUToId/We1kcnO4DyHM0E+bh5qv1AVuXCf8VmkvuSl+4YqjVbVwXu1chwh0hbpWI54H4WoA9h3G4ha1w94III8CCEGCz/HrhHgc3cwuX1pUq5ClM6CzC6vMTG9p2LSQwjofJejR/Gzhbq7UVXT2nNXVchlLfP6CuyCZpfyMc93VzAOjWuPf4KuLj9dqZHjbrS7QsR2a0uatOjljO7Xj0hG4PiPb4rY+x5kqWJ7SOkLmQnZBAZ54Od52HPLWljYPi97R8UE/e0f+ITXH3JZ/dlVTq0/tQX6eP7P+tJbtiOBkuKlgjLztzSSDkY0eZLiAqsEBERAREQEREBERAREQF2fs3cZrHD7JDC5ySaxpm0/dwG7nUnk9ZGDxaftNHvHXoeMIsHUtNx9SxqsbIp3pn8uscphJau1Wq4rp4pndobi9onEYFjNPS4zPZ+7HvBNWmD46zT/lJHMPU+TD7z074x2+JusrMjHyZOMFp7m1oxv7/VWmosbw/pNOh2ItWblUzHvMzv2jlHSEGbYxsy5Ny5ap3npH8ltF7X+q7cBhflHRNPeYY2scfiBuPgtYe5z3l73FznHcknckr4i3t7Iu3p3uVTPed0djFsY8bWqIp7RECIihTi2GnrnWtOsytT1hqGvBGNmRxZKZjWjyADtgteRBsdjXmubELobGs9Ryxu+sx+Tmc0+8Fy117nPeXvcXOcdySdySviIPrHOY8PY4tc07gg7EFbTqniPr3VWIhxGo9XZnK0ISHMgs2nPaSO4u3PrEeZ3K1VEBERAXuw2Yy2FtG1h8pextgt5TLUsOieR5btIOy8KINm/CFr7/AD41N+tZ/wCJPwha+/z41N+tZ/4lrKIPVlMjkMrcddyl+1etP+tNZmdI93vc4kleVEQZTT+otQaendPgM7lMTK7bd9G3JA47d3VhC9eoNa6y1DB6DP6tz+Xi6fyd7IzTt6de57isAiAiIg/WrYnq2YrNWaSCeJ4fHLG4tcxwO4II6gg+KyOpNS6j1LYisaj1BlszNE0tjkv3JLDmA94BeSQFiUQF6cXkL+KyEORxd6zRuQO5obFaV0ckbvNrmkEH3LzIgyeotQZ/Ud1t3UOcyeYtNZyNmv23zvDfIOeSdvYsYiICzOM1XqjF4ixh8ZqTM0cbZ/x9Ovekjhl/8TGuDXfELDIgL6CQdwdiF8RBmM5qnU+dpV6Wb1HmMpVq/wDR4bl2SaOHpt6rXOIb08lh0RAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREH//2Q==" alt="SPECTRA" style="height:36px;width:auto;display:block;">
         </div>
         <div class="footer-tagline">
           기업 커뮤니케이션 인프라의 새로운 기준.<br>
-          Spectra DWorks · Spectra eNomix
+          SPECTRA DWorks · SPECTRA eNomix
         </div>
         <div style="margin-top:20px;display:flex;gap:8px;">
-          <a href="#" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;">📘</a>
-          <a href="#" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;">▶</a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/company/96667303/" target="_blank" title="LinkedIn"
+             style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;"
+             onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/spectra.co.kr" target="_blank" title="Facebook"
+             style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;"
+             onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <!-- X (Twitter) -->
+          <a href="https://x.com/SPECTRAfamily" target="_blank" title="X"
+             style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;"
+             onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+            </svg>
+          </a>
+          <!-- 네이버 블로그 -->
+          <a href="https://blog.naver.com/spectrafamily" target="_blank" title="네이버 블로그"
+             style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;"
+             onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)">
+              <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
+            </svg>
+          </a>
         </div>
       </div>
       <div class="footer-nav-grid">
@@ -1489,7 +2049,7 @@
         </div>
         <div>
           <div class="footer-col-title">회사</div>
-          <a class="footer-link" href="about_spectra.html">Spectra 소개</a>
+          <a class="footer-link" href="about_spectra.html">SPECTRA 소개</a>
           <a class="footer-link" href="https://www.spectra.co.kr/blog/" target="_blank">채용</a>
           <a class="footer-link" href="eer.html">고객 지원</a>
         </div>
