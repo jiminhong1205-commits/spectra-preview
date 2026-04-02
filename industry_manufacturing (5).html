@@ -458,6 +458,57 @@
 </section>
 
 
+<!-- ══ 자료 다운로드 모달 ══ -->
+<div id="downloadModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:24px;width:100%;max-width:500px;position:relative;padding:48px 44px;margin:20px;box-shadow:0 32px 80px rgba(0,0,0,0.25);">
+    <button onclick="closeDownloadModal()" style="position:absolute;top:18px;right:18px;background:none;border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='#F1F5F9'" onmouseout="this.style.background='none'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="downloadModalContent">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;">
+        <div style="width:44px;height:44px;border-radius:12px;background:#F0FDF4;border:1.5px solid #BBF7D0;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B4332" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2D6A4F;margin-bottom:3px;">제조 · 유통 솔루션 제안서</div>
+          <h2 style="font-size:20px;font-weight:800;color:#0F172A;letter-spacing:-0.02em;line-height:1.2;">우리 이야기인지 확인해 보세요</h2>
+        </div>
+      </div>
+      <p style="font-size:13px;color:#64748B;margin-bottom:28px;line-height:1.65;padding-left:58px;">간단한 정보를 입력하시면 <strong style="color:#1B4332;">제조·유통업 특화 제안서</strong>를 바로 다운로드하실 수 있습니다.</p>
+      <div style="display:flex;flex-direction:column;gap:13px;">
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#374151;margin-bottom:5px;display:block;">담당자 성함 <span style="color:#EF4444;">*</span></label>
+          <input id="dl-name" type="text" placeholder="홍길동" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#1B4332'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#374151;margin-bottom:5px;display:block;">회사명 <span style="color:#EF4444;">*</span></label>
+          <input id="dl-company" type="text" placeholder="(주)스펙트라" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#1B4332'" onblur="this.style.borderColor='#E2E8F0'">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div>
+            <label style="font-size:12px;font-weight:600;color:#374151;margin-bottom:5px;display:block;">이메일 <span style="color:#EF4444;">*</span></label>
+            <input id="dl-email" type="email" placeholder="name@company.com" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#1B4332'" onblur="this.style.borderColor='#E2E8F0'">
+          </div>
+          <div>
+            <label style="font-size:12px;font-weight:600;color:#374151;margin-bottom:5px;display:block;">연락처</label>
+            <input id="dl-phone" type="tel" placeholder="010-0000-0000" style="width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#1B4332'" onblur="this.style.borderColor='#E2E8F0'">
+          </div>
+        </div>
+        <label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer;margin-top:4px;">
+          <input id="dl-privacy" type="checkbox" style="width:16px;height:16px;margin-top:2px;accent-color:#1B4332;flex-shrink:0;">
+          <span style="font-size:12px;color:#64748B;line-height:1.6;">개인정보 수집 및 이용에 동의합니다. <span style="color:#94A3B8;">(자료 발송 목적으로만 사용되며 제3자에게 제공되지 않습니다)</span></span>
+        </label>
+      </div>
+      <div id="dl-error" style="display:none;margin-top:10px;padding:10px 14px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;font-size:12px;color:#DC2626;"></div>
+      <button onclick="submitDownload()" style="width:100%;margin-top:20px;padding:15px;border-radius:12px;background:linear-gradient(135deg,#1B4332,#2D6A4F);color:white;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        제출하기 · 제안서 다운로드
+      </button>
+      <p style="text-align:center;font-size:11px;color:#94A3B8;margin-top:12px;">입력하신 정보는 자료 발송 용도로만 활용되며,<br>필요 시 담당자가 연락드릴 수 있습니다.</p>
+    </div>
+  </div>
+</div>
+
 <div id="inquiryModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
   <div id="modalBox" style="background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;position:relative;padding:44px 40px;margin:20px;box-shadow:0 32px 80px rgba(0,0,0,0.25);">
     <button onclick="closeInquiry()" style="position:absolute;top:18px;right:18px;background:none;border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='#F1F5F9'" onmouseout="this.style.background='none'">
@@ -514,8 +565,51 @@
   </div>
 </div>
 <script>
+var _dlFormHTML = null;
+
 function openModal(){document.getElementById("inquiryModal").style.display="flex";document.body.style.overflow="hidden";}
 function closeInquiry(){document.getElementById("inquiryModal").style.display="none";document.body.style.overflow="";}
+
+function openDownloadModal(){
+  var modal = document.getElementById("downloadModal");
+  var content = document.getElementById("downloadModalContent");
+  if(!_dlFormHTML) _dlFormHTML = content.innerHTML;
+  else content.innerHTML = _dlFormHTML;
+  ["dl-name","dl-company","dl-email","dl-phone"].forEach(function(id){var el=document.getElementById(id);if(el)el.value="";});
+  var cb=document.getElementById("dl-privacy"); if(cb) cb.checked=false;
+  var err=document.getElementById("dl-error"); if(err) err.style.display="none";
+  modal.style.display="flex";
+  document.body.style.overflow="hidden";
+}
+function closeDownloadModal(){
+  document.getElementById("downloadModal").style.display="none";
+  document.body.style.overflow="";
+}
+function submitDownload(){
+  var name=(document.getElementById("dl-name")||{}).value||"";
+  var company=(document.getElementById("dl-company")||{}).value||"";
+  var email=(document.getElementById("dl-email")||{}).value||"";
+  var privacy=document.getElementById("dl-privacy")&&document.getElementById("dl-privacy").checked;
+  var err=document.getElementById("dl-error");
+  name=name.trim(); company=company.trim(); email=email.trim();
+  if(!name||!company||!email){err.textContent="성함, 회사명, 이메일은 필수 항목입니다.";err.style.display="block";return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent="올바른 이메일 주소를 입력해 주세요.";err.style.display="block";return;}
+  if(!privacy){err.textContent="개인정보 수집·이용 동의가 필요합니다.";err.style.display="block";return;}
+  err.style.display="none";
+  var a=document.createElement("a");
+  a.href="manufacturing_proposal.pdf";
+  a.download="SPECTRA_제조유통_제안서.pdf";
+  a.style.display="none";
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){document.body.removeChild(a);},200);
+  document.getElementById("downloadModalContent").innerHTML=
+    "<div style='text-align:center;padding:32px 0'>"+
+    "<div style='font-size:60px;margin-bottom:16px;'>✅</div>"+
+    "<div style='font-size:20px;font-weight:800;color:#0F172A;margin-bottom:10px;letter-spacing:-0.02em;'>제출 완료! 다운로드가 시작됩니다</div>"+
+    "<div style='font-size:13.5px;color:#64748B;line-height:1.8;margin-bottom:8px;'>제조·유통업 특화 제안서를 확인해 보세요.<br>추가 문의 사항이 있으시면 담당자가 도와드립니다.</div>"+
+    "<button onclick='closeDownloadModal()' style='margin-top:24px;padding:12px 36px;background:#1B4332;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;'>닫기</button>"+
+    "</div>";
+}
 function submitInquiry(){
   var n=document.getElementById("iName").value;
   var co=document.getElementById("iCompany").value;
@@ -527,8 +621,11 @@ function submitInquiry(){
   if(pr.value==="disagree"){alert("개인정보 수집에 동의하셔야 문의를 제출할 수 있습니다.");return;}
   document.getElementById("modalContent").innerHTML="<div style='text-align:center;padding:48px 0'><div style='font-size:52px;margin-bottom:16px'>&#x2705;</div><div style='font-size:20px;font-weight:800;color:#0F172A;margin-bottom:10px'>문의가 접수되었습니다.</div><div style='font-size:14px;color:#64748B;line-height:1.8'>영업일 기준 24시간 내에<br>담당자가 연락드리겠습니다.</div><button onclick='closeInquiry()' style='margin-top:28px;padding:12px 32px;background:#1A6BFF;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit'>닫기</button></div>";
 }
-document.getElementById("inquiryModal").addEventListener("click",function(e){if(e.target===this)closeInquiry();});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")closeInquiry();});
+document.addEventListener("DOMContentLoaded",function(){
+  document.getElementById("inquiryModal").addEventListener("click",function(e){if(e.target===this)closeInquiry();});
+  document.getElementById("downloadModal").addEventListener("click",function(e){if(e.target===this)closeDownloadModal();});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeInquiry();closeDownloadModal();}});
+});
 </script>
 </body>
 </html>
