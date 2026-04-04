@@ -59,11 +59,54 @@
   .hero-desc{font-size:16px;line-height:1.8;color:rgba(255,255,255,0.55);margin-bottom:40px}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
 
-  /* 우측 고객사 박스 */
-  .hero-clients-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px}
-  .hcb-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px}
-  .hcb-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .hcb-chip{padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);text-align:center}
+  /* 히어로 채팅 슬라이더 */
+  .hero-chat-slider{position:relative;width:100%}
+  .chat-window{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;position:relative}
+  .chat-slides{display:flex;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+  .chat-slide{min-width:100%;padding:0}
+
+  /* 슬라이드 헤더 */
+  .chat-header{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:10px}
+  .chat-header-dots{display:flex;gap:5px}
+  .chat-header-dots span{width:9px;height:9px;border-radius:50%}
+  .chat-header-title{font-size:12px;font-weight:600;letter-spacing:0.02em}
+
+  /* Before: 카카오 스타일 */
+  .slide-before .chat-header{background:#2C2C2E}
+  .slide-before .chat-header-dots span:nth-child(1){background:#FF5F57}
+  .slide-before .chat-header-dots span:nth-child(2){background:#FFBD2E}
+  .slide-before .chat-header-dots span:nth-child(3){background:#28CA41}
+  .slide-before .chat-header-title{color:rgba(255,255,255,0.5)}
+  .slide-before .chat-body{background:#B2C7D9;padding:16px;display:flex;flex-direction:column;gap:8px;min-height:240px}
+  .bubble-wrap{display:flex;flex-direction:column}
+  .bubble-wrap.right{align-items:flex-end}
+  .bubble-name{font-size:10px;font-weight:700;color:rgba(0,0,0,0.45);margin-bottom:3px;padding:0 4px}
+  .bubble{padding:8px 12px;border-radius:14px;font-size:12.5px;line-height:1.5;max-width:75%;position:relative}
+  .bubble-time{font-size:10px;color:rgba(0,0,0,0.35);margin-top:3px;padding:0 4px}
+  .bubble-left{background:white;border-top-left-radius:4px;color:#1a1a1a}
+  .bubble-right{background:#FEE500;border-top-right-radius:4px;color:#1a1a1a}
+
+  /* After: Cowork+ 스타일 */
+  .slide-after .chat-header{background:#1A56DB}
+  .slide-after .chat-header-dots span:nth-child(1){background:rgba(255,255,255,0.3)}
+  .slide-after .chat-header-dots span:nth-child(2){background:rgba(255,255,255,0.3)}
+  .slide-after .chat-header-dots span:nth-child(3){background:rgba(255,255,255,0.3)}
+  .slide-after .chat-header-title{color:rgba(255,255,255,0.9)}
+  .slide-after .chat-header-channel{font-size:11px;color:rgba(255,255,255,0.85);font-weight:600;margin-left:auto}
+  .slide-after .chat-body{background:#F0F4FF;padding:16px;display:flex;flex-direction:column;gap:8px;min-height:240px}
+  .bubble-after-left{background:white;border:1px solid rgba(0,0,0,0.08);border-top-left-radius:4px;color:#1a1a1a}
+  .bubble-after-right{background:#1A56DB;border-top-right-radius:4px;color:white}
+  .bubble-name-after{font-size:10px;font-weight:700;color:rgba(0,0,0,0.4);margin-bottom:3px;padding:0 4px}
+  .bubble-time-after{font-size:10px;color:rgba(0,0,0,0.3);margin-top:3px;padding:0 4px}
+  .system-msg{background:rgba(26,86,219,0.07);border:1px solid rgba(26,86,219,0.15);border-radius:8px;padding:8px 12px;font-size:11px;color:#1A56DB;line-height:1.55;display:flex;align-items:flex-start;gap:6px}
+
+  /* 인디케이터 */
+  .chat-indicators{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px}
+  .chat-indicator-btn{background:none;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.5);font-size:11px;font-weight:600;letter-spacing:0.04em;transition:color 0.2s}
+  .chat-indicator-btn.active{color:white}
+  .chat-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all 0.2s;flex-shrink:0}
+  .chat-indicator-btn.active .chat-dot{background:white;width:18px;border-radius:3px}
+  .chat-progress{position:absolute;bottom:0;left:0;height:2px;background:#4DA3FF;border-radius:0 2px 2px 0;transition:width 0.1s linear}
 
   /* SECTIONS */
   .section{padding:88px 0}
@@ -87,8 +130,34 @@
   .cl-title{font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:20px;display:flex;align-items:center;gap:8px}
   .cl-items{display:flex;flex-direction:column;gap:12px}
   .cl-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--text-primary);line-height:1.55}
-  .cl-check{width:20px;height:20px;border-radius:5px;border:2px solid var(--mfg-border);background:var(--mfg-light);flex-shrink:0;margin-top:1px}
+  .cl-check{width:20px;height:20px;border-radius:5px;border:2px solid var(--mfg-border);background:var(--mfg-light);flex-shrink:0;margin-top:1px;transition:all 0.15s;display:flex;align-items:center;justify-content:center}
   .cl-sub{font-size:13px;color:var(--text-muted);margin-top:2px}
+  .cl-item{cursor:pointer;user-select:none;padding:10px 12px;border-radius:10px;transition:background 0.12s;margin:-10px -12px}
+  .cl-item:hover{background:rgba(27,67,50,0.04)}
+  .cl-item.checked .cl-check{background:var(--mfg);border-color:var(--mfg)}
+  .cl-item.checked .cl-check::after{content:'';display:block;width:5px;height:9px;border:2px solid white;border-top:none;border-left:none;transform:rotate(45deg) translate(-1px,-1px)}
+  .cl-item.checked>div>div:first-child{color:var(--mfg);font-weight:600}
+
+  /* 결과 배너 */
+  .cl-result{margin-top:20px;border-radius:12px;padding:16px 20px;display:none;animation:fadeSlideUp 0.25s ease}
+  .cl-result.show{display:block}
+  .cl-result.warn{background:#FFFBEB;border:1px solid #F59E0B}
+  .cl-result.danger{background:#FEF2F2;border:1px solid #EF4444}
+  .cl-result-badge{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
+  .cl-result.warn .cl-result-badge{color:#B45309}
+  .cl-result.danger .cl-result-badge{color:#B91C1C}
+  .cl-result-title{font-size:16px;font-weight:800;margin-bottom:4px}
+  .cl-result.warn .cl-result-title{color:#92400E}
+  .cl-result.danger .cl-result-title{color:#991B1B}
+  .cl-result-sub{font-size:13px;line-height:1.6;margin-bottom:14px}
+  .cl-result.warn .cl-result-sub{color:#78350F}
+  .cl-result.danger .cl-result-sub{color:#7F1D1D}
+  .cl-result-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:100px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;border:none;transition:all 0.15s}
+  .cl-result.warn .cl-result-btn{background:#F59E0B;color:white}
+  .cl-result.warn .cl-result-btn:hover{background:#D97706}
+  .cl-result.danger .cl-result-btn{background:#EF4444;color:white}
+  .cl-result.danger .cl-result-btn:hover{background:#DC2626}
+  @keyframes fadeSlideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
   /* 결과 섹션 */
   .result-section{background:var(--bg-white);padding:80px 0}
@@ -235,19 +304,94 @@
           기록되지 않는 업무는 반복되고, 반복은 매출 기회를 빼앗습니다.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-mfg" href="#" onclick="openModal();return false;">도입 상담 신청</a>
-          <a class="btn-outline-dark" href="#" onclick="openDownloadModal();return false;">우리 이야기인지 확인하기</a>
+          <a class="btn btn-mfg" href="#checklist">우리 이야기인지 확인하기</a>
+          <a class="btn-outline-dark" href="#" onclick="openModal();return false;">30분 상담 신청</a>
         </div>
       </div>
-      <div class="hero-clients-box">
-        <div class="hcb-label">제조 분야 주요 고객사</div>
-        <div class="hcb-grid">
-          <div class="hcb-chip">G전선</div>
-          <div class="hcb-chip">LS메탈</div>
-          <div class="hcb-chip">LG전자</div>
-          <div class="hcb-chip">코웨이</div>
-          <div class="hcb-chip">유한킴벌리</div>
-          <div class="hcb-chip">+ 다수</div>
+      <div class="hero-chat-slider">
+        <div class="chat-window">
+          <div class="chat-slides" id="chatSlides">
+
+            <!-- BEFORE -->
+            <div class="chat-slide slide-before">
+              <div class="chat-header">
+                <div class="chat-header-dots"><span></span><span></span><span></span></div>
+                <div class="chat-header-title">거래처 단톡방</div>
+              </div>
+              <div class="chat-body">
+                <div class="bubble-wrap">
+                  <div class="bubble-name">협력사</div>
+                  <div class="bubble bubble-left">안녕하십니까, 이거 언제쯤 받아보실 수 있을까요?</div>
+                  <div class="bubble-time">오전 9:02</div>
+                </div>
+                <div class="bubble-wrap right">
+                  <div class="bubble-name">담당자</div>
+                  <div class="bubble bubble-right">견적 긴급으로 부탁드립니다!</div>
+                  <div class="bubble-time">오전 9:09</div>
+                </div>
+                <div class="bubble-wrap">
+                  <div class="bubble-name">납품처</div>
+                  <div class="bubble bubble-left">GV-500 수량 2개요, 언제 도착 가능해요?</div>
+                  <div class="bubble-time">오후 2:39</div>
+                </div>
+                <div class="bubble-wrap">
+                  <div class="bubble bubble-left">10월 7일날 저희 창고로 받을 수 있어요?</div>
+                  <div class="bubble-time">오후 4:49</div>
+                </div>
+                <div class="bubble-wrap right">
+                  <div class="bubble bubble-right">내일 확인하고 전화드리겠습니다</div>
+                  <div class="bubble-time">오후 7:03</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AFTER -->
+            <div class="chat-slide slide-after">
+              <div class="chat-header">
+                <div class="chat-header-dots"><span></span><span></span><span></span></div>
+                <div class="chat-header-title">Cowork+</div>
+                <div class="chat-header-channel">📋 발주채널 · 납품처</div>
+              </div>
+              <div class="chat-body">
+                <div class="bubble-wrap">
+                  <div class="bubble-name-after">납품처</div>
+                  <div class="bubble bubble-after-left">견적 요청드립니다</div>
+                  <div class="bubble-time-after">오전 9:02</div>
+                </div>
+                <div class="system-msg">
+                  ⚡ 견적 요청 #REQ-0624 자동 접수 · 품목·수량·납기일 이력 저장 완료
+                </div>
+                <div class="bubble-wrap right">
+                  <div class="bubble-name-after">담당자</div>
+                  <div class="bubble bubble-after-right">확인했습니다, 오늘 중으로 회신드리겠습니다</div>
+                  <div class="bubble-time-after">오전 9:11</div>
+                </div>
+                <div class="system-msg">
+                  ✓ 처리 담당자 지정 완료 · 이 채널의 모든 대화는 자동 기록됩니다
+                </div>
+                <div class="bubble-wrap">
+                  <div class="bubble-name-after">납품처</div>
+                  <div class="bubble bubble-after-left">10월 7일 창고 입고 가능할까요?</div>
+                  <div class="bubble-time-after">오후 2:41</div>
+                </div>
+                <div class="system-msg">
+                  📦 납기 확정 — 10월 6일 입고 예정 · 일정 자동 등록됨
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="chat-progress" id="chatProgress"></div>
+        </div>
+
+        <!-- 인디케이터 -->
+        <div class="chat-indicators">
+          <button class="chat-indicator-btn active" onclick="goToSlide(0)" id="ind0">
+            <div class="chat-dot"></div> 지금 현장
+          </button>
+          <button class="chat-indicator-btn" onclick="goToSlide(1)" id="ind1">
+            <div class="chat-dot"></div> Cowork+ 전환 후
+          </button>
         </div>
       </div>
     </div>
@@ -305,53 +449,60 @@
 </section>
 
 <!-- 공감 체크리스트 -->
-<section class="checklist-section">
+<section class="checklist-section" id="checklist">
   <div class="container">
     <div class="checklist-layout">
       <div>
         <div class="section-eyebrow" style="margin-bottom:14px;"><span class="tag tag-mfg">체크리스트</span></div>
         <h2 class="section-h2" style="margin-bottom:16px;">하나라도 해당된다면<br>이야기를 나눠보세요</h2>
-        <p style="font-size:16px;color:var(--text-secondary);line-height:1.75;margin-bottom:32px;">스펙트라가 제조·B2B 현장에서 반복적으로 해결해온 문제들입니다. 어떤 부분이 해당되는지 확인하고 상담을 신청해 주세요.</p>
-        <a class="btn btn-mfg" href="#" onclick="openModal();return false;">30분 상담 신청 →</a>
+        <p style="font-size:16px;color:var(--text-secondary);line-height:1.75;margin-bottom:32px;">스펙트라가 제조·B2B 현장에서 반복적으로 해결해온 문제들입니다. 어떤 부분이 해당되는지 확인해 보세요.</p>
       </div>
       <div class="cl-box">
         <div class="cl-title">✋ 해당되는 항목을 확인하세요</div>
-        <div class="cl-items">
-          <div class="cl-item">
+        <div class="cl-items" id="clItems">
+          <div class="cl-item" onclick="toggleCheck(this)">
             <div class="cl-check"></div>
             <div>
               <div>거래처·협력사 소통이 90% 이상 개인 카카오에서 이루어집니다</div>
               <div class="cl-sub">납기·견적·발주 정보가 개인 기기에 존재</div>
             </div>
           </div>
-          <div class="cl-item">
+          <div class="cl-item" onclick="toggleCheck(this)">
             <div class="cl-check"></div>
             <div>
               <div>담당자 교체 시 거래처 맥락과 이력이 사라집니다</div>
               <div class="cl-sub">퇴사·이동 시 히스토리 단절, 인수인계 불가</div>
             </div>
           </div>
-          <div class="cl-item">
+          <div class="cl-item" onclick="toggleCheck(this)">
             <div class="cl-check"></div>
             <div>
               <div>협력사가 협업 툴 설치를 거부해 도입에 실패했습니다</div>
               <div class="cl-sub">외부 파트너 앱 설치·회원가입 거부</div>
             </div>
           </div>
-          <div class="cl-item">
+          <div class="cl-item" onclick="toggleCheck(this)">
             <div class="cl-check"></div>
             <div>
               <div>설비·정비 요청이 구두나 카카오로 접수되어 누락이 반복됩니다</div>
               <div class="cl-sub">현장 요청 추적 불가, 처리 이력 없음</div>
             </div>
           </div>
-          <div class="cl-item">
+          <div class="cl-item" onclick="toggleCheck(this)">
             <div class="cl-check"></div>
             <div>
               <div>거래처 클레임 원인을 파악하기 어렵습니다</div>
               <div class="cl-sub">공장·구조·담당자 중 어디가 문제인지 데이터 없음</div>
             </div>
           </div>
+        </div>
+
+        <!-- 결과 배너 -->
+        <div class="cl-result" id="clResult">
+          <div class="cl-result-badge" id="clResultBadge"></div>
+          <div class="cl-result-title" id="clResultTitle"></div>
+          <div class="cl-result-sub" id="clResultSub"></div>
+          <a class="cl-result-btn" href="#" onclick="openModal();return false;">지금 바로 문제 해결하기 →</a>
         </div>
       </div>
     </div>
@@ -403,10 +554,10 @@
 
     </div>
 
-    <div style="text-align:center;margin-top:40px;padding:24px;background:var(--mfg-light);border-radius:14px;border:1px solid var(--mfg-border);max-width:560px;margin-left:auto;margin-right:auto;">
-      <div style="font-size:14px;color:var(--mfg);font-weight:600;margin-bottom:6px;">구체적인 사례가 궁금하시다면</div>
-      <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">어떤 문제가 해당되는지 말씀해 주시면, 같은 문제를 먼저 해결한 사례를 직접 보여드립니다.<br>자료 요청 없이 30분 상담으로 시작합니다.</div>
-      <a class="btn btn-mfg" href="#" onclick="openModal();return false;" style="margin-top:16px;">30분 상담 신청 →</a>
+    <div style="text-align:center;margin-top:40px;padding:28px 32px;background:var(--mfg-light);border-radius:14px;border:1px solid var(--mfg-border);max-width:560px;margin-left:auto;margin-right:auto;">
+      <div style="font-size:14px;color:var(--mfg);font-weight:700;margin-bottom:6px;">📄 제조·유통 특화 제안서</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:18px;">같은 문제를 먼저 해결한 사례와 도입 방법이 담겨 있습니다.<br>간단한 정보 입력 후 바로 다운로드하실 수 있습니다.</div>
+      <a class="btn btn-mfg" href="#" onclick="openDownloadModal();return false;">제안서 다운로드 →</a>
     </div>
 
   </div>
@@ -450,7 +601,6 @@
       </p>
       <div class="cta-actions">
         <a class="btn btn-mfg" href="#" onclick="openModal();return false;">30분 상담 신청 →</a>
-        <a class="btn-outline-dark" href="#">자료 다운로드</a>
       </div>
       <p class="cta-note">영업일 기준 24시간 내 담당자가 연락드립니다</p>
     </div>
@@ -626,6 +776,76 @@ document.addEventListener("DOMContentLoaded",function(){
   document.getElementById("downloadModal").addEventListener("click",function(e){if(e.target===this)closeDownloadModal();});
   document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeInquiry();closeDownloadModal();}});
 });
+
+/* ── 히어로 채팅 슬라이더 ── */
+(function(){
+  const DURATION = 4000; // 슬라이드 유지 시간 (ms)
+  let current = 0;
+  let timer, progressTimer, progressStart;
+
+  function goToSlide(idx){
+    current = idx;
+    document.getElementById('chatSlides').style.transform = `translateX(-${idx * 100}%)`;
+    document.querySelectorAll('.chat-indicator-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i === idx);
+    });
+    resetProgress();
+  }
+  window.goToSlide = goToSlide;
+
+  function resetProgress(){
+    clearInterval(progressTimer);
+    clearTimeout(timer);
+    const bar = document.getElementById('chatProgress');
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    progressStart = Date.now();
+    requestAnimationFrame(() => {
+      bar.style.transition = `width ${DURATION}ms linear`;
+      bar.style.width = '100%';
+    });
+    timer = setTimeout(() => {
+      goToSlide((current + 1) % 2);
+    }, DURATION);
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    goToSlide(0);
+  });
+})();
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  updateChecklistResult();
+}
+
+function updateChecklistResult() {
+  const checked = document.querySelectorAll('#clItems .cl-item.checked').length;
+  const result  = document.getElementById('clResult');
+  const badge   = document.getElementById('clResultBadge');
+  const title   = document.getElementById('clResultTitle');
+  const sub     = document.getElementById('clResultSub');
+
+  if (checked === 0) {
+    result.classList.remove('show','warn','danger');
+    return;
+  }
+
+  result.classList.add('show');
+
+  if (checked >= 3) {
+    result.classList.remove('warn');
+    result.classList.add('danger');
+    badge.textContent  = '⚠ 운영 위험 감지';
+    title.textContent  = '문제가 심각합니다';
+    sub.textContent    = '복합적인 운영 누수가 발생 중입니다. 방치할수록 손실이 누적됩니다. 지금 바로 점검이 필요합니다.';
+  } else {
+    result.classList.remove('danger');
+    result.classList.add('warn');
+    badge.textContent  = '주의 필요';
+    title.textContent  = '문제가 있습니다';
+    sub.textContent    = '지금 방치하면 손실로 이어질 수 있습니다. 30분이면 진단 가능합니다.';
+  }
+}
 </script>
 </body>
 </html>
